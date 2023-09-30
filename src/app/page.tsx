@@ -9,6 +9,7 @@ import clsx from "clsx";
 import {BsFillPersonFill, BsFillLockFill} from "react-icons/bs";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { join } from "path/win32";
 
 function Home() {
   const [loading, setLoading] = useState(true);
