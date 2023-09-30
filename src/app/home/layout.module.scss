@@ -1,4 +1,4 @@
-.main{
+.Main{
     width: 100%;
     height: 100vh;
     display: flex;
@@ -7,26 +7,15 @@
     align-items: center;
     background-color: yellow;
 }
-.nav{
-    height: 60px;
-    width: 100%;
-    background-color: red;
+
+.AbstractPage{
+
 }
-.page{
-    width: 100%;
-    background-color: green;
-    flex-grow: 1;
-    display: flex;
-    justify-content:flex-start ;
-    align-items: center;
-}
-.sideBar{
+.SideMenu{
     width:200px;
     height: 100%;
     background-color: blue;
 }
-.contents{
-    flex-grow: 1;
-    height: 100%;
-    background-color: white;
+.Page{
+   
 }
