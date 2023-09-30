@@ -1,0 +1,43 @@
+@import 'variables';
+
+.button {
+    padding: 0.7em 0;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    background-color: $default-color;
+    color: $teriary-color;
+    transition: all 1000ms;
+    font-size: 15px;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    outline: 2px solid $teriary-color
+  }
+  
+  .button:hover {
+    color: $white;
+    transform: scale(1.1);
+    outline: 2px solid $primary-color;
+    box-shadow: 4px 5px 17px -4px $secondary-color;
+  }
+  
+  .button::before {
+    content: "";
+    position: absolute;
+    left: -50px;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: $primary-color;
+    transform: skewX(45deg);
+    z-index: -1;
+    transition: width 1000ms;
+  }
+  
+  .button:hover::before {
+    width: 250%;
+  }
+  

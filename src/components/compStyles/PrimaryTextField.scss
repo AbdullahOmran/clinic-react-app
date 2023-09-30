@@ -1,0 +1,7 @@
+@import 'variables';
+
+.formControl input:focus+label span,
+.formControl input:valid+label span {
+  color: $secondary-color;
+  transform: translateY(-30px);
+}
