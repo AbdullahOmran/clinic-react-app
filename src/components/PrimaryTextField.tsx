@@ -11,12 +11,10 @@ type textFieldParams = {
   style?: object,
   className?: any,
 };
-function PrimaryTextField({icon, text, type, style, className }: textFieldParams) {
-  let content = [
-    <span className={styles.span} style={{ transitionDelay: "0ms" }}>
+function PrimaryTextField({icon, text, type, style, className}: textFieldParams) {
+  let content = [<span className={styles.span} style={{ transitionDelay: "0ms" }}>
       {text[0]}
-    </span>,
-  ];
+    </span>, ];
   for (let index = 1; index < text.length; index++) {
     const element = text[index];
     const delay = index * 50;

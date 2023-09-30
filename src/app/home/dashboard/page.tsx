@@ -1,8 +1,8 @@
 import styles from './page.module.css';
 
-function About() {
+function dashboard() {
     return(
         <h1>HHHH</h1>
     )
 };
-export default About;
+export default dashboard;

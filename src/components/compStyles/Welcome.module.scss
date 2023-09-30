@@ -1,7 +1,7 @@
 @import 'variables';
 
-/* === removing default button style ===*/
-.button {
+/* === removing default button__jio23style ===*/
+.button{
     margin: 0;
     height: auto;
     background: transparent;
@@ -9,8 +9,8 @@
     border: none;
   }
   
-  /* button styling */
-  .button {
+  /* button__jio23styling */
+  .button{
     --border-right: 6px;
     --text-stroke-color: rgba(255,255,255,0.6);
     --animation-color: #dd1e3d;
@@ -24,7 +24,7 @@
     color: $teriary-color;
     -webkit-text-stroke: 1px var(--text-stroke-color);
   }
-  /* this is the text, when you hover on button */
+  /* this is the text, when you hover on button__jio23*/
   .hoverText {
     position: absolute;
     box-sizing: border-box;
