@@ -2,16 +2,8 @@
 import styles from "./PageComponent.module.scss";
 import clsx from "clsx";
 
-function PageComponent({
-  topNav,
-  content,
-}: {
-  topNav?: React.ReactNode;
-  content?: React.ReactNode;
-}) {
-  return <div className={styles.PageComponent}>
-   
-  </div>;
+function PageComponent({ node }: { node: React.ReactNode }) {
+  return <div className={styles.PageComponent}>{node}</div>;
 }
 
 export default PageComponent;

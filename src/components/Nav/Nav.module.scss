@@ -1,0 +1,36 @@
+@import "../compStyles/variables";
+.Nav{
+    height: 60px;
+    width: 100%;
+    background-color: $white;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.item{
+   background-color: gray;
+}
+.itemsGroup{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.logo{
+    
+    background-color: $white;
+    width: 240px;
+    height: 100%;
+}
+.link{
+    text-decoration: none;
+    display: block;
+    background-color: yellow;
+    width: 60px;
+    height: 100%;
+    margin: auto 0 auto 25px;
+}
