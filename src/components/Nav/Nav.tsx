@@ -93,8 +93,8 @@ function Nav() {
               <h6>Abdullah Omran</h6>
               <Image
                 src="/images/loginAvatar.png"
-                width={60}
-                height={60}
+                width={50}
+                height={50}
                 quality={100}
                 alt="UserImg"
               />
