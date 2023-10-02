@@ -1,27 +1,43 @@
 @import "../compStyles/variables";
 .Nav{
-    height: 60px;
+    height: $nav-height;
     width: 100%;
     background-color: $white;
     flex-shrink: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 2px solid $default-color;
+    
 }
 .item{
-   background-color: gray;
+   
+   position: relative;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   width: 60px;
+}
+.item:hover{
+    background-color: $default-color;
+    cursor: pointer;
 }
 .itemsGroup{
     list-style: none;
     padding: 0;
+    height: 100%;
     margin: 0;
+    padding-right:20px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 15px;
+    align-items: stretch;
+    gap: 2px;
+}
+.list{
+    height: 100%;
 }
 .logo{
-    
+    overflow: hidden;
     background-color: $white;
     width: 240px;
     height: 100%;
@@ -29,8 +45,69 @@
 .link{
     text-decoration: none;
     display: block;
-    background-color: yellow;
-    width: 60px;
+    background-color: transparent;
+    width: $nav-height;
     height: 100%;
     margin: auto 0 auto 25px;
 }
+.icon{
+    font-size: 1.5em;
+    color: $secondary-color;
+}
+.notif{
+    margin: auto;
+    position: relative;
+}
+
+.card{
+    margin: auto;
+    position: relative;
+}
+.Badge{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    padding: auto;
+    transform: translate(20%,20%);
+    border-radius: 50%;
+    background-color: $primary-color;
+    font-size: 12px;
+    color: $white;
+}
+.langBadge{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    padding: auto;
+    transform: translate(50%,20%);
+    border-radius: 50%;
+    background-color: $primary-color;
+    font-size: 9px;
+    color: $white;
+}
+.lang{
+    margin: auto;
+    position: relative;
+}
+.userItemContent{
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    gap: 10px;
+}
+.userItem{ 
+    width: auto;
+    min-width: 150px;
+    justify-content: center;
+ }

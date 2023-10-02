@@ -32,9 +32,10 @@ function Home() {
             <div className={styles.imgBox}>
               <Image
                 className={styles.medcyImage}
-                src="/images/medcy.jpg"
+                src="/images/medcy.png"
                 width={450}
                 height={450}
+                style={{backgroundColor:"transparent"}}
                 quality={100}
                 alt="Medcy"
               />

@@ -1,0 +1,10 @@
+@import '../../compStyles/variables.scss';
+.content{
+    position: absolute;
+    width: 150px;
+   
+    background-color: $white;
+
+    box-shadow: 2px 2px 4px 2px rgba( 0 ,0 ,0,0.2);
+    top:$nav-height;
+}
