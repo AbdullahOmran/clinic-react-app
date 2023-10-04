@@ -7,17 +7,15 @@ import Link from "next/link";
 import Loader from "@/components/Loader";
 import clsx from "clsx";
 import {BsFillPersonFill, BsFillLockFill} from "react-icons/bs";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useState, useEffect } from "react";
-import { useSelector,useDispatch } from "react-redux";
 import { increment } from "@/redux/userSlice";
-
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 function Home() {
   const [loading, setLoading] = useState(true);
-  const {user} = useSelector((state)=>state.user);
-  const dispatch = useDispatch();
-  dispatch(increment());
-
+  //const user = useSelector((state: RootState)=>state.user);
+  //const dispatch = useDispatch();
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -62,7 +60,7 @@ function Home() {
                   />
                   <Welcome />
                 </div>
-                  {user}
+            
                 <PrimaryTextField
                   icon = {<BsFillPersonFill size = {18}/>}
                   className={clsx({ [styles.Item]: true })}
