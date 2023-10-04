@@ -26,7 +26,7 @@
 .imgBox{
     display: flex;
     flex-direction: column;
-    background-color: $teriary-color;
+    background-color: $tertiary-color;
     border-radius: 20px;
     justify-content: flex-start;
     align-items: center;
@@ -74,7 +74,7 @@
     margin-right: 10px;
     align-self: end;
     text-decoration: none;
-    color: $teriary-color;
+    color: $tertiary-color;
 }
 .forgotPassword:hover{
     color: $secondary-color;

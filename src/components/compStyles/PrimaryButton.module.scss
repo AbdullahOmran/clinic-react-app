@@ -8,13 +8,13 @@
     letter-spacing: 5px;
     text-transform: uppercase;
     background-color: $default-color;
-    color: $teriary-color;
+    color: $tertiary-color;
     transition: all 1000ms;
     font-size: 15px;
     position: relative;
     width: 100%;
     overflow: hidden;
-    outline: 2px solid $teriary-color
+    outline: 2px solid $tertiary-color
   }
   
   .button:hover {
