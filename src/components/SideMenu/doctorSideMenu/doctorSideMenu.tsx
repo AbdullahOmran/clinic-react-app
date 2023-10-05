@@ -22,7 +22,7 @@ function DoctorSideMenu() {
           </Link>
         </li>
         <li>
-          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===1})} href="/home/patient-encounter">
+          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===1})} href="/home/patient-encounter/demographics">
             <Icon icon="medical-icon:i-family-practice"/>
             <div>Patient Encounter</div>
           </Link>
