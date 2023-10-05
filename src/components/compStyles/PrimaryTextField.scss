@@ -1,4 +1,4 @@
-@import 'variables';
+@import '../shared/variables.scss';
 
 .formControl input:focus+label span,
 .formControl input:valid+label span {
