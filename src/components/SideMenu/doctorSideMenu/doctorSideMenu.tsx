@@ -5,49 +5,54 @@ import { BsCalendarEventFill, BsGearFill, BsHouseFill, BsPersonFill } from "reac
 import clsx from "clsx";
 import {Icon} from "@iconify/react";
 import {FaTimeline,FaPaste} from "react-icons/fa6";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+
 
 function DoctorSideMenu() {
+  const activeItem = useSelector((state: RootState)=>state.doctor.activeSideMenuItem);
+
   return (
     <div className={styles.SideMenu}>
       <ul className={styles.itemsGroup}>
         <li>
-          <Link className={styles.item} href="/">
+          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===0})} href="/home/dashboard">
             <BsHouseFill />
             <div>Dashboard</div>
           </Link>
         </li>
         <li>
-          <Link className={styles.item} href="/">
+          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===1})} href="/home/patient-encounter">
             <Icon icon="medical-icon:i-family-practice"/>
             <div>Patient Encounter</div>
           </Link>
         </li>
         <li>
-          <Link className={styles.item} href="/">
+          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===2})} href="/">
             <FaTimeline />
             <div>Treatment Plans</div>
           </Link>
         </li>
         <li>
-          <Link className={styles.item} href="/">
+          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===3})} href="/">
             <FaPaste />
             <div>Prescriptions</div>
           </Link>
         </li>
         <li>
-          <Link className={styles.item} href="/">
+          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===4})} href="/">
             <BsCalendarEventFill />
             <div>Calendar</div>
           </Link>
         </li>
         <li>
-          <Link className={styles.item} href="/">
+          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===5})} href="/">
             <Icon icon="medical-icon:i-medical-records"/>
             <div>Medical Records</div>
           </Link>
         </li>
         <li>
-          <Link className={styles.item} href="/">
+          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===6})} href="/">
             <BsGearFill />
             <div>Settings</div>
           </Link>

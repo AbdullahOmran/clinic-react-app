@@ -1,6 +1,12 @@
+"use client";
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './page.module.scss';
-
-function dashboard() {
+import { RootState } from '@/redux/store';
+import { setActiveSideMenuItem } from '@/redux/doctorSlice';
+function Dashboard() {
+   //  const doctor = useSelector((state: RootState)=>state.doctor);
+     const dispatch = useDispatch();
+     dispatch(setActiveSideMenuItem(0));
     return(
         <div className={styles.container}>
         
@@ -8,4 +14,4 @@ function dashboard() {
         </div>
         );
 }
-export default dashboard;
+export default Dashboard;
