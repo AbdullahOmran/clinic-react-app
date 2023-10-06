@@ -5,7 +5,7 @@ import {
   setActiveSideMenuItem,
   setActiveSubNavItem,
 } from "@/redux/doctorSlice";
-import { Form, InputGroup } from "react-bootstrap";
+import { Col, Form, InputGroup, Row } from "react-bootstrap";
 
 function Demographics() {
   const dispatch = useDispatch();
@@ -13,16 +13,94 @@ function Demographics() {
   dispatch(setActiveSubNavItem(0));
   return (
     <div className={styles.container}>
-       <Form.Label htmlFor="inputPassword5">Password</Form.Label>
-      <Form.Control
-        type="password"
-        id="inputPassword5"
-        aria-describedby="passwordHelpBlock"
-      />
-      <Form.Text id="passwordHelpBlock" muted>
-        Your password must be 8-20 characters long, contain letters and numbers,
-        and must not contain spaces, special characters, or emoji.
-      </Form.Text>
+      <Form>
+        <Row className="mb-3">
+          <Form.Group as={Col}>
+            <Form.Label>Patient ID</Form.Label>
+            <InputGroup>
+              <InputGroup.Text id="patientID___23jik">ID</InputGroup.Text>
+              <Form.Control
+                placeholder="ID"
+                aria-label="ID"
+                aria-describedby="patientID___23jik"
+                disabled
+              />
+            </InputGroup>
+          </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          <Form.Group as={Col}>
+            <Form.Label>Full Name</Form.Label>
+            <Form.Control type="text" placeholder="Enter Full Name" />
+          </Form.Group>
+
+          <Form.Group as={Col}>
+            <Form.Label>Phone Number</Form.Label>
+            <Form.Control type="number" placeholder="Enter Phone Number" />
+          </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          <Form.Group as={Col}>
+            <Form.Label>Age</Form.Label>
+            <Form.Control type="number" placeholder="Enter Age" />
+          </Form.Group>
+
+          <Form.Group as={Col}>
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" placeholder="Enter Email" />
+          </Form.Group>
+        </Row>
+        <Row className="mb-3">
+        <Form.Group as={Col}>
+          <Form.Label>Gender</Form.Label>
+          <Form.Select defaultValue="Choose...">
+            <option>Choose...</option>
+            <option>Male</option>
+            <option>Female</option>
+          </Form.Select>
+        </Form.Group>
+        <Form.Group as={Col}>
+          <Form.Label>Marital Status</Form.Label>
+          <Form.Select defaultValue="Choose...">
+            <option>Choose...</option>
+            <option>Married</option>
+            <option>single</option>
+          </Form.Select>
+        </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          <Form.Group as={Col}>
+            <Form.Label>Address</Form.Label>
+            <Form.Control type="text" placeholder="Enter Address" />
+          </Form.Group>
+
+          <Form.Group as={Col}>
+            <Form.Label>Blood Group</Form.Label>
+            <Form.Select defaultValue="Choose...">
+            <option>Choose...</option>
+            <option>A+</option>
+            <option>A-</option>
+            <option>B+</option>
+            <option>B-</option>
+            <option>O+</option>
+            <option>O-</option>
+            <option>AB+</option>
+            <option>AB-</option>
+          </Form.Select>
+          </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          <Form.Group as={Col}>
+            <Form.Label>Education</Form.Label>
+            <Form.Control type="text" placeholder="Education" />
+          </Form.Group>
+
+          <Form.Group as={Col}>
+            <Form.Label>Occupation</Form.Label>
+            <Form.Control type="text" placeholder="Occupation" />
+          </Form.Group>
+        </Row>
+      </Form>
     </div>
   );
 }
