@@ -3,14 +3,14 @@ import styles from "./page.module.scss";
 import { useDispatch } from "react-redux";
 import { setActiveSideMenuItem,setActiveSubNavItem } from "@/redux/doctorSlice";
 
-function Demographics() {
+function History() {
     const dispatch = useDispatch();
     dispatch(setActiveSideMenuItem(1));
-    dispatch(setActiveSubNavItem(0));
+    dispatch(setActiveSubNavItem(1));
   return (
     <div className={styles.container}>
-      0
+      1
     </div>
   );
 }
-export default Demographics;
+export default History;
