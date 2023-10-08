@@ -15,7 +15,7 @@ function PatientEncounterSubNav() {
             className={clsx({ [styles.link]: true, [styles.active]: activeItem ===0 })}
             href="/home/patient-encounter/demographics"
           >
-            <div>Demographics</div>
+            <div>Patient Demographics</div>
           </Link>
         </li>
         <li className={styles.item}>

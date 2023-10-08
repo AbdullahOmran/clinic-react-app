@@ -1,5 +1,6 @@
+@import '@/app/variables';
 .container{
-    background-color: red;
+    background-color: $white;
     margin-top: 5px;
     padding: 10px;
 }
