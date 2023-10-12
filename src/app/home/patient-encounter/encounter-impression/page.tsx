@@ -1,11 +1,21 @@
 "use client";
 import styles from "./page.module.scss";
 import { useDispatch } from "react-redux";
+import { BsPlusCircle, BsXCircle,BsFillClipboard2PulseFill} from "react-icons/bs";
 import {
   setActiveSideMenuItem,
   setActiveSubNavItem,
 } from "@/redux/doctorSlice";
-import { Form, Row, Col, Dropdown, ListGroup } from "react-bootstrap";
+import {
+  Row,
+  Button,
+  ListGroup,
+  Badge,
+  CloseButton,
+  Container,
+  Stack,
+} from "react-bootstrap";
+import clsx from "clsx";
 
 function EncounterImpression() {
   const dispatch = useDispatch();
@@ -13,51 +23,105 @@ function EncounterImpression() {
   dispatch(setActiveSubNavItem(5));
   return (
     <div className={styles.container}>
-      <Form>
-        <Row className="mb-3">
-          <Form.Group as={Col}>
-          <Form.Label>Symptoms</Form.Label>
-            <ListGroup as="ol" numbered>
-              <ListGroup.Item as="li">Headache</ListGroup.Item>
-              <ListGroup.Item as="li">Sneezing</ListGroup.Item>
-              <ListGroup.Item as="li">Cough</ListGroup.Item>
-            </ListGroup>
-          </Form.Group>
-          <Form.Group as={Col}>
-          <Form.Label>Possible Diagnosis</Form.Label>
-            <ListGroup as="ol" numbered>
-              <ListGroup.Item as="li">Colds</ListGroup.Item>
-              <ListGroup.Item as="li">Flu</ListGroup.Item>
-            </ListGroup>
-          </Form.Group>
-        </Row>
-        <Row className="mb-3">
-          <Form.Group as={Col}>
-            <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
+      <Container>
+        <Row className="mb-4 mt-2">
+          <Stack direction="horizontal" gap={3}>
+            
+            <Button className="p-1" variant="primary">
+                <BsXCircle className={styles.icon} />
+                Delete All
+                <span className="visually-hidden">unread messages</span>
+              </Button>
+            
+            <Button className="p-1 ms-auto" variant="primary">
+                <BsPlusCircle className={styles.icon} />
+                Create Treatment Plan
+                <span className="visually-hidden">unread messages</span>
+              </Button>
+            <Button className="p-1" variant="primary">
+                <BsPlusCircle className={styles.icon} />
                 Add Symptom
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </Form.Group>
-          <Form.Group as={Col}>
-          <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-              Add Diagnosis
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </Form.Group>
+                <span className="visually-hidden">unread messages</span>
+              </Button>
+          </Stack>
         </Row>
-      </Form>
+        <Row className="mb-1">
+        
+          <h3 className={styles.header}>
+          <BsFillClipboard2PulseFill className={styles.clipboardIcon}/>
+            Symptoms & Diagnosis
+            </h3>
+        </Row>
+        <Row className="mb-3">
+          <ListGroup  as="ol" numbered>
+            <ListGroup.Item
+              as="li"
+              action
+              className={clsx({"d-flex justify-content-between align-items-center ":true,[styles.item]:true})}
+            >
+              <div className="ms-2 me-auto">
+                <div className="fw-bold">Symptom</div>
+                Possible Diagnosis
+              </div>
+              <Button className="p-1" variant="primary">
+                <BsPlusCircle className={styles.icon} />
+                Add Diagnosis
+                <span className="visually-hidden">unread messages</span>
+              </Button>
+              <CloseButton className="ms-3" />
+            </ListGroup.Item>
+            <ListGroup.Item
+              as="li"
+              action
+              className={clsx({"d-flex justify-content-between align-items-center ":true,[styles.item]:true})}
+            >
+              <div className="ms-2 me-auto">
+                <div className="fw-bold">Symptom</div>
+                Possible Diagnosis
+              </div>
+              <Button className="p-1" variant="primary">
+                <BsPlusCircle className={styles.icon} />
+                Add Diagnosis
+                <span className="visually-hidden">unread messages</span>
+              </Button>
+              <CloseButton className="ms-3" />
+            </ListGroup.Item>
+            <ListGroup.Item
+              as="li"
+              action
+              className={clsx({"d-flex justify-content-between align-items-center ":true,[styles.item]:true})}
+            >
+              <div className="ms-2 me-auto">
+                <div className="fw-bold">Symptom</div>
+                Possible Diagnosis
+              </div>
+              <Button className="p-1" variant="primary">
+                <BsPlusCircle className={styles.icon} />
+                Add Diagnosis
+                <span className="visually-hidden">unread messages</span>
+              </Button>
+              <CloseButton className="ms-3" />
+            </ListGroup.Item>
+            <ListGroup.Item
+              as="li"
+              action
+              className={clsx({"d-flex justify-content-between align-items-center ":true,[styles.item]:true})}
+            >
+              <div className="ms-2 me-auto">
+                <div className="fw-bold">Symptom</div>
+                Possible Diagnosis
+              </div>
+              <Button className="p-1" variant="primary">
+                <BsPlusCircle className={styles.icon} />
+                Add Diagnosis
+                <span className="visually-hidden">unread messages</span>
+              </Button>
+              <CloseButton className="ms-3" />
+            </ListGroup.Item>
+           
+          </ListGroup>
+        </Row>
+      </Container>
     </div>
   );
 }

@@ -1,6 +1,14 @@
+$primary-color: #dd1e3d;
+$default-color: #eaedf2;
+$secondary-color: #08508a;
+$tertiary-color: #1bbbcc;
+$dark-tertiary-color: #548eaa;
+$white: #ffffff;
 
 $theme-colors: (
-    'danger':red
+    
+    'primary':$primary-color,
+    'secondary':$secondary-color,
 );
 
 
