@@ -28,7 +28,7 @@ function DoctorSideMenu() {
           </Link>
         </li>
         <li>
-          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===2})} href="/">
+          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===2})} href="/home/treatment-plans/">
             <FaTimeline />
             <div>Treatment Plans</div>
           </Link>

@@ -1,0 +1,33 @@
+@import '../../../../shared/variables.scss';
+
+.itemsGroup {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+  .item {
+   flex-grow: 1;
+  }
+  .link{
+    color: $secondary-color;
+    padding: 8px;
+    display: flex;
+    background-color: $white;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1em;
+  }
+  .link:hover{
+    background-color: $primary-color;
+    color: $white;
+  }
+  .active{
+    background-color: $primary-color;
+    color: $white;
+  }
