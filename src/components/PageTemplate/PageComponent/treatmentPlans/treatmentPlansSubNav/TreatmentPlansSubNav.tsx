@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 
 function TreatmentPlansSubNav() {
-  const activeItem = useSelector((state:RootState)=>state.doctor.activeSubNavItem);
+  const activeItem = useSelector((state:RootState)=>state.doctor.activeTreatmentPlansSubNavItem);
   return (
     
       <ul className={styles.itemsGroup}>
