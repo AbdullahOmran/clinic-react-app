@@ -1,13 +1,13 @@
 "use client";
 import styles from "./page.module.scss";
 import { useDispatch } from "react-redux";
-import { setActiveSideMenuItem,setActiveSubNavItem } from "@/redux/doctorSlice";
+import { setActiveSideMenuItem,setActivePatientEncounterSubNavItem } from "@/redux/doctorSlice";
 import { Form,Row,Col } from "react-bootstrap";
 
 function AllergiesAndImmuzinations() {
     const dispatch = useDispatch();
     dispatch(setActiveSideMenuItem(1));
-    dispatch(setActiveSubNavItem(3));
+    dispatch(setActivePatientEncounterSubNavItem(3));
   return (
     <div className={styles.container}>
       <Form>

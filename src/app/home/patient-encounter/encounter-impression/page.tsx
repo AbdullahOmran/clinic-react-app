@@ -8,7 +8,7 @@ import {
 } from "react-icons/bs";
 import {
   setActiveSideMenuItem,
-  setActiveSubNavItem,
+  setActivePatientEncounterSubNavItem,
 } from "@/redux/doctorSlice";
 import {
   Row,
@@ -34,7 +34,7 @@ function EncounterImpression() {
 
   const dispatch = useDispatch();
   dispatch(setActiveSideMenuItem(1));
-  dispatch(setActiveSubNavItem(5));
+  dispatch(setActivePatientEncounterSubNavItem(5));
   return (
     <>
       <div className={styles.container}>

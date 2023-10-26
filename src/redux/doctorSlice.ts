@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface doctorState {
   activeSideMenuItem: number,
-  activeSubNavItem: number,
+  activePatientEncounterSubNavItem: number,
 }
 const initialState: doctorState = {
   activeSideMenuItem: 0,
-  activeSubNavItem: 0,
+  activePatientEncounterSubNavItem: 0,
 };
 
 export const doctorSlice = createSlice({
@@ -17,11 +17,11 @@ export const doctorSlice = createSlice({
     setActiveSideMenuItem: (state, action) => {
         state.activeSideMenuItem = action.payload ;
     },
-    setActiveSubNavItem: (state, action) => {
-        state.activeSubNavItem = action.payload ;
+    setActivePatientEncounterSubNavItem: (state, action) => {
+        state.activePatientEncounterSubNavItem = action.payload ;
     },
   },
 });
 
-export const { setActiveSideMenuItem,setActiveSubNavItem} = doctorSlice.actions;
+export const { setActiveSideMenuItem,setActivePatientEncounterSubNavItem} = doctorSlice.actions;
 export default doctorSlice.reducer;

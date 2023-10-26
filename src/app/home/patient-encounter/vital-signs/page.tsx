@@ -3,14 +3,14 @@ import styles from "./page.module.scss";
 import { useDispatch } from "react-redux";
 import {
   setActiveSideMenuItem,
-  setActiveSubNavItem,
+  setActivePatientEncounterSubNavItem,
 } from "@/redux/doctorSlice";
 import { Form, Row, Col, InputGroup } from "react-bootstrap";
 
 function VitalSigns() {
   const dispatch = useDispatch();
   dispatch(setActiveSideMenuItem(1));
-  dispatch(setActiveSubNavItem(2));
+  dispatch(setActivePatientEncounterSubNavItem(2));
   return (
     <div className={styles.container}>
       <Form>

@@ -3,14 +3,14 @@ import styles from "./page.module.scss";
 import { useDispatch } from "react-redux";
 import {
   setActiveSideMenuItem,
-  setActiveSubNavItem,
+  setActivePatientEncounterSubNavItem,
 } from "@/redux/doctorSlice";
 import { Form, Row,Col } from "react-bootstrap";
 
 function History() {
   const dispatch = useDispatch();
   dispatch(setActiveSideMenuItem(1));
-  dispatch(setActiveSubNavItem(1));
+  dispatch(setActivePatientEncounterSubNavItem(1));
   return (
     <div className={styles.container}>
       <Form>
