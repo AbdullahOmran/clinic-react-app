@@ -12,3 +12,9 @@
 .viewListIcon{
     font-size: 1.6em;
 }
+.card{
+    cursor: pointer;
+}
+.card:hover{
+    background-color: $primary-color;
+}

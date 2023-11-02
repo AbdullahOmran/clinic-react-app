@@ -6,10 +6,11 @@ import {
   setActiveTreatmentPlansSubNavItem,
 } from "@/redux/doctorSlice";
 import { Button, Card, CloseButton, Col, Container, Row, Stack } from "react-bootstrap";
-import { BsPlusCircle, BsXCircle } from "react-icons/bs";
+import { BsCheckCircle, BsPlusCircle, BsXCircle } from "react-icons/bs";
 import { CiViewList } from "react-icons/ci";
 import { useState } from "react";
 import MedicationModal from "@/components/PageTemplate/PageComponent/treatmentPlans/medicationModal/medicationModal";
+import clsx from "clsx";
 
 function Interventions() {
   const dispatch = useDispatch();
@@ -54,7 +55,7 @@ function Interventions() {
                 className="p-1"
                 variant="primary"
               >
-                <BsPlusCircle className={styles.icon} />
+                <BsCheckCircle className={styles.icon} />
                 Drug Interaction checker
                 <span className="visually-hidden">unread messages</span>
               </Button>
@@ -69,15 +70,15 @@ function Interventions() {
           <Row xl={4} md={2} className="g-4">
             {Array.from({ length: 5 }).map((_, idx) => (
               <Col key={idx}>
-                <Card className="position-relative">
+                <Card className={clsx({"position-relative":true, [styles.card]:true})}>
                   <CloseButton className="position-absolute end-0 p-2"/>
                   <Card.Img variant="top" src="/images/drug_img.jpg" />
                   <Card.Body>
-                    <Card.Title>Medication Name</Card.Title>
+                    <Card.Title>Lisinopril</Card.Title>
                     <Card.Text>
-                      <p className="m-1">Dosage</p>
-                      <p className="m-1">Frequency</p>
-                      <p className="m-1">Duration</p>
+                      <p className="m-1"><span className="fw-bold">Dosage:</span> 5-40 mg</p>
+                      <p className="m-1"><span className="fw-bold">Frequency:</span> once daily</p>
+                      <p className="m-1"><span className="fw-bold">Duration:</span> 3 weeks</p>
                     </Card.Text>
                   </Card.Body>
                 </Card>
