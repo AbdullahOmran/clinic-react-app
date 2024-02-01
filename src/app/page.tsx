@@ -30,7 +30,7 @@ function Home() {
             src="/images/healthcareBackground.jpg"
             layout="fill"
             objectFit="cover"
-            quality={100}
+            unoptimized
           />
           <div className={styles.loginBox}>
             <div className={styles.imgBox}>
@@ -40,8 +40,8 @@ function Home() {
                 width={450}
                 height={450}
                 style={{backgroundColor:"transparent"}}
-                quality={100}
                 alt="Medcy"
+                unoptimized
               />
             </div>
             <div className={styles.contents}>
@@ -57,6 +57,7 @@ function Home() {
                     width={100}
                     height={100}
                     alt="LOGIN"
+                    unoptimized
                   />
                   <Welcome />
                 </div>

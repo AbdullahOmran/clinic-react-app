@@ -27,8 +27,8 @@ function Nav() {
               transform: "translate(-10%,-20%)",
             }}
             height={100}
-            quality={100}
             alt="Medcy"
+            unoptimized
           />
         </Link>
       </div>
@@ -95,8 +95,8 @@ function Nav() {
                 src="/images/loginAvatar.png"
                 width={50}
                 height={50}
-                quality={100}
                 alt="UserImg"
+                unoptimized
               />
             </div>
             <Dropdown display={displayUserMenu} />
