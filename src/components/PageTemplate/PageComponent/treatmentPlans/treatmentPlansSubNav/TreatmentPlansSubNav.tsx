@@ -26,17 +26,10 @@ function TreatmentPlansSubNav() {
             <div>Interventions</div>
           </Link>
         </li>
+        
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true, [styles.active]: activeItem ===2 })}
-            href="/home/treatment-plans/timeline"
-          >
-            <div>Timeline</div>
-          </Link>
-        </li>
-        <li className={styles.item}>
-          <Link
-            className={clsx({ [styles.link]: true, [styles.active]: activeItem ===3 })}
             href="/home/treatment-plans/progress-monitoring"
           >
             <div>Progress Monitoring</div>
