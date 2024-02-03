@@ -34,7 +34,7 @@ function DoctorSideMenu() {
           </Link>
         </li>
         <li>
-          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===3})} href="/">
+          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===3})} href="/home/prescriptions/">
             <FaPaste />
             <div>Prescriptions</div>
           </Link>

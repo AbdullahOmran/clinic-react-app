@@ -1,0 +1,14 @@
+@import '@/app/variables';
+.container{
+    background-color: $white;
+    padding: 10px;
+    min-height: 98%;
+    margin: 9px 6px 4px 6px;
+}
+.icon{
+    font-size: 1.5em;
+    margin-right: 5px;
+}
+.viewListIcon{
+    font-size: 1.6em;
+}

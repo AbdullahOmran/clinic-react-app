@@ -12,13 +12,10 @@ import { useState } from "react";
 import MedicationModal from "@/components/PageTemplate/PageComponent/treatmentPlans/medicationModal/medicationModal";
 import clsx from "clsx";
 
-function Interventions() {
+function Prescriptions() {
   const dispatch = useDispatch();
-  dispatch(setActiveSideMenuItem(2));
-  dispatch(setActiveTreatmentPlansSubNavItem(1));
-  const [showMedicationModal, setShowMedicationModal] = useState(false);
-  const handleCloseMedicationModal= () => setShowMedicationModal(false);
-  const handleShowMedicationModal = () => setShowMedicationModal(true);
+  dispatch(setActiveSideMenuItem(3));
+  
   return (
     <>
       <div className={styles.container}>
@@ -32,7 +29,7 @@ function Interventions() {
               </Button>
       
               <Button
-                onClick={handleShowMedicationModal}
+               
                 className="p-1 ms-auto"
                 variant="primary"
               >
@@ -42,7 +39,7 @@ function Interventions() {
               </Button>
               
               <Button
-                onClick={handleShowMedicationModal}
+              
                 className="p-1"
                 variant="primary"
               >
@@ -51,7 +48,7 @@ function Interventions() {
                 <span className="visually-hidden">unread messages</span>
               </Button>
               <Button
-                onClick={handleShowMedicationModal}
+                
                 className="p-1"
                 variant="primary"
               >
@@ -64,33 +61,16 @@ function Interventions() {
           <Row className="mb-1">
             <h3 className={styles.header}>
               <CiViewList className={styles.viewListIcon} />
-              Medications List
+              Prescriptions List
             </h3>
           </Row>
-          <Row xl={4} md={2} className="g-4">
-            {Array.from({ length: 5 }).map((_, idx) => (
-              <Col key={idx}>
-                <Card className={clsx({"position-relative":true, [styles.card]:true})}>
-                  <CloseButton className="position-absolute end-0 p-2"/>
-                  <Card.Img variant="top" src="/images/drug_img.jpg" />
-                  <Card.Body>
-                    <Card.Title>Lisinopril</Card.Title>
-                    <Card.Text>
-                      <p className="m-1"><span className="fw-bold">Dosage:</span> 5-40 mg</p>
-                      <p className="m-1"><span className="fw-bold">Frequency:</span> once daily</p>
-                      <p className="m-1"><span className="fw-bold">Duration:</span> 3 weeks</p>
-                      <p className="m-1"><span className="fw-bold">Route:</span> orally or topically</p>
-                      <p className="m-1"><span className="fw-bold">Instructions:</span> with food, at bedtime</p>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
+          <Row className="g-4">
+            
           </Row>
         </Container>
       </div>
-      <MedicationModal show={showMedicationModal} handleClose={handleCloseMedicationModal}  />
+      
     </>
   );
 }
-export default Interventions;
+export default Prescriptions;
