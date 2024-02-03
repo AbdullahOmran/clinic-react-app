@@ -5,16 +5,25 @@ import {
   setActiveSideMenuItem,
   setActiveTreatmentPlansSubNavItem,
 } from "@/redux/doctorSlice";
-import { Button, Card, CloseButton, Col, Container, Row, Stack } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  CloseButton,
+  Col,
+  Container,
+  Row,
+  Stack,
+  Table,
+} from "react-bootstrap";
 import clsx from "clsx";
-import { BsCheckCircle, BsPlusCircle, BsXCircle } from "react-icons/bs";
+import { BsCheckCircle, BsPencilSquare, BsPlusCircle, BsXCircle } from "react-icons/bs";
 import { CiViewList } from "react-icons/ci";
 
 function ProgressMonitoring() {
   const dispatch = useDispatch();
   dispatch(setActiveSideMenuItem(2));
   dispatch(setActiveTreatmentPlansSubNavItem(2));
-  
+
   return (
     <>
       <div className={styles.container}>
@@ -31,32 +40,16 @@ function ProgressMonitoring() {
                 Delete Encounter
                 <span className="visually-hidden">unread messages</span>
               </Button>
-      
-              <Button
-                
-                className="p-1 ms-auto"
-                variant="primary"
-              >
+
+              <Button className="p-1 ms-auto" variant="primary">
                 <BsPlusCircle className={styles.icon} />
                 Add Encounter
                 <span className="visually-hidden">unread messages</span>
               </Button>
+
               
-              <Button
-               
-                className="p-1"
-                variant="primary"
-              >
-                <BsPlusCircle className={styles.icon} />
-                Add Notes
-                <span className="visually-hidden">unread messages</span>
-              </Button>
-              <Button
-               
-                className="p-1"
-                variant="primary"
-              >
-                <BsCheckCircle className={styles.icon} />
+              <Button className="p-1" variant="primary">
+              <BsPencilSquare className={styles.icon}/>
                 Edit Encounter
                 <span className="visually-hidden">unread messages</span>
               </Button>
@@ -65,19 +58,54 @@ function ProgressMonitoring() {
           <Row className="mb-1">
             <h3 className={styles.header}>
               <CiViewList className={styles.viewListIcon} />
-              Medications List
+              All Encounters
             </h3>
           </Row>
-          <Row xl={4} md={2} className="g-4">
-            {Array.from({ length: 5 }).map((_, idx) => (
-              <Col key={idx}>
-                {['encounter number','goals','interventions','Notes','action'].at(idx)}
-              </Col>
-            ))}
+          <Row className="g-4">
+            
+            <Table className={styles.table} hover striped responsive="xl">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Date</th>
+                  <th>Goals</th>
+                  <th>Medications</th>
+                  <th>Notes</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
+                  <td> - </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
+
+                  <td> - </td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
+                  <td>Table cell</td>
+
+                  <td>Table cell</td>
+                  <td> - </td>
+                </tr>
+              </tbody>
+            </Table>
           </Row>
         </Container>
       </div>
-      
     </>
   );
 }
