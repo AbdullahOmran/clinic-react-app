@@ -40,7 +40,7 @@ function DoctorSideMenu() {
           </Link>
         </li>
         <li>
-          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===4})} href="/">
+          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===4})} href="/home/calendar/new-appointments/">
             <BsCalendarEventFill />
             <div>Calendar</div>
           </Link>

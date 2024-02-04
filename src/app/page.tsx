@@ -13,18 +13,17 @@ import { increment } from "@/redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 function Home() {
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   //const user = useSelector((state: RootState)=>state.user);
   //const dispatch = useDispatch();
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 5000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1000);
+  // }, []);
   return (
     <main className={styles.main}>
-      {!loading ? (
-        <>
+      
           <Image
             alt="healthcare"
             src="/images/healthcareBackground.jpg"
@@ -90,10 +89,8 @@ function Home() {
               </div>
             </div>
           </div>
-        </>
-      ) : (
-        <Loader />
-      )}
+        
+     
     </main>
   );
 }
