@@ -1,0 +1,29 @@
+SETTINGS:
+    1- prescription image template
+    2- specify display mode (dark mode , light mode)
+    4- specify the number of appointments per slot
+    5- change the user credentials (password,username)
+
+
+
+
+TODO:
+    1- procedure at the first encounter
+        -- patient fills his data in the reception.
+        -- the receptionist checks the available time slots for the patient.
+        -- the receptionist schedules new available appointment for the patient.
+        -- the patient comes on time.
+        -- receptionist redirect the patient to the doctor.
+        -- doctor accepts the patient from notifications shown above.
+        -- patient meets the doctor and tells the symptoms
+        -- doctor diagnoses.
+        -- doctor makes treatment plan for the patient.
+        -- doctor specifies the goals.
+        -- doctor specifies the suitable medications for the patient
+        -- that goals and medications are stored in encounter object
+        -- encounter object should be shown in progress tab.
+        -- the doctor generates prescription from a certain encounter object
+        -- the doctor checks the available upcoming appointments with the receptionist.
+        -- if the appointment is available, the receptionist will schedule that appointment
+    2- procedure at the second encounter
+        --
