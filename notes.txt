@@ -7,6 +7,31 @@ SETTINGS:
 
 
 
+
+Calendar:
+    Design:
+        1- new appointments tab
+            shows the appointments that needs to be confirmed
+        2- availability tab
+            the doctor specifies the available time slots
+        3- schedule tab
+            - Day view
+                appointments for the current day
+            - Week view
+                appointments for the current week
+            - Month view
+                appointments for the current month
+        4- completed tab
+            - shows the achreive of the completed appointments
+        5- pending approvals tab
+            confirm special appointment in case of conflicts 
+
+    Notes:
+        integrate the appointments with the EMR of the patient
+        integrate the new-appointment with the treatment-plan tab
+
+
+
 TODO:
     1- procedure at the first encounter
         -- patient fills his data in the reception.
