@@ -21,7 +21,7 @@ function CalendarSubNav() {
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true , [styles.active]: activeItem ===1})}
-            href="/home/calendar/schdule/"
+            href="/home/calendar/schedule/"
           >
             <div>Schedule</div>
           </Link>

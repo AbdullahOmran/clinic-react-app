@@ -1,0 +1,35 @@
+@import '@/app/variables';
+.container{
+    background-color: $white;
+    margin-top: 5px;
+    padding: 10px;
+    min-height: 93%;
+}
+.calendar{
+    width: 95%;
+}
+@mixin circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    display: inline-block;
+    margin: 0 10px;
+}
+.redCircle{
+    @include circle;
+    background-color: $primary-color;
+}
+.blueCircle{
+    @include circle;
+    background-color: $secondary-color;
+}
+.headerIcon{
+    font-size: 1em;
+    margin-right: 5px;
+    color: $secondary-color;
+}
+.interval{
+    color: $secondary-color;
+    font-size: 1em;
+    margin: 0 10px;
+}

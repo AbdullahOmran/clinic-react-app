@@ -52,3 +52,6 @@ TODO:
         -- if the appointment is available, the receptionist will schedule that appointment
     2- procedure at the second encounter
         --
+
+Bugs:
+    -- items are selected while scrolling
