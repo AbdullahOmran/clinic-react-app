@@ -18,6 +18,7 @@ import { useState } from "react";
 import Calendar, { TileArgs, TileContentFunc } from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { BsCalendarEventFill } from "react-icons/bs";
+import ScheduleModal from "@/components/PageTemplate/PageComponent/calendar/scheduleModal/scheduleModal";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -27,6 +28,9 @@ function Schedule() {
   dispatch(setActiveSideMenuItem(4));
   dispatch(setActiveCalendarSubNavItem(1));
   const [calendarValue, calendarOnChange] = useState<Value>(new Date());
+  const [showScheduleModal, setShowScheduleModal] = useState(false);
+  const handleCloseScheduleModal= () => setShowScheduleModal(false);
+  const handleShowScheduleModal = () => setShowScheduleModal(true);
 
   const calendarContent: TileContentFunc = ({
     activeStartDate,
@@ -46,6 +50,7 @@ function Schedule() {
   };
 
   return (
+    <>
     <div className={styles.container}>
       <Container>
         <Row className="mb-1 mt-2">
@@ -123,6 +128,7 @@ function Schedule() {
             tileContent={calendarContent}
             onChange={calendarOnChange}
             value={calendarValue}
+            onClickDay={handleShowScheduleModal}
           />
           <div className="mt-2 ms-4 d-flex justify-content-start align-items-center">
             <div className={styles.redCircle}></div>
@@ -134,6 +140,8 @@ function Schedule() {
         
       </Container>
     </div>
+    <ScheduleModal show={showScheduleModal} handleClose={handleCloseScheduleModal}  />
+    </>
   );
 }
 export default Schedule;

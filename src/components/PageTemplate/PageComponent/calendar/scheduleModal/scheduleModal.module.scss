@@ -1,0 +1,15 @@
+
+@import "@/app/variables";
+
+
+.icon{
+    font-size: 1.3em;
+    margin-right: 5px;
+}
+.listGroup{
+    overflow-y: auto;
+    max-height: 250px;
+}
+.item{
+    color: $secondary-color;
+}
