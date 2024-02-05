@@ -27,9 +27,29 @@ function ScheduleModal({
       <Modal.Body>
         <Form>
           <Row>
+            <div className="fw-bold">
+            Appointment Type
+            </div>
+          </Row>
+          <Row>
+            <Col>
+              <Form.Check // prettier-ignore
+                type="switch"
+                label="New Inspection"
+                checked
+              />
+            </Col>
+            <Col>
+              <Form.Check // prettier-ignore
+                type="switch"
+                label="Consultation"
+              />
+            </Col>
+          </Row>
+          <Row className="mt-2">
             <Col>
               <Form.Group className="mb-3">
-                <Form.Label>Available Time Slots</Form.Label>
+                <Form.Label className="fw-bold">Available Time Slots</Form.Label>
                 <ListGroup className={styles.listGroup}>
                   <ListGroup.Item className={styles.item} action>
                     Flurest
@@ -42,15 +62,17 @@ function ScheduleModal({
             </Col>
             <Col className="my-auto">
               <Form.Group className="mb-3">
-                <Form.Label>Patient name</Form.Label>
+                <Form.Label className="fw-bold">Patient name</Form.Label>
                 <Form.Control type="text" placeholder="Search..." autoFocus />
               </Form.Group>
-              <InputGroup className="mb-3">
-                <InputGroup.Text>
-                  <BsCapsule />
-                </InputGroup.Text>
-                <Form.Control type="text" placeholder="Dosage" />
-              </InputGroup>
+              <ListGroup className={styles.listGroup}>
+                <ListGroup.Item className={styles.item} action>
+                  Ahmed
+                </ListGroup.Item>
+                <ListGroup.Item className={styles.item} action>
+                  Mohamed
+                </ListGroup.Item>
+              </ListGroup>
             </Col>
           </Row>
         </Form>

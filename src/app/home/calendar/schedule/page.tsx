@@ -56,7 +56,7 @@ function Schedule() {
         <Row className="mb-1 mt-2">
           <h3>
             <BsCalendarEventFill className={styles.headerIcon} />
-            Today View
+            Day View
           </h3>
         </Row>
         <Row className="mb-1 mt-2">
@@ -116,7 +116,7 @@ function Schedule() {
           </ListGroup>
         </Row>
         
-        <Row className="mb-1 mt-2">
+        <Row className="mb-1 mt-4">
           <h3>
             <BsCalendarEventFill className={styles.headerIcon} />
             Month View

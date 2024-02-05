@@ -35,14 +35,7 @@ function CalendarSubNav() {
             <div>Completed</div>
           </Link>
         </li>
-        <li className={styles.item}>
-          <Link
-            className={clsx({ [styles.link]: true, [styles.active]: activeItem ===3 })}
-            href="/home/calendar/avialability/"
-          >
-            <div>Availability</div>
-          </Link>
-        </li>
+        
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true, [styles.active]: activeItem ===4 })}

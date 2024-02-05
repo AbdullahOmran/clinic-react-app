@@ -1,8 +1,18 @@
 SETTINGS:
-    1- prescription image template
-    2- specify display mode (dark mode , light mode)
-    4- specify the number of appointments per slot
-    5- change the user credentials (password,username)
+    -- prescription image template
+    -- specify display mode (dark mode , light mode)
+    -- Appointment Duration
+    -- Time Slots
+            Determine the time intervals for available slots (e.g., every 15 minutes, 30 minutes, etc.).
+            Allow administrators to specify the start and end times for appointment availability each day.
+    -- Buffer Time
+            Add buffer time between appointments to account for setup, cleanup, or breaks for service providers.
+            Enable administrators to set global buffer times or customize them for specific services or providers.
+    -- Maximum Bookings per Time Slot
+            Limit the number of appointments that can be booked for each time slot to prevent overbooking.
+            Provide flexibility for administrators to adjust this limit based on demand.
+    -- change the user credentials (password,username)
+    -- Two-Factor Authentication (2FA)
 
 
 
