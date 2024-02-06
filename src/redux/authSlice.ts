@@ -24,11 +24,17 @@ export const authSlice = createSlice({
     },
     login: (state, action) => {
       const res = loginUser(action.payload)
-      if (res.status ===200) {
-        // console.log(res)
-      }
-    
-    
+      
+      res.then((value)=>{
+        if (value){
+         // success
+          console.log('success');
+        }else{
+         // error
+          console.log('failed');
+        }  
+      });
+        
     },
   },
 });
