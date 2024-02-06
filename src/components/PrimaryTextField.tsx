@@ -1,8 +1,9 @@
 "use client";
 import styles from "./compStyles/PrimaryTextField.module.scss";
 import "./compStyles/PrimaryTextField.scss";
-import useState from "react";
+import useState, { useRef } from "react";
 import clsx from "clsx";
+import { AnyARecord } from "dns";
 
 type textFieldParams = {
   text: string,
@@ -10,8 +11,9 @@ type textFieldParams = {
   icon?:any,
   style?: object,
   className?: any,
+  onChange?:any,
 };
-function PrimaryTextField({icon, text, type, style, className}: textFieldParams) {
+function PrimaryTextField({icon, text, type, style, className, onChange}: textFieldParams) {
   let content = [<span key={0} className={styles.span} style={{ transitionDelay: "0ms" }}>
       {text[0]}
     </span>,];
@@ -25,6 +27,7 @@ function PrimaryTextField({icon, text, type, style, className}: textFieldParams)
     );
   }
 
+
   return (
     
       icon ?(
@@ -37,7 +40,7 @@ function PrimaryTextField({icon, text, type, style, className}: textFieldParams)
             [styles.formControl]: true,
           })}
         >
-          <input className={styles.input} type={type} required />
+          <input onChange={(e)=>onChange(e.target.value)}  className={styles.input} type={type} required />
           <label className={styles.label}>{content}</label>
         </div>
       </div>

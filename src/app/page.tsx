@@ -11,16 +11,29 @@ import Image from "next/legacy/image";
 import { useState, useEffect } from "react";
 import { increment } from "@/redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+
+
 import { RootState } from "@/redux/store";
+import { login } from "@/redux/authSlice";
 function Home() {
   // const [loading, setLoading] = useState(true);
   //const user = useSelector((state: RootState)=>state.user);
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  
+  const [password,setPassword] = useState('');
+  const [username,setUsername] = useState('');
+  const handleSubmit = ()=>{
+    const user = {'username': username, 'password': password};
+    dispatch(login(user));
+  }
   // useEffect(() => {
   //   setTimeout(() => {
   //     setLoading(false);
   //   }, 1000);
   // }, []);
+  
+
+
   return (
     <main className={styles.main}>
       
@@ -66,9 +79,10 @@ function Home() {
                   className={clsx({ [styles.Item]: true })}
                   text="Username"
                   type="text"
+                  onChange= {(value:string)=>setUsername(value)}
                 />
                 
-                <PrimaryTextField icon = {<BsFillLockFill size = {18}/>} text="Password" type="password" />
+                <PrimaryTextField onChange= {(value:string)=>setPassword(value)} icon = {<BsFillLockFill size = {18}/>} text="Password" type="password" />
                 <Link
                   className={clsx({
                     [styles.Item]: true,
@@ -80,12 +94,10 @@ function Home() {
                 </Link>
                 <PrimaryButton
                   className={clsx({ [styles.Item]: true })}
+                  onClick={handleSubmit}
                   text="login"
                 />
-                <PrimaryButton
-                  className={clsx({ [styles.Item]: true })}
-                  text="sign up"
-                />
+                
               </div>
             </div>
           </div>

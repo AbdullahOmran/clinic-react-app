@@ -6,9 +6,10 @@ import clsx from "clsx";
 type buttonParams  = {
   text: string,
   style?:object,
+  onClick?:any,
   className?:any
 }
-function PrimaryButton({text,style,className}:buttonParams) {
-  return <button style={style} className={clsx({[styles.button]:true,[className]:true})}>{text}</button>;
+function PrimaryButton({text,style,className,onClick}:buttonParams) {
+  return <button onClick={onClick} style={style} className={clsx({[styles.button]:true,[className]:true})}>{text}</button>;
 }
 export default PrimaryButton;
