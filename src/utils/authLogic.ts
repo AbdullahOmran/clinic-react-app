@@ -1,5 +1,6 @@
 export const loginUser = async (e: any) => {
   try {
+    
     const res = await fetch("http://127.0.0.1:8000/api/token/", {
       method: "POST",
       headers: {

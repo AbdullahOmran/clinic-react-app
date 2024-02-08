@@ -65,3 +65,4 @@ TODO:
 
 Bugs:
     -- items are selected while scrolling
+    -- the login page should not be visible in case of redirect.

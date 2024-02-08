@@ -1,11 +1,28 @@
 "use client";
+import { ListGroup } from "react-bootstrap";
 import styles from "./UserContent.module.scss";
 import clsx from "clsx";
+import { setAuthTokens, setUser } from "@/redux/authSlice";
+import { jwtDecode } from "jwt-decode";
+import { useDispatch } from "react-redux";
 
 function UserContent() {
+  const dispatch = useDispatch();
+  const logout = ()=>{
+    const tokens  = localStorage.getItem('authTokens');
+    if(tokens){
+      localStorage.removeItem('authTokens');
+    }
+    dispatch(setAuthTokens(null));
+    dispatch(setUser(null));
+    window.location.reload();
+  }
   return (
-    <div>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, voluptatum! Quae eum dolores officiis accusamus facere fugiat atque ullam maiores in iure. Excepturi perferendis fugit, consectetur nesciunt libero impedit fuga neque explicabo nostrum cupiditate quaerat pariatur corporis tempore et, harum at aut enim laboriosam rem nihil. Architecto, aspernatur facere. Obcaecati a, incidunt eligendi ratione consequatur earum quaerat, ad tenetur, architecto laboriosam corporis vitae odio. Incidunt suscipit quam est. Molestiae nisi numquam assumenda quas maxime aliquam ratione modi eum error architecto voluptatum deleniti atque sed mollitia ea, libero, perferendis corporis id tempora officia, in repellat cumque vero nobis? Explicabo, perferendis vero.</div>
+    <ListGroup  variant="flush">
+      <ListGroup.Item variant="primary" action>My Profile</ListGroup.Item>
+      <ListGroup.Item variant="primary" action>Account Settings</ListGroup.Item>
+      <ListGroup.Item variant="primary" action onClick={logout}>Sign out</ListGroup.Item>
+    </ListGroup>
   );
 }
-
 export default UserContent;

@@ -6,10 +6,12 @@ import Image from "next/image";
 import Dropdown from "./Dropdown/Dropdown";
 import { BsBellFill, BsCart3, BsTranslate } from "react-icons/bs";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import UserContent from "./UserContent/UserContent";
+import { setAuthTokens, setUser } from "@/redux/authSlice";
+import { jwtDecode } from "jwt-decode";
 
 function Nav() {
   const [displayNotiMenu, setDisplayNotiMenu] = useState("none");
@@ -18,8 +20,19 @@ function Nav() {
   const [displayUserMenu, setDisplayUserMenu] = useState("none");
   const user = useSelector((state: RootState)=>state.auth.user);
   const router = useRouter();
+  const dispatch = useDispatch();
+  let authTokens: any = null;
   useEffect(()=>{
-    if(!user){
+    const storedAuthTokens = localStorage.getItem('authTokens');
+    if(storedAuthTokens){
+       authTokens = JSON.parse(storedAuthTokens);
+      dispatch(setAuthTokens(authTokens));
+      dispatch(setUser(jwtDecode(authTokens.access)));
+    }
+    
+  },[]);
+  useEffect(()=>{
+    if(!authTokens){
       router.push('/');
     }
   },[]);
@@ -102,7 +115,7 @@ function Nav() {
             className={clsx({ [styles.item]: true, [styles.userItem]: true })}
           >
             <div className={styles.userItemContent}>
-              <h6>Abdullah Omran</h6>
+              <h6>{user.username}</h6>
               <Image
                 src="/images/loginAvatar.png"
                 width={50}

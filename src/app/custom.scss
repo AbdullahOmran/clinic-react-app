@@ -1,3 +1,7 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+
 $primary-color: #dd1e3d;
 $default-color: #eaedf2;
 $secondary-color: #08508a;
@@ -11,5 +15,26 @@ $theme-colors: (
     'secondary':$secondary-color,
 );
 
+@import 'bootstrap/scss/bootstrap';
 
-@import '~bootstrap/scss/bootstrap';
+
+    .list-group-item-primary {
+      color: $secondary-color;
+      background-color: $white;
+  
+      &.list-group-item-action {
+        &:hover,
+        &:focus {
+          color: $white;
+          background-color: shade-color($primary-color, 10%);
+        }
+  
+        &.active {
+          color: $white;
+          background-color: $primary-color;
+          border-color: $secondary-color;
+        }
+      }
+    }
+  
+  
