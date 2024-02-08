@@ -28,16 +28,24 @@ function Home() {
   const [username,setUsername] = useState('');
   const user = useSelector((state: RootState)=>state.auth.user);
   useEffect(()=>{
+    const storedAuthTokens = localStorage.getItem('authTokens');
+    if(storedAuthTokens){
+      const authTokens = JSON.parse(storedAuthTokens);
+      dispatch(setAuthTokens(authTokens));
+      dispatch(setUser(jwtDecode(authTokens.access)));
+      router.push('/home/dashboard');
+    }
     if(user){
       router.push('/home/dashboard');
     }
-  },[user]);
+  },[]);
   const handleSubmit = async ()=>{
     const credentials = {'username': username, 'password': password};
     const res = await loginUser(credentials);
     if (res){
       dispatch(setAuthTokens(res));
       dispatch(setUser(jwtDecode(res.access)));
+      localStorage.setItem('authTokens', JSON.stringify(res));
       router.push('/home/dashboard');
     }else{
       console.log('error');
@@ -53,6 +61,7 @@ function Home() {
 
 
   return (
+    !user &&
     <main className={styles.main}>
      
           <Image

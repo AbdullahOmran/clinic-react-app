@@ -1,9 +1,11 @@
 "use client";
 import styles from "./compStyles/PrimaryTextField.module.scss";
 import "./compStyles/PrimaryTextField.scss";
-import useState, { useEffect, useRef } from "react";
+import useState, { useEffect, useReducer, useRef } from "react";
 import clsx from "clsx";
 import { AnyARecord } from "dns";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 type textFieldParams = {
   text: string,
@@ -14,6 +16,7 @@ type textFieldParams = {
   onChange?:any,
 };
 function PrimaryTextField({icon, text, type, style, className, onChange}: textFieldParams) {
+  
   let content = [<span key={0} className={styles.span} style={{ transitionDelay: "0ms" }}>
       {text[0]}
     </span>,];
@@ -60,7 +63,7 @@ function PrimaryTextField({icon, text, type, style, className, onChange}: textFi
             [className]: true,
           })}
         >
-          <input className={styles.input} type={type} required />
+          <input ref={inputRef} onChange={(e)=>onChange(e.target.value)}  className={styles.input} type={type} required />
           <label className={styles.label}>{content}</label>
         </div>
       )

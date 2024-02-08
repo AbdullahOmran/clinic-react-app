@@ -6,14 +6,26 @@ import Image from "next/image";
 import Dropdown from "./Dropdown/Dropdown";
 import { BsBellFill, BsCart3, BsTranslate } from "react-icons/bs";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { useRouter } from "next/navigation";
+import UserContent from "./UserContent/UserContent";
 
 function Nav() {
   const [displayNotiMenu, setDisplayNotiMenu] = useState("none");
   const [displayCardMenu, setDisplayCardMenu] = useState("none");
   const [displayLangMenu, setDisplayLangMenu] = useState("none");
   const [displayUserMenu, setDisplayUserMenu] = useState("none");
+  const user = useSelector((state: RootState)=>state.auth.user);
+  const router = useRouter();
+  useEffect(()=>{
+    if(!user){
+      router.push('/');
+    }
+  },[]);
 
   return (
+    user &&
     <nav className={styles.Nav}>
       <div className={styles.logo}>
         <Link className={styles.link} href="/home/dashboard/">
@@ -99,11 +111,12 @@ function Nav() {
                 unoptimized
               />
             </div>
-            <Dropdown display={displayUserMenu} />
+            <Dropdown display={displayUserMenu}><UserContent></UserContent></Dropdown>
           </li>
         </ul>
       </div>
     </nav>
+    
   );
 }
 
