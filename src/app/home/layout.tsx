@@ -19,7 +19,9 @@ export default function Layout({
   return (
     <main className={styles.Main}>
       <Nav/>
-      <PageTemplate node = {children} />
+      <PageTemplate>
+        {children}
+      </PageTemplate>
     </main>
   );
 }

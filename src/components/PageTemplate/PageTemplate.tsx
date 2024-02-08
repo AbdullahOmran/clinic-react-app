@@ -8,7 +8,7 @@ import { RootState } from "@/redux/store";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-function PageTemplate({node}:{node: React.ReactNode}) {
+function PageTemplate({children}:{children: React.ReactNode}) {
   const user = useSelector((state: RootState)=>state.auth.user);
   const router = useRouter();
   useEffect(()=>{
@@ -20,7 +20,9 @@ function PageTemplate({node}:{node: React.ReactNode}) {
     user &&
     <div className={styles.PageTemplate}>
       <DoctorSideMenu />
-      <PageComponent node= {node} />
+      <PageComponent>
+        {children}
+      </PageComponent>
     </div>
     
   );
