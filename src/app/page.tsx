@@ -14,17 +14,35 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 import { RootState } from "@/redux/store";
-import { login } from "@/redux/authSlice";
+import { loginUser } from "@/utils/authLogic";
+import { setAuthTokens, setUser } from "@/redux/authSlice";
+import { jwtDecode } from "jwt-decode";
+import { redirect, useRouter } from 'next/navigation';
+
 function Home() {
   // const [loading, setLoading] = useState(true);
   //const user = useSelector((state: RootState)=>state.user);
   const dispatch = useDispatch();
-  
+  const router = useRouter();
   const [password,setPassword] = useState('');
   const [username,setUsername] = useState('');
-  const handleSubmit = ()=>{
-    const user = {'username': username, 'password': password};
-    dispatch(login(user));
+  const user = useSelector((state: RootState)=>state.auth.user);
+  useEffect(()=>{
+    if(user){
+      router.push('/home/dashboard');
+    }
+  },[user]);
+  const handleSubmit = async ()=>{
+    const credentials = {'username': username, 'password': password};
+    const res = await loginUser(credentials);
+    if (res){
+      dispatch(setAuthTokens(res));
+      dispatch(setUser(jwtDecode(res.access)));
+      router.push('/home/dashboard');
+    }else{
+      console.log('error');
+    }
+    
   }
   // useEffect(() => {
   //   setTimeout(() => {
@@ -36,7 +54,7 @@ function Home() {
 
   return (
     <main className={styles.main}>
-      
+     
           <Image
             alt="healthcare"
             src="/images/healthcareBackground.jpg"
@@ -88,9 +106,10 @@ function Home() {
                     [styles.Item]: true,
                     [styles.forgotPassword]: true,
                   })}
-                  href="/home/dashboard"
+                  href="/"
                 >
                   Forgot password
+                  
                 </Link>
                 <PrimaryButton
                   className={clsx({ [styles.Item]: true })}

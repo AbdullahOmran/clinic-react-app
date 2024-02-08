@@ -1,7 +1,7 @@
 "use client";
 import styles from "./compStyles/PrimaryTextField.module.scss";
 import "./compStyles/PrimaryTextField.scss";
-import useState, { useRef } from "react";
+import useState, { useEffect, useRef } from "react";
 import clsx from "clsx";
 import { AnyARecord } from "dns";
 
@@ -26,6 +26,13 @@ function PrimaryTextField({icon, text, type, style, className, onChange}: textFi
       </span>
     );
   }
+  
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(()=>{
+    if(inputRef.current){
+      inputRef.current.value = '';
+    }
+  },[])
 
 
   return (
@@ -40,7 +47,7 @@ function PrimaryTextField({icon, text, type, style, className, onChange}: textFi
             [styles.formControl]: true,
           })}
         >
-          <input onChange={(e)=>onChange(e.target.value)}  className={styles.input} type={type} required />
+          <input ref={inputRef} onChange={(e)=>onChange(e.target.value)}  className={styles.input} type={type} required />
           <label className={styles.label}>{content}</label>
         </div>
       </div>
