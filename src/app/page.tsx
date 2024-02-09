@@ -42,7 +42,7 @@ function Home() {
     if(user){
       router.push('/home/dashboard/');
     }else{
-      setLoading(true);
+      setLoading(true) ;
     }
     
   },[]);
