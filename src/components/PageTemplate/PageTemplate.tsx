@@ -11,24 +11,9 @@ import { setAuthTokens, setUser } from "@/redux/authSlice";
 import { jwtDecode } from "jwt-decode";
 
 function PageTemplate({children}:{children: React.ReactNode}) {
-  const user = useSelector((state: RootState)=>state.auth.user);
-  const router = useRouter();
   
-  let authTokens: any = null;
-  useEffect(()=>{
-    const storedAuthTokens = localStorage.getItem('authTokens');
-    if(storedAuthTokens){
-       authTokens = JSON.parse(storedAuthTokens);
-    }
-    
-  },[]);
-  useEffect(()=>{
-    if(!authTokens){
-      router.push('/');
-    }
-  },[]);
   return (
-    user &&
+    
     <div className={styles.PageTemplate}>
       <DoctorSideMenu />
       <PageComponent>

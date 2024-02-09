@@ -19,26 +19,10 @@ function Nav() {
   const [displayLangMenu, setDisplayLangMenu] = useState("none");
   const [displayUserMenu, setDisplayUserMenu] = useState("none");
   const user = useSelector((state: RootState)=>state.auth.user);
-  const router = useRouter();
-  const dispatch = useDispatch();
-  let authTokens: any = null;
-  useEffect(()=>{
-    const storedAuthTokens = localStorage.getItem('authTokens');
-    if(storedAuthTokens){
-       authTokens = JSON.parse(storedAuthTokens);
-      dispatch(setAuthTokens(authTokens));
-      dispatch(setUser(jwtDecode(authTokens.access)));
-    }
-    
-  },[]);
-  useEffect(()=>{
-    if(!authTokens){
-      router.push('/');
-    }
-  },[]);
+  
 
   return (
-    user &&
+    
     <nav className={styles.Nav}>
       <div className={styles.logo}>
         <Link className={styles.link} href="/home/dashboard/">

@@ -58,8 +58,8 @@ function Home() {
     }else{
       console.log('error');
     }
-    
   }
+  
   // useEffect(() => {
   //   setTimeout(() => {
   //     setLoading(false);
