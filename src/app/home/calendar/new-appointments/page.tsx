@@ -8,11 +8,16 @@ import {
 import { Badge, Button, CloseButton, Container, ListGroup, Row } from "react-bootstrap";
 import clsx from "clsx";
 import { CiViewList } from "react-icons/ci";
+import useAxios from "@/utils/useAxios";
+import { useEffect } from "react";
 
 function NewAppointments() {
   const dispatch = useDispatch();
   dispatch(setActiveSideMenuItem(4));
   dispatch(setActiveCalendarSubNavItem(0));
+  const api = useAxios();
+  
+  
   return (
     <div className={styles.container}>
       <Container>
@@ -35,7 +40,12 @@ function NewAppointments() {
                 <div className="fw-bold">Patient Name</div>
                 <Badge bg="primary">New</Badge>
               </div>
-              <Button className="p-1" variant="primary">
+              <Button 
+              onClick={async()=>{
+                const res = await api.get('api/notes/');
+                alert(res.data);
+              }}
+              className="p-1" variant="primary">
                 Approve
                 <span className="visually-hidden">unread messages</span>
               </Button>

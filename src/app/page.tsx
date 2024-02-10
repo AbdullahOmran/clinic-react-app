@@ -22,6 +22,7 @@ import { redirect, useRouter } from 'next/navigation';
 function Home() {
   // const [loading, setLoading] = useState(true);
   //const user = useSelector((state: RootState)=>state.user);
+  // to use axios, we need to type const api = useAxios();
   const dispatch = useDispatch();
   const router = useRouter();
   const [password,setPassword] = useState('');
