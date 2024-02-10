@@ -31,6 +31,7 @@ function PrimaryTextField({icon, text, type, style, className, onChange}: textFi
   }
   
   const inputRef = useRef<HTMLInputElement>(null);
+  
   useEffect(()=>{
     if(inputRef.current){
       inputRef.current.value = '';
@@ -50,7 +51,7 @@ function PrimaryTextField({icon, text, type, style, className, onChange}: textFi
             [styles.formControl]: true,
           })}
         >
-          <input ref={inputRef} onChange={(e)=>onChange(e.target.value)}  className={styles.input} type={type} required />
+          <input autoComplete="new-password"  ref={inputRef} onChange={(e)=>onChange(e.target.value)}  className={styles.input} type={type} required />
           <label className={styles.label}>{content}</label>
         </div>
       </div>

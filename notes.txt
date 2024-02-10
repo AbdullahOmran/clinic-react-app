@@ -65,4 +65,15 @@ TODO:
 
 Bugs:
     -- items are selected while scrolling
-    -- the login page should not be visible in case of redirect.
+
+Security:
+    -- use http-only cookie for storing jwt to add layers of Security.
+    -- set the flag secure to true , this enables data transmission over https only. 
+
+
+
+
+Requirements:
+     -- set the consultation appointment after a week automatically
+     -- send mail to doctors with today appointments
+     -- configures the prescription like setting images
