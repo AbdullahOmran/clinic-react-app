@@ -41,10 +41,10 @@ function NewAppointments() {
                 <Badge bg="primary">New</Badge>
               </div>
               <Button 
-              onClick={async()=>{
-                const res = await api.get('api/notes/');
-                alert(res.data);
-              }}
+              // onClick={async()=>{
+              //   const res = await api.get('api/notes/');
+              //   alert(res.data);
+              // }}
               className="p-1" variant="primary">
                 Approve
                 <span className="visually-hidden">unread messages</span>
