@@ -6,12 +6,14 @@ export interface doctorState {
   activePatientEncounterSubNavItem: number,
   activeTreatmentPlansSubNavItem: number,
   activeCalendarSubNavItem: number,
+  alerts: Array<Array<string>>,
 }
 const initialState: doctorState = {
   activeSideMenuItem: 0,
   activePatientEncounterSubNavItem: 0,
   activeTreatmentPlansSubNavItem: 0,
   activeCalendarSubNavItem: 0,
+  alerts: [],
 };
 
 export const doctorSlice = createSlice({
@@ -30,6 +32,9 @@ export const doctorSlice = createSlice({
     setActiveCalendarSubNavItem: (state, action)=>{
         state.activeCalendarSubNavItem = action.payload ;
     },
+    appendAlert:(state,action)=>{
+      state.alerts.push(action.payload);
+    },
   },
 });
 
@@ -37,5 +42,6 @@ export const { setActiveSideMenuItem,
   setActivePatientEncounterSubNavItem,
   setActiveTreatmentPlansSubNavItem,
   setActiveCalendarSubNavItem,
+  appendAlert,
             } = doctorSlice.actions;
 export default doctorSlice.reducer;

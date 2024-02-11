@@ -1,0 +1,12 @@
+.alerts{
+    position: fixed;
+    right: 30px;
+    bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 7px;
+    z-index: 1;
+    min-width: 300px;
+}

@@ -11,7 +11,7 @@ import Image from "next/legacy/image";
 import { useState, useEffect } from "react";
 import { increment } from "@/redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-
+import Alert from '@mui/material/Alert';
 
 import { RootState } from "@/redux/store";
 import { loginUser } from "@/utils/authLogic";
@@ -29,6 +29,8 @@ function Home() {
   const [username,setUsername] = useState('');
   const user = useSelector((state: RootState)=>state.auth.user);
   const [loading, setLoading] = useState(false);
+  const [displaySuccess, setDisplaySuccess] = useState(false);
+  const [displayError, setDisplayError] = useState(false);
   
   useEffect(()=>{
     const storedAuthTokens = localStorage.getItem('authTokens');
@@ -52,12 +54,16 @@ function Home() {
     const credentials = {'username': username, 'password': password};
     const res = await loginUser(credentials);
     if (res){
-      dispatch(setAuthTokens(res));
-      dispatch(setUser(jwtDecode(res.access)));
       localStorage.setItem('authTokens', JSON.stringify(res));
-      router.push('/home/dashboard');
+      setDisplayError(false);
+      setDisplaySuccess(true);
+      setTimeout(() => {
+        dispatch(setAuthTokens(res));
+        dispatch(setUser(jwtDecode(res.access)));
+        router.push('/home/dashboard');
+          }, 3000);
     }else{
-      console.log('error');
+      setDisplayError(true);
     }
   }
   
@@ -107,7 +113,16 @@ function Home() {
                   />
                   <Welcome />
                 </div>
-            
+                {displaySuccess &&    
+                <Alert className={styles.alert} variant="outlined" severity="success">Successful login.</Alert>
+                 }
+                {displayError &&    
+                <Alert className={styles.alert} variant="outlined" severity="error"><span className="fw-bold">Login Failed:</span>
+                <br/>
+                Wrong credentials or missing access rights to application
+                </Alert>
+                 }
+                
                 <PrimaryTextField
                   icon = {<BsFillPersonFill size = {18}/>}
                   className={clsx({ [styles.Item]: true })}

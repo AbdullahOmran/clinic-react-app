@@ -2,6 +2,7 @@
 import styles from "./page.module.scss";
 import { useDispatch } from "react-redux";
 import {
+  appendAlert,
   setActiveCalendarSubNavItem,
   setActiveSideMenuItem,
 } from "@/redux/doctorSlice";
@@ -45,6 +46,9 @@ function NewAppointments() {
               //   const res = await api.get('api/notes/');
               //   alert(res.data);
               // }}
+              onClick={
+                ()=>{dispatch(appendAlert(['hhhhhh','filled','info']))}
+              }
               className="p-1" variant="primary">
                 Approve
                 <span className="visually-hidden">unread messages</span>
