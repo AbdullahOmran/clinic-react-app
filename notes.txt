@@ -13,6 +13,7 @@ SETTINGS:
             Provide flexibility for administrators to adjust this limit based on demand.
     -- change the user credentials (password,username)
     -- Two-Factor Authentication (2FA)
+    -- reject appointment automatically after slot
 
 
 
