@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import styles from "./doctorSideMenu.module.scss";
+import styles from "./SideMenu.module.scss";
 import { BsCalendarEventFill, BsGearFill, BsHouseFill, BsPersonFill } from "react-icons/bs";
 import clsx from "clsx";
 import {Icon} from "@iconify/react";
@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 
 
-function DoctorSideMenu() {
+function SideMenu() {
   const activeItem = useSelector((state: RootState)=>state.doctor.activeSideMenuItem);
 
   return (
@@ -62,4 +62,4 @@ function DoctorSideMenu() {
   );
 }
 
-export default DoctorSideMenu;
+export default SideMenu;

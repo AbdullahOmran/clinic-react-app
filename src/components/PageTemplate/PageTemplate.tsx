@@ -1,6 +1,6 @@
 "use client";
 import styles from "./PageTemplate.module.scss";
-import DoctorSideMenu from "../SideMenu/doctorSideMenu/doctorSideMenu";
+import SideMenu from "../SideMenu/SideMenu";
 import clsx from "clsx";
 import PageComponent from "./PageComponent/PageComponent";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +19,7 @@ function PageTemplate({ children }: { children: React.ReactNode }) {
   const alerts = useSelector((state:RootState)=>state.doctor.alerts);
   return (
     <div className={styles.PageTemplate}>
-      <DoctorSideMenu />
+      <SideMenu />
       <PageComponent>{children}</PageComponent>
       <AlertsStack>
         {Array.from({length:alerts.length}).map((_,id)=>{
