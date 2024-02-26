@@ -6,11 +6,14 @@ import { jwtDecode } from "jwt-decode";
 export interface authState {
   user: any,
   authTokens: any,
+  isSecretary: boolean,
+  isDoctor: boolean,
 }
 const initialState: authState = {
   user:null,
   authTokens:null,
-  
+  isSecretary:false,
+  isDoctor:false,
 };
 
 export const authSlice = createSlice({
@@ -22,6 +25,12 @@ export const authSlice = createSlice({
     },
     setAuthTokens: (state, action) => {
         state.authTokens = action.payload ;
+    },
+    setIsSecretary:(state, action) => {
+      state.isSecretary = action.payload;
+    },
+    setIsDoctor:(state, action) => {
+      state.isDoctor = action.payload;
     },
     // login: (state, action) => {
     //   // const res = loginUser(action.payload)
@@ -47,6 +56,6 @@ export const authSlice = createSlice({
 });
 
 export const { setUser,
-    setAuthTokens,  
+    setAuthTokens, setIsSecretary, setIsDoctor
    } = authSlice.actions;
 export default authSlice.reducer;
