@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 
 function CalendarSubNav() {
-  const activeItem = useSelector((state:RootState)=>state.doctor.activeCalendarSubNavItem);
+  const activeItem = useSelector((state:RootState)=>state.user.activeCalendarSubNavItem);
   return (
     
       <ul className={styles.itemsGroup}>
