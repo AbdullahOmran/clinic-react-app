@@ -1,5 +1,5 @@
 "use client";
-import { setAuthTokens, setUser } from "@/redux/authSlice";
+import { setAuthTokens, setIsDoctor, setIsSecretary, setUser } from "@/redux/authSlice";
 import { RootState } from "@/redux/store";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
@@ -13,12 +13,22 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     const user = useSelector((state: RootState)=>state.auth.user);
     // this flag is used to avoid the first rendering
     const [loading, setLoading] = useState(false);
+    interface userDataOptions {
+      username?: string;
+      doctor_id?: string;
+      first_name?: string;
+      last_name?: string;
+      secretary_id?: string;
+    }
   useEffect(()=>{
     const storedAuthTokens = localStorage.getItem('authTokens');
     if(storedAuthTokens){
       const authTokens = JSON.parse(storedAuthTokens);
       dispatch(setAuthTokens(authTokens));
-      dispatch(setUser(jwtDecode(authTokens.access)));
+      const userData: userDataOptions = jwtDecode(authTokens.access);
+      dispatch(setUser(userData));
+      dispatch(setIsDoctor(Boolean(userData?.doctor_id)));
+      dispatch(setIsSecretary(Boolean(userData?.secretary_id)));
       setLoading(true);
     }
     

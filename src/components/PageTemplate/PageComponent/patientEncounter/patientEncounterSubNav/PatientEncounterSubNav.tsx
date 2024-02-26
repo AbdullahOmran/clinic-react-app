@@ -7,6 +7,8 @@ import { RootState } from "@/redux/store";
 
 function PatientEncounterSubNav() {
   const activeItem = useSelector((state:RootState)=>state.user.activePatientEncounterSubNavItem);
+  const isDoctor = useSelector((state: RootState)=>state.auth.isDoctor);
+  const isSecretary = useSelector((state: RootState)=>state.auth.isSecretary);
   return (
     
       <ul className={styles.itemsGroup}>
@@ -26,6 +28,7 @@ function PatientEncounterSubNav() {
             <div>History</div>
           </Link>
         </li>
+        {isDoctor &&
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true, [styles.active]: activeItem ===2 })}
@@ -34,6 +37,7 @@ function PatientEncounterSubNav() {
             <div>Vital Signs</div>
           </Link>
         </li>
+        }
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true, [styles.active]: activeItem ===3 })}
@@ -50,6 +54,7 @@ function PatientEncounterSubNav() {
             <div>Risk Factors</div>
           </Link>
         </li>
+        {isDoctor &&
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true, [styles.active]: activeItem ===5 })}
@@ -58,6 +63,7 @@ function PatientEncounterSubNav() {
             <div>Encounter Impression</div>
           </Link>
         </li>
+        }
       </ul>
     
   );

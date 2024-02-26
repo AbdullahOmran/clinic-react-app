@@ -7,9 +7,12 @@ import { RootState } from "@/redux/store";
 
 function CalendarSubNav() {
   const activeItem = useSelector((state:RootState)=>state.user.activeCalendarSubNavItem);
+  const isDoctor = useSelector((state: RootState)=>state.auth.isDoctor);
+  const isSecretary = useSelector((state: RootState)=>state.auth.isSecretary);
   return (
     
       <ul className={styles.itemsGroup}>
+        {isDoctor &&
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true, [styles.active]: activeItem ===0 })}
@@ -18,6 +21,7 @@ function CalendarSubNav() {
             <div>New Appointments</div>
           </Link>
         </li>
+        }
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true , [styles.active]: activeItem ===1})}
@@ -35,7 +39,7 @@ function CalendarSubNav() {
             <div>Completed</div>
           </Link>
         </li>
-        
+        {isDoctor &&
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true, [styles.active]: activeItem ===4 })}
@@ -44,6 +48,7 @@ function CalendarSubNav() {
             <div>Pending-approvals</div>
           </Link>
         </li>
+        }
        
       </ul>
     

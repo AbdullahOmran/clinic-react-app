@@ -8,6 +8,7 @@ function RiskFactors() {
     const dispatch = useDispatch();
     dispatch(setActiveSideMenuItem(1));
     dispatch(setActivePatientEncounterSubNavItem(4));
+    const choices = []
   return (
     <div className={styles.container}>
       <Form>
@@ -15,6 +16,7 @@ function RiskFactors() {
         className="mb-2"
         type="switch"
         label="High Blood Pressure"
+        
       />
       <Form.Check 
         type="switch"
