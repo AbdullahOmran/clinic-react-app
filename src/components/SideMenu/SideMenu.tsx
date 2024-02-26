@@ -10,7 +10,7 @@ import { RootState } from "@/redux/store";
 
 
 function SideMenu() {
-  const activeItem = useSelector((state: RootState)=>state.doctor.activeSideMenuItem);
+  const activeItem = useSelector((state: RootState)=>state.user.activeSideMenuItem);
 
   return (
     <div className={styles.SideMenu}>

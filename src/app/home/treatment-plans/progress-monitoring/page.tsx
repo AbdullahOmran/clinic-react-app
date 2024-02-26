@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import {
   setActiveSideMenuItem,
   setActiveTreatmentPlansSubNavItem,
-} from "@/redux/doctorSlice";
+} from "@/redux/userSlice";
 import {
   Button,
   Card,

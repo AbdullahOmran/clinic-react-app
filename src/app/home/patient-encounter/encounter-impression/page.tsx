@@ -9,7 +9,7 @@ import {
 import {
   setActiveSideMenuItem,
   setActivePatientEncounterSubNavItem,
-} from "@/redux/doctorSlice";
+} from "@/redux/userSlice";
 import {
   Row,
   Button,

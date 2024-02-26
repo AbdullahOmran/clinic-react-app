@@ -3,27 +3,45 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface userState {
   // define states
-  value: number;
+  activeSideMenuItem: number,
+  activePatientEncounterSubNavItem: number,
+  activeTreatmentPlansSubNavItem: number,
+  activeCalendarSubNavItem: number,
+  alerts: Array<Array<string>>,
 }
 const initialState: userState = {
   // initialize states
-  value: 0,
+  activeSideMenuItem: 0,
+  activePatientEncounterSubNavItem: 0,
+  activeTreatmentPlansSubNavItem: 0,
+  activeCalendarSubNavItem: 0,
+  alerts: [],
 };
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    incrementByValue: (state, action) => {
-      state.value += action.payload;
-    },
+    setActiveSideMenuItem: (state, action) => {
+      state.activeSideMenuItem = action.payload ;
+  },
+  setActivePatientEncounterSubNavItem: (state, action) => {
+      state.activePatientEncounterSubNavItem = action.payload ;
+  },
+  setActiveTreatmentPlansSubNavItem: (state, action) => {
+      state.activeTreatmentPlansSubNavItem = action.payload ;
+  },
+  setActiveCalendarSubNavItem: (state, action)=>{
+      state.activeCalendarSubNavItem = action.payload ;
+  },
+  appendAlert:(state,action)=>{
+    state.alerts.push(action.payload);
+  },
   },
 });
 
-export const { increment, decrement } = userSlice.actions;
+export const { setActiveSideMenuItem,
+  setActivePatientEncounterSubNavItem,
+  setActiveTreatmentPlansSubNavItem,
+  setActiveCalendarSubNavItem,
+  appendAlert,} = userSlice.actions;
 export default userSlice.reducer;

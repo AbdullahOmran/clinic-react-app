@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import {
   setActiveCalendarSubNavItem,
   setActiveSideMenuItem,
-} from "@/redux/doctorSlice";
+} from "@/redux/userSlice";
 import { Badge, Button, CloseButton, Container, ListGroup, Row } from "react-bootstrap";
 import clsx from "clsx";
 import { CiViewList } from "react-icons/ci";

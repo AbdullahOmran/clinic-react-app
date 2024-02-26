@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import {
   setActiveSideMenuItem,
   setActiveTreatmentPlansSubNavItem,
-} from "@/redux/doctorSlice";
+} from "@/redux/userSlice";
 import {Button, CloseButton, Container, ListGroup, Row, Stack } from "react-bootstrap";
 import clsx from "clsx";
 import GoalModal from "@/components/PageTemplate/PageComponent/treatmentPlans/goalModal/goalModal";

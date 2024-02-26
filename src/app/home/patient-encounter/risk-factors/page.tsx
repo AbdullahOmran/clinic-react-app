@@ -1,7 +1,7 @@
 "use client";
 import styles from "./page.module.scss";
 import { useDispatch } from "react-redux";
-import { setActiveSideMenuItem,setActivePatientEncounterSubNavItem } from "@/redux/doctorSlice";
+import { setActiveSideMenuItem,setActivePatientEncounterSubNavItem } from "@/redux/userSlice";
 import { Form } from "react-bootstrap";
 
 function RiskFactors() {

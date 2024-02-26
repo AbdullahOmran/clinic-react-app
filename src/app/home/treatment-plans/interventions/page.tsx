@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import {
   setActiveSideMenuItem,
   setActiveTreatmentPlansSubNavItem,
-} from "@/redux/doctorSlice";
+} from "@/redux/userSlice";
 import { Button, Card, CloseButton, Col, Container, Row, Stack } from "react-bootstrap";
 import { BsCheckCircle, BsPlusCircle, BsXCircle } from "react-icons/bs";
 import { CiViewList } from "react-icons/ci";

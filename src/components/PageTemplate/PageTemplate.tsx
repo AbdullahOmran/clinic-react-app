@@ -16,7 +16,7 @@ import MyAlert from "./PageComponent/alertsStack/Alert";
 
 
 function PageTemplate({ children }: { children: React.ReactNode }) {
-  const alerts = useSelector((state:RootState)=>state.doctor.alerts);
+  const alerts = useSelector((state:RootState)=>state.user.alerts);
   return (
     <div className={styles.PageTemplate}>
       <SideMenu />

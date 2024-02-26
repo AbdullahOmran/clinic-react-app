@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import {
   setActiveSideMenuItem,
   setActivePatientEncounterSubNavItem,
-} from "@/redux/doctorSlice";
+} from "@/redux/userSlice";
 import { Col, Form, InputGroup, Row } from "react-bootstrap";
 
 function Demographics() {

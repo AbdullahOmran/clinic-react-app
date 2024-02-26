@@ -9,7 +9,6 @@ import clsx from "clsx";
 import {BsFillPersonFill, BsFillLockFill} from "react-icons/bs";
 import Image from "next/legacy/image";
 import { useState, useEffect } from "react";
-import { increment } from "@/redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from '@mui/material/Alert';
 
