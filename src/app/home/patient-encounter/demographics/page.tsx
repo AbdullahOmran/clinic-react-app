@@ -5,7 +5,7 @@ import {
   setActiveSideMenuItem,
   setActivePatientEncounterSubNavItem,
 } from "@/redux/userSlice";
-import { Col, Form, InputGroup, Row } from "react-bootstrap";
+import { Button, Col, Form, InputGroup, Row, Stack } from "react-bootstrap";
 import { patientState, setAddress, setAge, setBloodGroup, setEducation, setEmail, setGender, setMaritalStatus, setName, setOccupation, setPhone } from "@/redux/patientSlice";
 import { RootState } from "@/redux/store";
 
@@ -19,6 +19,7 @@ function Demographics() {
   return (
     <div className={styles.container}>
       <Form>
+        
         <Row className="mb-3">
           <Form.Group as={Col}>
             <Form.Label>Patient ID</Form.Label>
@@ -156,6 +157,13 @@ function Demographics() {
             }}
             type="text" placeholder="Occupation" />
           </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          
+        <Stack className="mt-3" direction="horizontal" gap={1}>
+          <Button className="ms-auto w-25">Save</Button>  
+          <Button className="w-25">Cancel</Button>
+          </Stack>
         </Row>
       </Form>
     </div>
