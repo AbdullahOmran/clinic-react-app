@@ -8,13 +8,14 @@ import {
 import { Button, Col, Form, InputGroup, Row, Stack } from "react-bootstrap";
 import { patientState, setAddress, setAge, setBloodGroup, setEducation, setEmail, setGender, setMaritalStatus, setName, setOccupation, setPhone } from "@/redux/patientSlice";
 import { RootState } from "@/redux/store";
+import  usePatient  from "@/api/usePatient";
 
 function Demographics() {
   const dispatch = useDispatch();
   dispatch(setActiveSideMenuItem(1));
   dispatch(setActivePatientEncounterSubNavItem(0));
   const patientData:  patientState= useSelector((state: RootState)=>state.patient);
-  
+  const patientApi = usePatient();
 
   return (
     <div className={styles.container}>
@@ -161,7 +162,7 @@ function Demographics() {
         <Row className="mb-3">
           
         <Stack className="mt-3" direction="horizontal" gap={1}>
-          <Button className="ms-auto w-25">Save</Button>  
+          <Button onClick={patientApi.submit} className="w-25">Save</Button>  
           <Button className="w-25">Cancel</Button>
           </Stack>
         </Row>
