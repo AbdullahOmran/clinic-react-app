@@ -14,7 +14,7 @@ import { BsCapsule, BsPlusCircle, BsStopwatch } from "react-icons/bs";
 import { FaSyringe } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
-import { setDoctorId, setPatientId } from "@/redux/appointmentSlice";
+import { setDoctorId, setPatientId, setSecretaryId } from "@/redux/appointmentSlice";
 import usePatient from "@/api/usePatient";
 
 function ScheduleModal({
@@ -26,11 +26,13 @@ function ScheduleModal({
 }) {
   const dispatch = useDispatch();
   const patientList = useSelector((state: RootState) => state.patient.patients);
+  const user = useSelector((state: RootState) => state.auth.user);
   const patient = usePatient();
   const searchInputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     patient.getPatients();
-  });
+    dispatch(setSecretaryId(user.secretary_id));
+  },[]);
   return (
     <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>

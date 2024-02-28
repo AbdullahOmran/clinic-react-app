@@ -51,7 +51,7 @@ function Patients() {
   
   useEffect(()=>{
     patient.getPatients();
-  });
+  },[]);
   const editButton =(pk: number)=> <Button onClick={()=>editPatient(pk)} variant="primary">Edit</Button>;
   const deleteButton =(pk: number)=> <Button onClick={()=>deletePatient(pk)} variant="primary">Delete</Button>;
 
