@@ -35,9 +35,7 @@ function EncounterImpression() {
   const dispatch = useDispatch();
   dispatch(setActiveSideMenuItem(1));
   dispatch(setActivePatientEncounterSubNavItem(5));
-  useEffect(()=>{
-    
-  });
+  
   return (
     <>
       <div className={styles.container}>

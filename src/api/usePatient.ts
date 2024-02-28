@@ -1,7 +1,7 @@
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import useAxios from "@/utils/useAxios";
-import { patientState, setPatients } from "@/redux/patientSlice";
+import { patientState, setAddress, setAge, setAllergies, setBloodGroup, setEducation, setEmail, setGender, setHistoryOfPresentIllness, setImmuzinations, setMaritalStatus, setMedicalHistory, setMedications, setName, setOccupation, setPatients, setPhone, setRiskFactors, setSurgicalHistory } from "@/redux/patientSlice";
 import { useDispatch } from "react-redux";
 import { appendAlert } from "@/redux/userSlice";
 
@@ -115,10 +115,39 @@ const usePatient = () => {
         dispatch(appendAlert(["Something went wrong", "filled", "error"]));
       }
   };
+
+  const getPatient = async(pk: number)=>{
+    try {
+      const res = await api.get(`api/patient/${pk}/`);
+      if (res.status == 200) {
+        dispatch(setName(res.data.first_name+' '+res.data.last_name));
+        dispatch(setGender(res.data.gender));
+        dispatch(setAge(res.data.age));
+        dispatch(setPhone(res.data.contact_number));
+        dispatch(setEmail(res.data.email));
+        dispatch(setAddress(res.data.address));
+        dispatch(setMaritalStatus(res.data.marital_status));
+        dispatch(setOccupation(res.data.occupation));
+        dispatch(setEducation(res.data.education));
+        dispatch(setBloodGroup(res.data.blood_group));
+        dispatch(setMedicalHistory(res.data.medical_history));
+        dispatch(setSurgicalHistory(res.data.surgical_history));
+        dispatch(setHistoryOfPresentIllness(res.data.history_of_present_illness));
+        dispatch(setMedications(res.data.medications));
+        dispatch(setAllergies(res.data.allergies));
+        dispatch(setImmuzinations(res.data.immuzinations));
+        dispatch(setRiskFactors(res.data.risk_factors));
+      } else {
+      }
+    } catch (e) {
+      dispatch(appendAlert(["Something went wrong", "filled", "error"]));
+    }
+  };
   return {
     submit: submitData,
     getPatients: getPatients,
     deletePatient: deletePatient,
+    getPatient: getPatient,
   };
 };
 

@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface patientState {
     action?: string;
-    id?: number;
+    id: number;
     name?: string;
     gender?: string;
     age?: number;

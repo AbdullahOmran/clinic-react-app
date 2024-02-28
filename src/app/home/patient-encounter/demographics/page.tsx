@@ -9,6 +9,7 @@ import { Button, Col, Form, InputGroup, Row, Stack } from "react-bootstrap";
 import { patientState, setAddress, setAge, setBloodGroup, setEducation, setEmail, setGender, setMaritalStatus, setName, setOccupation, setPhone } from "@/redux/patientSlice";
 import { RootState } from "@/redux/store";
 import  usePatient  from "@/api/usePatient";
+import { useEffect } from "react";
 
 function Demographics() {
   const dispatch = useDispatch();
@@ -16,7 +17,11 @@ function Demographics() {
   dispatch(setActivePatientEncounterSubNavItem(0));
   const patientData:  patientState= useSelector((state: RootState)=>state.patient);
   const patientApi = usePatient();
-
+  useEffect(()=>{
+    if (patientData.action == 'edit'){
+      patientApi.getPatient(patientData.id);
+    }
+  });
   return (
     <div className={styles.container}>
       <Form>
