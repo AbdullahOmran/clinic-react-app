@@ -49,12 +49,22 @@ function SideMenu() {
           </Link>
         </li>
 }
+          {isDoctor &&
         <li>
           <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===4})} href="/home/calendar/new-appointments/">
             <BsCalendarEventFill />
             <div>Calendar</div>
           </Link>
         </li>
+}
+          {isSecretary &&
+        <li>
+          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===4})} href="/home/calendar/schedule/">
+            <BsCalendarEventFill />
+            <div>Calendar</div>
+          </Link>
+        </li>
+}
         { isDoctor &&
         <li>
           <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===5})} href="/">

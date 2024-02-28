@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import { BsCapsule, BsPlusCircle, BsStopwatch } from "react-icons/bs";
 import { FaSyringe } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
 
 function ScheduleModal({
   show,
@@ -19,6 +20,10 @@ function ScheduleModal({
   show: boolean;
   handleClose: any;
 }) {
+
+const dispatch = useDispatch();
+
+
   return (
     <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>

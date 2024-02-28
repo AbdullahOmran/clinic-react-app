@@ -4,6 +4,7 @@ import userSlice from "./userSlice";
 import  doctorSlice  from "./doctorSlice";
 import authSlice from "./authSlice";
 import patientSlice from "./patientSlice";
+import appointmentSlice from "./appointmentSlice";
 
 export const store = configureStore({
     reducer:{
@@ -11,6 +12,7 @@ export const store = configureStore({
         doctor: doctorSlice,
         auth: authSlice,
         patient: patientSlice,
+        appointment: appointmentSlice,
     }
 });
 export type RootState = ReturnType<typeof store.getState>;
