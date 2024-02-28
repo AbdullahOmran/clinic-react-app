@@ -17,7 +17,7 @@ const useAppointment = () => {
       time: appointmentData.time,
     };
     try {
-      const res = await api.post("api/appointment/", appointmentData);
+      const res = await api.post("api/appointment/", submittedData);
       if (res.status == 200) {
         dispatch(
           appendAlert(["Appointment added successfully", "filled", "info"])

@@ -5,15 +5,15 @@ export interface appointmentState {
   doctorId: number;
   secretaryId: number;
   patientId: number;
-  date: Date;
+  date: string;
   time: any;
 }
 const initialState: appointmentState = {
     doctorId: -1,
     secretaryId: -1,
     patientId: -1,
-    date: new Date(),
-    time: new Date().getTime(),
+    date: '',
+    time: '14:00:00',
 };
 
 export const appointmentSlice = createSlice({
@@ -29,10 +29,10 @@ export const appointmentSlice = createSlice({
     setPatientId: (state, action)=>{
         state.patientId = action.payload;
     },
-    date: (state, action)=>{
+    setDate: (state, action)=>{
         state.date = action.payload;
     },
-    time: (state, action)=>{
+    setTime: (state, action)=>{
         state.time = action.payload;
     },
   },
@@ -42,7 +42,7 @@ export const {
     setDoctorId,
     setSecretaryId,
     setPatientId,
-    date,
-    time,
+    setDate,
+    setTime,
             } = appointmentSlice.actions;
 export default appointmentSlice.reducer;

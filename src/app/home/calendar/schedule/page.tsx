@@ -19,18 +19,24 @@ import Calendar, { TileArgs, TileContentFunc } from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { BsCalendarEventFill } from "react-icons/bs";
 import ScheduleModal from "@/components/PageTemplate/PageComponent/calendar/scheduleModal/scheduleModal";
+import { setDate } from "@/redux/appointmentSlice";
+import useAppointment from "@/api/useAppointment";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 function Schedule() {
   const dispatch = useDispatch();
+ 
   dispatch(setActiveSideMenuItem(4));
   dispatch(setActiveCalendarSubNavItem(1));
   const [calendarValue, calendarOnChange] = useState<Value>(new Date());
   const [showScheduleModal, setShowScheduleModal] = useState(false);
   const handleCloseScheduleModal= () => setShowScheduleModal(false);
-  const handleShowScheduleModal = () => setShowScheduleModal(true);
+  const handleShowScheduleModal = (datetime: Date) => {
+    setShowScheduleModal(true);
+    dispatch(setDate(datetime.toISOString().substring(0,10)));
+  };
 
   const calendarContent: TileContentFunc = ({
     activeStartDate,

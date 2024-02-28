@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
 import { setDoctorId, setPatientId, setSecretaryId } from "@/redux/appointmentSlice";
 import usePatient from "@/api/usePatient";
+import useAppointment from "@/api/useAppointment";
 
 function ScheduleModal({
   show,
@@ -25,6 +26,7 @@ function ScheduleModal({
   handleClose: any;
 }) {
   const dispatch = useDispatch();
+  const appointmentApi = useAppointment();
   const patientList = useSelector((state: RootState) => state.patient.patients);
   const user = useSelector((state: RootState) => state.auth.user);
   const patient = usePatient();
@@ -44,9 +46,9 @@ function ScheduleModal({
             <div className="fw-bold">Doctor</div>
           </Row>
           <Row className="mb-2">
-            <Form.Select onChange={(e)=>dispatch(setDoctorId(e.currentTarget.value))} className="w-50 mx-2">
+            <Form.Select onChange={(e)=>dispatch(setDoctorId(Number(e.currentTarget.value)))} className="w-50 mx-2">
               <option value={-1}>Choose...</option>
-              <option value={1}>AbdullahOmran</option>
+              <option value={5}>AbdullahOmran</option>
             </Form.Select>
           </Row>
           <Row>
@@ -129,7 +131,7 @@ function ScheduleModal({
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        <Button variant="primary" onClick={handleClose}>
+        <Button variant="primary" onClick={()=>{appointmentApi.submit();handleClose()}}>
           <BsPlusCircle className={styles.icon} />
           Schedule
         </Button>
