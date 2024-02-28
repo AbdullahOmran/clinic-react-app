@@ -28,6 +28,7 @@ const usePatient = ()=>{
     const api = useAxios();
     const submitData = async()=>{
 
+        
         const pname = patientData.name?.trim();
         const fname = pname?.split(' ')[0];
         const lname = pname?.split(' ').slice(1).reduce((t,v)=>{return t+v});
@@ -49,14 +50,16 @@ const usePatient = ()=>{
             email:patientData.email,
             marital_status:patientData.maritalStatus?.toUpperCase().at(0),
         };
-    
+        
         try{
-            const res = await api.post('api/patient/', submittedData);
+        const res = await api.post('api/patient/', submittedData);
             if( res.status == 200 ){
                 dispatch(appendAlert(['Patient added successfully','filled','info']));
+                
+            }else{
             }
         }catch(e){
-
+            dispatch(appendAlert(['Something went wrong','filled','error']));
         }
     };
     
