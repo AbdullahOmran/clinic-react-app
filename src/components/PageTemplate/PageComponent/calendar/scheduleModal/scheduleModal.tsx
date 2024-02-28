@@ -1,4 +1,5 @@
 "use client";
+import { RootState } from "@/redux/store";
 import styles from "./ScheduleModal.module.scss";
 import {
   Form,
@@ -11,7 +12,10 @@ import {
 } from "react-bootstrap";
 import { BsCapsule, BsPlusCircle, BsStopwatch } from "react-icons/bs";
 import { FaSyringe } from "react-icons/fa6";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
+import { setDoctorId, setPatientId } from "@/redux/appointmentSlice";
+import usePatient from "@/api/usePatient";
 
 function ScheduleModal({
   show,
@@ -20,10 +24,13 @@ function ScheduleModal({
   show: boolean;
   handleClose: any;
 }) {
-
-const dispatch = useDispatch();
-
-
+  const dispatch = useDispatch();
+  const patientList = useSelector((state: RootState) => state.patient.patients);
+  const patient = usePatient();
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    patient.getPatients();
+  });
   return (
     <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -32,9 +39,16 @@ const dispatch = useDispatch();
       <Modal.Body>
         <Form>
           <Row>
-            <div className="fw-bold">
-            Appointment Type
-            </div>
+            <div className="fw-bold">Doctor</div>
+          </Row>
+          <Row className="mb-2">
+            <Form.Select onChange={(e)=>dispatch(setDoctorId(e.currentTarget.value))} className="w-50 mx-2">
+              <option value={-1}>Choose...</option>
+              <option value={1}>AbdullahOmran</option>
+            </Form.Select>
+          </Row>
+          <Row>
+            <div className="fw-bold">Appointment Type</div>
           </Row>
           <Row>
             <Col>
@@ -54,29 +68,56 @@ const dispatch = useDispatch();
           <Row className="mt-2">
             <Col>
               <Form.Group className="mb-3">
-                <Form.Label className="fw-bold">Available Time Slots</Form.Label>
+                <Form.Label className="fw-bold">
+                  Available Time Slots
+                </Form.Label>
                 <ListGroup className={styles.listGroup}>
-                  <ListGroup.Item className={styles.item} action>
-                    Flurest
-                  </ListGroup.Item>
-                  <ListGroup.Item className={styles.item} action>
-                    Comitrex
-                  </ListGroup.Item>
+                  {Array.from({ length: patientList.length }).map((_, idx) => (
+                    <ListGroup.Item
+                      key={idx}
+                      onClick={(e) => e.preventDefault()}
+                      className={styles.item}
+                      action
+                    >
+                      {patientList[idx].first_name +
+                        " " +
+                        patientList[idx].last_name}
+                    </ListGroup.Item>
+                  ))}
                 </ListGroup>
               </Form.Group>
             </Col>
             <Col className="my-auto">
               <Form.Group className="mb-3">
                 <Form.Label className="fw-bold">Patient name</Form.Label>
-                <Form.Control type="text" placeholder="Search..." autoFocus />
+                <Form.Control
+                  ref={searchInputRef}
+                  type="text"
+                  placeholder="Search..."
+                  autoFocus
+                />
               </Form.Group>
               <ListGroup className={styles.listGroup}>
-                <ListGroup.Item className={styles.item} action>
-                  Ahmed
-                </ListGroup.Item>
-                <ListGroup.Item className={styles.item} action>
-                  Mohamed
-                </ListGroup.Item>
+                {Array.from({ length: patientList.length }).map((_, idx) => (
+                  <ListGroup.Item
+                    key={idx}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (searchInputRef.current)
+                        searchInputRef.current.value =
+                          patientList[idx].first_name +
+                          " " +
+                          patientList[idx].last_name;
+                      dispatch(setPatientId(patientList[idx].id));
+                    }}
+                    className={styles.item}
+                    action
+                  >
+                    {patientList[idx].first_name +
+                      " " +
+                      patientList[idx].last_name}
+                  </ListGroup.Item>
+                ))}
               </ListGroup>
             </Col>
           </Row>
