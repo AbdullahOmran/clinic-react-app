@@ -36,6 +36,9 @@ export const userSlice = createSlice({
   appendAlert:(state,action)=>{
     state.alerts.push(action.payload);
   },
+  removeAlert:(state,action)=>{
+    state.alerts.splice(action.payload,1);
+  },
   },
 });
 
@@ -43,5 +46,5 @@ export const { setActiveSideMenuItem,
   setActivePatientEncounterSubNavItem,
   setActiveTreatmentPlansSubNavItem,
   setActiveCalendarSubNavItem,
-  appendAlert,} = userSlice.actions;
+  appendAlert,removeAlert} = userSlice.actions;
 export default userSlice.reducer;

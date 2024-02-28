@@ -5,9 +5,14 @@ import clsx from "clsx";
 import Slide from "@mui/material/Slide";
 import { jsx } from "@emotion/react";
 import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { removeAlert } from "@/redux/userSlice";
+
 
 function MyAlert({ msg,variant,severity,...Props }: {idx:any, msg:string,variant:any,severity:any  }) {
-
+  const dispatch = useDispatch();
+  
   
 
   return  <Slide direction="down" in={true} mountOnEnter unmountOnExit>
@@ -15,7 +20,7 @@ function MyAlert({ msg,variant,severity,...Props }: {idx:any, msg:string,variant
     style={{width: '100%'}}
     variant={variant}
     severity={severity}
-    onClose={() => {alert( Props.idx)}}
+    onClose={() => {dispatch(removeAlert(Props.idx));}}
   >
     {msg}
   </Alert>
