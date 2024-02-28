@@ -20,7 +20,7 @@ import {
   Stack,
 } from "react-bootstrap";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SymptomModal from "@/components/PageTemplate/PageComponent/patientEncounter/symptomModal/symptomModal";
 import DiagnosisModal from "@/components/PageTemplate/PageComponent/patientEncounter/diagnosisModal/diagnosisModal";
 
@@ -35,6 +35,9 @@ function EncounterImpression() {
   const dispatch = useDispatch();
   dispatch(setActiveSideMenuItem(1));
   dispatch(setActivePatientEncounterSubNavItem(5));
+  useEffect(()=>{
+    
+  });
   return (
     <>
       <div className={styles.container}>

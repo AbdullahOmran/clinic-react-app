@@ -1,4 +1,5 @@
 "use client";
+import { PatientObj } from "@/api/usePatient";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface patientState {
@@ -21,6 +22,7 @@ export interface patientState {
     allergies?: string;
     immuzinations?: string;
     riskFactors?: string;
+    patients: Array<PatientObj>;
 }
 const initialState: patientState = {
     action: "noSelection",
@@ -42,6 +44,7 @@ const initialState: patientState = {
     allergies: '',
     immuzinations: '',
     riskFactors:'',
+    patients: [],
 };
 
 export const patientSlice = createSlice({
@@ -50,6 +53,9 @@ export const patientSlice = createSlice({
   reducers: {
     setAction:(state, action) => {
         state.action = action.payload;
+    },
+    setId:(state, action)=>{
+        state.id = action.payload
     },
     setName:(state, action) => {
         state.name = action.payload;
@@ -102,11 +108,15 @@ export const patientSlice = createSlice({
     setRiskFactors:(state, action) => {
         state.riskFactors = action.payload;
     },
+    setPatients:(state, action) => {
+        state.patients = action.payload;
+    },
   },
 });
 
 export const {
     setAction,
+    setId,
     setName,
     setGender,
     setAge,
@@ -124,5 +134,6 @@ export const {
     setAllergies,
     setImmuzinations,
     setRiskFactors,
+    setPatients,
             } = patientSlice.actions;
 export default patientSlice.reducer;
