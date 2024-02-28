@@ -1,24 +1,29 @@
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import useAxios from "@/utils/useAxios";
-import { patientState, setAddress, setAge, setAllergies, setBloodGroup, setEducation, setEmail, setGender, setHistoryOfPresentIllness, setImmuzinations, setMaritalStatus, setMedicalHistory, setMedications, setName, setOccupation, setPatients, setPhone, setRiskFactors, setSurgicalHistory } from "@/redux/patientSlice";
+import {
+  patientState,
+  setAddress,
+  setAge,
+  setAllergies,
+  setBloodGroup,
+  setEducation,
+  setEmail,
+  setGender,
+  setHistoryOfPresentIllness,
+  setImmuzinations,
+  setMaritalStatus,
+  setMedicalHistory,
+  setMedications,
+  setName,
+  setOccupation,
+  setPatients,
+  setPhone,
+  setRiskFactors,
+  setSurgicalHistory,
+} from "@/redux/patientSlice";
 import { useDispatch } from "react-redux";
 import { appendAlert } from "@/redux/userSlice";
-
-// const endpoints = [
-//         'token/',
-//         'token/refresh/',
-//         'user/',
-//         'doctor/',
-//         'secretary/',
-//         'patient/<int:pk>/',
-//         'patient/',
-//         'appointment/<int:pk>/',
-//         'appointment/',
-//         'treatment/<int:pk>/',
-//         'treatment/',
-//         'clinic/<int:pk>/',
-// ];
 export interface PatientObj {
   id: number;
   first_name: string;
@@ -53,7 +58,7 @@ const usePatient = () => {
       ?.split(" ")
       .slice(1)
       .reduce((t, v) => {
-        return t +' '+ v;
+        return t + " " + v;
       });
     const submittedData = {
       first_name: fname,
@@ -75,19 +80,25 @@ const usePatient = () => {
     };
 
     try {
-      if (patientData.action == 'add') {
-
-          const res = await api.post("api/patient/", submittedData);
-          if (res.status == 200) {
-            dispatch(appendAlert(["Patient added successfully", "filled", "info"]));
-          } else {
-          }
-      }else if(patientData.action == 'edit'){
-        const res = await api.put(`api/patient/${patientData.id}/`, submittedData);
-          if (res.status == 200) {
-            dispatch(appendAlert(["Patient updated successfully", "filled", "info"]));
-          } else {
-          }
+      if (patientData.action == "add") {
+        const res = await api.post("api/patient/", submittedData);
+        if (res.status == 200) {
+          dispatch(
+            appendAlert(["Patient added successfully", "filled", "info"])
+          );
+        } else {
+        }
+      } else if (patientData.action == "edit") {
+        const res = await api.put(
+          `api/patient/${patientData.id}/`,
+          submittedData
+        );
+        if (res.status == 200) {
+          dispatch(
+            appendAlert(["Patient updated successfully", "filled", "info"])
+          );
+        } else {
+        }
       }
     } catch (e) {
       dispatch(appendAlert(["Something went wrong", "filled", "error"]));
@@ -106,21 +117,23 @@ const usePatient = () => {
   };
   const deletePatient = async (pk: number) => {
     try {
-        const res = await api.delete(`api/patient/${pk}/`);
-        if (res.status == 204) {
-            dispatch(appendAlert(["Patient deleted successfully", "filled", "info"]));
-        } else {
-        }
-      } catch (e) {
-        dispatch(appendAlert(["Something went wrong", "filled", "error"]));
+      const res = await api.delete(`api/patient/${pk}/`);
+      if (res.status == 204) {
+        dispatch(
+          appendAlert(["Patient deleted successfully", "filled", "info"])
+        );
+      } else {
       }
+    } catch (e) {
+      dispatch(appendAlert(["Something went wrong", "filled", "error"]));
+    }
   };
 
-  const getPatient = async(pk: number)=>{
+  const getPatient = async (pk: number) => {
     try {
       const res = await api.get(`api/patient/${pk}/`);
       if (res.status == 200) {
-        dispatch(setName(res.data.first_name+' '+res.data.last_name));
+        dispatch(setName(res.data.first_name + " " + res.data.last_name));
         dispatch(setGender(res.data.gender));
         dispatch(setAge(res.data.age));
         dispatch(setPhone(res.data.contact_number));
@@ -132,7 +145,9 @@ const usePatient = () => {
         dispatch(setBloodGroup(res.data.blood_group));
         dispatch(setMedicalHistory(res.data.medical_history));
         dispatch(setSurgicalHistory(res.data.surgical_history));
-        dispatch(setHistoryOfPresentIllness(res.data.history_of_present_illness));
+        dispatch(
+          setHistoryOfPresentIllness(res.data.history_of_present_illness)
+        );
         dispatch(setMedications(res.data.medications));
         dispatch(setAllergies(res.data.allergies));
         dispatch(setImmuzinations(res.data.immuzinations));
