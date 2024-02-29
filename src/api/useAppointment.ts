@@ -1,7 +1,16 @@
+import { setAppointments } from "@/redux/appointmentSlice";
 import { RootState } from "@/redux/store";
 import { appendAlert } from "@/redux/userSlice";
 import useAxios from "@/utils/useAxios";
 import { useDispatch, useSelector } from "react-redux";
+
+export interface appointmentObj {
+  doctor: number;
+  secretary: number;
+  patient: number;
+  date: string;
+  time: string;
+}
 
 const useAppointment = () => {
   const dispatch = useDispatch();
@@ -26,8 +35,18 @@ const useAppointment = () => {
     } catch (e) {}
   };
 
+  const getAppointments = async () => {
+    try {
+      const res = await api.get("api/appointment/");
+      if (res.status == 200) {
+        dispatch(setAppointments(res.data));
+      }
+    } catch (e) {}
+  };
+
   return {
     submit: submit,
+    getAppointments: getAppointments,
   };
 };
 
