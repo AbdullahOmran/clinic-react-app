@@ -1,6 +1,6 @@
 "use client";
 import { RootState } from "@/redux/store";
-import styles from "./ScheduleModal.module.scss";
+import styles from "./scheduleModal.module.scss";
 import {
   Form,
   Button,
