@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import styles from "./layout.module.scss";
 import Nav from "@/components/Nav/Nav";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
-import SideMenu from "@/components/SideMenu/doctorSideMenu/doctorSideMenu";
+
 import PageComponent from "@/components/PageTemplate/PageComponent/PageComponent";
 import AuthProvider from "@/components/shared/AuthProvider";
 
