@@ -16,7 +16,7 @@ function CalendarSubNav() {
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true, [styles.active]: activeItem ===0 })}
-            href="/home/calendar/new-appointments/"
+            href="/calendar/new-appointments/"
           >
             <div>New Appointments</div>
           </Link>
@@ -25,7 +25,7 @@ function CalendarSubNav() {
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true , [styles.active]: activeItem ===1})}
-            href="/home/calendar/schedule/"
+            href="/calendar/schedule/"
           >
             <div>Schedule</div>
           </Link>
@@ -34,7 +34,7 @@ function CalendarSubNav() {
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true, [styles.active]: activeItem ===2 })}
-            href="/home/calendar/completed/"
+            href="/calendar/completed/"
           >
             <div>Completed</div>
           </Link>
@@ -43,7 +43,7 @@ function CalendarSubNav() {
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true, [styles.active]: activeItem ===4 })}
-            href="/home/calendar/pending-approvals/"
+            href="/calendar/pending-approvals/"
           >
             <div>Pending-approvals</div>
           </Link>

@@ -15,7 +15,7 @@ function PatientEncounterSubNav() {
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true, [styles.active]: activeItem ===0 })}
-            href="/home/patient-encounter/demographics"
+            href="/patient-encounter/demographics"
           >
             <div>Patient Demographics</div>
           </Link>
@@ -23,7 +23,7 @@ function PatientEncounterSubNav() {
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true , [styles.active]: activeItem ===1})}
-            href="/home/patient-encounter/history"
+            href="/patient-encounter/history"
           >
             <div>History</div>
           </Link>
@@ -32,7 +32,7 @@ function PatientEncounterSubNav() {
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true, [styles.active]: activeItem ===2 })}
-            href="/home/patient-encounter/vital-signs"
+            href="/patient-encounter/vital-signs"
           >
             <div>Vital Signs</div>
           </Link>
@@ -41,7 +41,7 @@ function PatientEncounterSubNav() {
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true, [styles.active]: activeItem ===3 })}
-            href="/home/patient-encounter/allergies-and-immuzinations"
+            href="/patient-encounter/allergies-and-immuzinations"
           >
             <div>Allergies and Immuzinations</div>
           </Link>
@@ -49,7 +49,7 @@ function PatientEncounterSubNav() {
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true, [styles.active]: activeItem ===4 })}
-            href="/home/patient-encounter/risk-factors"
+            href="/patient-encounter/risk-factors"
           >
             <div>Risk Factors</div>
           </Link>
@@ -58,7 +58,7 @@ function PatientEncounterSubNav() {
         <li className={styles.item}>
           <Link
             className={clsx({ [styles.link]: true, [styles.active]: activeItem ===5 })}
-            href="/home/patient-encounter/encounter-impression"
+            href="/patient-encounter/encounter-impression"
           >
             <div>Encounter Impression</div>
           </Link>

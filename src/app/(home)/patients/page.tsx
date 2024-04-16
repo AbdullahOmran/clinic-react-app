@@ -37,16 +37,16 @@ function Patients() {
   dispatch(setActiveSideMenuItem(7));
   const addPatient = ()=>{
     dispatch(setAction('add'));
-    router.push('/home/patient-encounter/');
+    router.push('/patient-encounter/');
   }
   const editPatient = (pk: number)=>{
     dispatch(setAction('edit'));
     dispatch(setId(pk));
-    router.push('/home/patient-encounter/');
+    router.push('/patient-encounter/');
   };
   const deletePatient = (pk: number)=>{
     patient.deletePatient(pk);
-    router.push('/home/patients/');
+    router.push('/patients/');
   };
   
   useEffect(()=>{

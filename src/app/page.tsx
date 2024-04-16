@@ -37,12 +37,12 @@ function Home() {
       const authTokens = JSON.parse(storedAuthTokens);
       dispatch(setAuthTokens(authTokens));
       dispatch(setUser(jwtDecode(authTokens.access)));
-      router.push('/home/dashboard/');
+      router.push('/dashboard/');
       setLoading(true);
     }
     
     if(user){
-      router.push('/home/dashboard/');
+      router.push('/dashboard/');
     }else{
       setLoading(true) ;
     }
@@ -59,7 +59,7 @@ function Home() {
       setTimeout(() => {
         dispatch(setAuthTokens(res));
         dispatch(setUser(jwtDecode(res.access)));
-        router.push('/home/dashboard');
+        router.push('/dashboard');
           }, 3000);
     }else{
       setDisplayError(true);

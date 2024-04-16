@@ -21,13 +21,13 @@ function SideMenu() {
     <div className={styles.SideMenu}>
       <ul className={styles.itemsGroup}>
         <li>
-          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===0})} href="/home/dashboard">
+          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===0})} href="/dashboard">
             <BsHouseFill />
             <div>Dashboard</div>
           </Link>
         </li>
         <li>
-          <Link tabIndex={disablePatientEncounter?undefined:-1} className={clsx({[styles.item]:true, [styles.disabled]:disablePatientEncounter,[styles.active]:activeItem===1})} href="/home/patient-encounter/demographics">
+          <Link tabIndex={disablePatientEncounter?undefined:-1} className={clsx({[styles.item]:true, [styles.disabled]:disablePatientEncounter,[styles.active]:activeItem===1})} href="/patient-encounter/demographics">
             <Icon icon="medical-icon:i-family-practice"/>
             <div>Patient Encounter</div>
           </Link>
@@ -35,7 +35,7 @@ function SideMenu() {
         { isDoctor &&
         <li>
           
-          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===2})} href="/home/treatment-plans/goals">
+          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===2})} href="/treatment-plans/goals">
             <FaTimeline />
             <div>Treatment Plans</div>
           </Link>
@@ -43,7 +43,7 @@ function SideMenu() {
         }
         { isDoctor &&
         <li>
-          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===3})} href="/home/prescriptions/">
+          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===3})} href="/prescriptions/">
             <FaPaste />
             <div>Prescriptions</div>
           </Link>
@@ -51,7 +51,7 @@ function SideMenu() {
 }
           {isDoctor &&
         <li>
-          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===4})} href="/home/calendar/new-appointments/">
+          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===4})} href="/calendar/new-appointments/">
             <BsCalendarEventFill />
             <div>Calendar</div>
           </Link>
@@ -59,7 +59,7 @@ function SideMenu() {
 }
           {isSecretary &&
         <li>
-          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===4})} href="/home/calendar/schedule/">
+          <Link className={clsx({[styles.item]:true,[styles.active]:activeItem===4})} href="/calendar/schedule/">
             <BsCalendarEventFill />
             <div>Calendar</div>
           </Link>
@@ -76,7 +76,7 @@ function SideMenu() {
         { isSecretary &&
         <li>
           <Link  className={clsx({[styles.item]:true,
-            [styles.active]:activeItem===7})} href="/home/patients/">
+            [styles.active]:activeItem===7})} href="/patients/">
             <Icon icon="medical-icon:i-medical-records"/>
             <div>Patients</div>
           </Link>

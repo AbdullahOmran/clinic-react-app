@@ -4,6 +4,6 @@ import { redirect } from "next/navigation";
 
 export default function Redirect(){
     
-    redirect('/home/patient-encounter/demographics/');
+    redirect('/calendar/new-appointments/');
 
 }

@@ -25,7 +25,7 @@ function Nav() {
     
     <nav className={styles.Nav}>
       <div className={styles.logo}>
-        <Link className={styles.link} href="/home/dashboard/">
+        <Link className={styles.link} href="/dashboard/">
           <Image
             //replace this image with icon
 

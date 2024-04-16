@@ -4,6 +4,6 @@ import { redirect } from "next/navigation";
 
 export default function Redirect(){
     
-    redirect('/home/dashboard/');
+    redirect('/patient-encounter/demographics/');
 
 }
