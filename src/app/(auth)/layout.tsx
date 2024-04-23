@@ -1,6 +1,7 @@
-
 import type { Metadata } from "next";
 import { Children } from "react";
+import styles from "./page.module.scss";
+import Image from "next/legacy/image";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -12,5 +13,31 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div>{children}</div>;
+  return (
+    <main className={styles.main}>
+      <Image
+        alt="healthcare"
+        src="/images/healthcareBackground.jpg"
+        layout="fill"
+        objectFit="cover"
+        unoptimized
+      />
+      <div className={styles.loginBox}>
+        <div className={styles.imgBox}>
+          <Image
+            className={styles.medcyImage}
+            src="/images/medcy.png"
+            width={450}
+            height={450}
+            style={{ backgroundColor: "transparent" }}
+            alt="Medcy"
+            unoptimized
+          />
+        </div>
+        <div className={styles.contents}>
+            {children}
+        </div>
+      </div>
+    </main>
+  );
 }
