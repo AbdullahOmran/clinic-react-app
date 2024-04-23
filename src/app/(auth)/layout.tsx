@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Children } from "react";
 import styles from "./page.module.scss";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {

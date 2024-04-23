@@ -21,7 +21,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
       secretary_id?: string;
     }
   useEffect(()=>{
-    const storedAuthTokens = localStorage.getItem('authTokens');
+    const storedAuthTokens = localStorage.getItem('Tokens');
     if(storedAuthTokens){
       const authTokens = JSON.parse(storedAuthTokens);
       dispatch(setAuthTokens(authTokens));

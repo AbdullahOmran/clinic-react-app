@@ -9,9 +9,9 @@ import { useDispatch } from "react-redux";
 function UserContent() {
   const dispatch = useDispatch();
   const logout = ()=>{
-    const tokens  = localStorage.getItem('authTokens');
+    const tokens  = localStorage.getItem('Tokens');
     if(tokens){
-      localStorage.removeItem('authTokens');
+      localStorage.removeItem('Tokens');
     }
     dispatch(setAuthTokens(null));
     dispatch(setUser(null));

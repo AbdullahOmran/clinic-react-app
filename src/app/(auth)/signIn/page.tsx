@@ -107,12 +107,12 @@ export default function SignIn() {
             </Typography>
             {notFoundError && (
               <Typography color="error" component="h6" variant="h6">
-                الحساب دا مش موجود يا حماده{" "}
+                The account does not exist
               </Typography>
             )}
             {genericError && (
               <Typography color="error" component="h6" variant="h6">
-                حدث مشكلة ي حمادة{" "}
+                An error occurred
               </Typography>
             )}
             <Box
@@ -133,7 +133,7 @@ export default function SignIn() {
                 helperText={
                   errors.username && (
                     <Typography color="error" component="span">
-                      معلش هنتعبك معانا اكتب رقم التليفون
+                      Please enter your username
                     </Typography>
                   )
                 }
@@ -152,7 +152,7 @@ export default function SignIn() {
                 helperText={
                   errors.password && (
                     <Typography color="error" component="span">
-                      معلش هنتعبك معانا اكتب كلمة السر
+                      Please enter your password
                     </Typography>
                   )
                 }
