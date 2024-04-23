@@ -1,38 +1,61 @@
 "use client";
-import styles from "./page.module.scss";
-import PrimaryTextField from "@/components/PrimaryTextField";
-import PrimaryButton from "@/components/PrimaryButton";
-import Welcome from "@/components/Welcome";
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import Link from "next/link";
-import Loader from "@/components/Loader";
-import clsx from "clsx";
-import { BsFillPersonFill, BsFillLockFill } from "react-icons/bs";
-import Image from "next/legacy/image";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Alert from "@mui/material/Alert";
-
-import { RootState } from "@/redux/store";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import styles from "./page.module.scss";
 import { loginUser } from "@/utils/authLogic";
-import { setAuthTokens, setUser } from "@/redux/authSlice";
 import { jwtDecode } from "jwt-decode";
-import { redirect, useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuthTokens, setUser } from "@/redux/authSlice";
+import { useRouter } from "next/navigation";
+import { RootState } from "@/redux/store";
+import { useForm } from "react-hook-form";
 
-function SignIn() {
-  // const [loading, setLoading] = useState(true);
-  //const user = useSelector((state: RootState)=>state.user);
-  // to use axios, we need to type const api = useAxios();
+function Copyright(props: any) {
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <Link className={styles.link} href="https://medcy.com/">
+        Medcy
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
+
+export default function SignIn() {
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
   const dispatch = useDispatch();
   const router = useRouter();
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
   const user = useSelector((state: RootState) => state.auth.user);
-  const [loading, setLoading] = useState(false);
-  const [displaySuccess, setDisplaySuccess] = useState(false);
-  const [displayError, setDisplayError] = useState(false);
-
-  useEffect(() => {
-    const storedAuthTokens = localStorage.getItem("authTokens");
+  const [loading, setLoading] = React.useState(false);
+  const [genericError, setGenericError] = React.useState(false);
+  const [notFoundError, setNotFoundError] = React.useState(false);
+  React.useEffect(() => {
+    const storedAuthTokens = localStorage.getItem("Tokens");
     if (storedAuthTokens) {
       const authTokens = JSON.parse(storedAuthTokens);
       dispatch(setAuthTokens(authTokens));
@@ -47,93 +70,127 @@ function SignIn() {
       setLoading(true);
     }
   }, []);
+  const onSubmit = async (data: any) => {
+    const res = await loginUser(data);
+    if (typeof res == "object") {
+      localStorage.setItem("Tokens", JSON.stringify(res));
 
-  const handleSubmit = async () => {
-    const credentials = { username: username, password: password };
-    const res = await loginUser(credentials);
-    if (res) {
-      localStorage.setItem("authTokens", JSON.stringify(res));
-      setDisplayError(false);
-      setDisplaySuccess(true);
-      setTimeout(() => {
-        dispatch(setAuthTokens(res));
-        dispatch(setUser(jwtDecode(res.access)));
-        router.push("/dashboard");
-      }, 3000);
-    } else {
-      setDisplayError(true);
+      dispatch(setAuthTokens(res));
+      dispatch(setUser(jwtDecode(res.access)));
+      router.push("/dashboard");
+    } else if (res == 404) {
+      setNotFoundError(true);
+    } else if (res == 400) {
+      setGenericError(true);
     }
   };
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 1000);
-  // }, []);
 
   return (
     !user &&
     loading && (
-      <div className={styles.loginForm}>
-        <div
-          className={clsx({
-            [styles.userImage]: true,
-            [styles.Item]: true,
-          })}
-        >
-          <Image
-            src="/images/loginAvatar.png"
-            width={100}
-            height={100}
-            alt="LOGIN"
-            unoptimized
-          />
-          <Welcome />
-        </div>
-        {displaySuccess && (
-          <Alert className={styles.alert} variant="outlined" severity="success">
-            Successful login.
-          </Alert>
-        )}
-        {displayError && (
-          <Alert className={styles.alert} variant="outlined" severity="error">
-            <span className="fw-bold">Login Failed:</span>
-            <br />
-            Wrong credentials or missing access rights to application
-          </Alert>
-        )}
-
-        <PrimaryTextField
-          icon={<BsFillPersonFill size={18} />}
-          className={clsx({ [styles.Item]: true })}
-          text="Username"
-          type="text"
-          onChange={(value: string) => setUsername(value)}
-        />
-
-        <PrimaryTextField
-          onChange={(value: string) => setPassword(value)}
-          icon={<BsFillLockFill size={18} />}
-          text="Password"
-          type="password"
-        />
-        <Link
-          className={clsx({
-            [styles.Item]: true,
-            [styles.forgotPassword]: true,
-          })}
-          href="/"
-        >
-          Forgot password
-        </Link>
-        <PrimaryButton
-          className={clsx({ [styles.Item]: true })}
-          onClick={handleSubmit}
-          text="login"
-        />
-      </div>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        
+          <Box
+            sx={{
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign In
+            </Typography>
+            {notFoundError && (
+              <Typography color="error" component="h6" variant="h6">
+                الحساب دا مش موجود يا حماده{" "}
+              </Typography>
+            )}
+            {genericError && (
+              <Typography color="error" component="h6" variant="h6">
+                حدث مشكلة ي حمادة{" "}
+              </Typography>
+            )}
+            <Box
+             
+              component="form"
+              onSubmit={handleSubmit(onSubmit)}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+              
+                fullWidth
+                {...(errors.username && { color: "error" })}
+                id="username"
+                {...register("username", { required: true })}
+                helperText={
+                  errors.username && (
+                    <Typography color="error" component="span">
+                      معلش هنتعبك معانا اكتب رقم التليفون
+                    </Typography>
+                  )
+                }
+                label="username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                
+                {...(errors.password && { color: "error" })}
+                {...register("password", { required: true })}
+                helperText={
+                  errors.password && (
+                    <Typography color="error" component="span">
+                      معلش هنتعبك معانا اكتب كلمة السر
+                    </Typography>
+                  )
+                }
+                name="password"
+                label="password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link className={styles.link} href="#">
+                   Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link className={styles.link} href="/signUp/">
+                    Don't have account? Sign Up
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        
+        <Copyright sx={{ mt: 8, mb: 4 }} />
+      </Container>
     )
   );
 }
-
-export default SignIn;

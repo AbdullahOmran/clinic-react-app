@@ -20,8 +20,11 @@
     opacity: 0.7;
 }
 .contents{
-   
     flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ flex-direction: column;
 }
 .imgBox{
     display: flex;

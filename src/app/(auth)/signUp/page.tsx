@@ -6,13 +6,13 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import Link from "next/link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-
+import styles from "./page.module.scss";
 import { loginUser, registerUser } from "@/utils/authLogic";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,8 +30,8 @@ function Copyright(props: any) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://supermadrsa.com/">
-        Super Madrsa
+      <Link className={styles.link} href="https://medcy.com/">
+        Medcy
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -232,7 +232,7 @@ Sign Up </Typography>
               </Button>
               <Grid container justifyContent="flex-start">
                 <Grid item>
-                  <Link href="/signIn/" variant="body2">
+                  <Link className={styles.link} href="/signIn/">
                   Already have an account? Sign in
                   </Link>
                 </Grid>
