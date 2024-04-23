@@ -33,7 +33,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     }
     
   if((!user) && loading){
-      router.push('/');
+      router.push('/signIn/');
     }else{
         setLoading(true);
     }
