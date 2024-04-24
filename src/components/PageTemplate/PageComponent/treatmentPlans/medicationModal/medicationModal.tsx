@@ -12,7 +12,7 @@ function MedicationModal({
   handleClose: any;
 }) {
   return (
-    <Modal size = "lg" show={show} onHide={handleClose}>
+    <Modal className={styles.modal} size = "lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Medications</Modal.Title>
       </Modal.Header>

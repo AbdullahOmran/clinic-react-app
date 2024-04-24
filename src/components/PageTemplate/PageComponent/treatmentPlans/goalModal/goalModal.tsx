@@ -11,7 +11,7 @@ function GoalModal({
   handleClose: any;
 }) {
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal className={styles.modal} show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>New Goal</Modal.Title>
       </Modal.Header>

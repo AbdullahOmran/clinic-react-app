@@ -11,7 +11,7 @@ function SymptomModal({
   handleClose: any;
 }) {
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal className={styles.modal} show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Symptoms</Modal.Title>
       </Modal.Header>

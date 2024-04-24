@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <main className={styles.Main}>
+    <main>
       <AuthProvider>
         {/* <Nav />
         <PageTemplate>{children}</PageTemplate> */}
