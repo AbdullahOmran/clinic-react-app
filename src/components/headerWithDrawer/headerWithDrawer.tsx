@@ -141,6 +141,10 @@ export default function HeaderWithDrawer({
   const router = useRouter();
   const dispatch = useDispatch();
   const activeItem = useSelector((state: RootState)=>state.user.activeSideMenuItem);
+  const isDoctor = useSelector((state: RootState)=>state.auth.isDoctor);
+  const isSecretary = useSelector((state: RootState)=>state.auth.isSecretary);
+  const patientAction = useSelector((state: RootState)=>state.patient.action);
+  const disablePatientEncounter = patientAction !="noSelection" && isSecretary ? false :true;
 
   const logout = ()=>{
     const tokens  = localStorage.getItem('Tokens');
@@ -349,6 +353,7 @@ export default function HeaderWithDrawer({
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>
+            {isDoctor &&
             <ListItemButton
             {...((activeItem==2)&&{selected:true})}
               onClick={() => router.push("/treatment-plans")}
@@ -369,32 +374,11 @@ export default function HeaderWithDrawer({
               </ListItemIcon>
               <ListItemText primary="Treatment Plans" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
+            }
+{isDoctor &&
             <ListItemButton
             {...((activeItem==3)&&{selected:true})}
-              onClick={() => router.push("/patients")}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                <FcKey size={25} />
-              </ListItemIcon>
-              <ListItemText
-                primary="Patients"
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-            <ListItemButton
-            {...((activeItem==3)&&{selected:true})}
-              onClick={() => router.push("/prescriptions")}
+              onClick={() => router.push("/prescriptions/")}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -415,9 +399,61 @@ export default function HeaderWithDrawer({
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>
+}
+{isSecretary &&
             <ListItemButton
             {...((activeItem==4)&&{selected:true})}
-              onClick={() => router.push("/calendar/")}
+              onClick = {() => router.push("/calendar/schedule/")}
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <FcKey size={25} />
+              </ListItemIcon>
+              <ListItemText
+                primary="Calendar"
+                sx={{ opacity: open ? 1 : 0 }}
+              />
+            </ListItemButton>
+}
+{isDoctor&&
+            <ListItemButton
+            {...((activeItem==4)&&{selected:true})}
+              onClick = {() => router.push("/calendar/new-appointments/")}
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <FcKey size={25} />
+              </ListItemIcon>
+              <ListItemText
+                primary="Calendar"
+                sx={{ opacity: open ? 1 : 0 }}
+              />
+            </ListItemButton>
+}
+{isDoctor &&
+            <ListItemButton
+            {...((activeItem==5)&&{selected:true})}
+              onClick={() => router.push("/emr/")}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -433,11 +469,13 @@ export default function HeaderWithDrawer({
               >
                 <FcIdea size={25} />
               </ListItemIcon>
-              <ListItemText primary="Calendar" sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText primary="EMR" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
+}
+{isSecretary&&
             <ListItemButton
-            {...((activeItem==5)&&{selected:true})}
-              onClick={() => router.push("/emr")}
+            {...((activeItem==7)&&{selected:true})}
+              onClick={() => router.push("/patients/")}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -453,8 +491,10 @@ export default function HeaderWithDrawer({
               >
                 <FcReadingEbook size={25} />
               </ListItemIcon>
-              <ListItemText primary="EMR" sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText primary="Patients" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
+}
+         
           </ListItem>
         </List>
 
