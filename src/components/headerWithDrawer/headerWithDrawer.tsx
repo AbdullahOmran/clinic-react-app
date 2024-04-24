@@ -9,7 +9,7 @@ import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
-
+import Image from "next/image";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -22,10 +22,8 @@ import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
 import { useState } from "react";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import AdbIcon from "@mui/icons-material/Adb";
-import { IoMdSettings } from "react-icons/io";
-import { ImExit } from "react-icons/im";
-import { IoMdHelp } from "react-icons/io";
+import styles from "./page.module.scss";
+
 import {
   FcAssistant,
   FcDepartment,
@@ -47,8 +45,11 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FaPersonChalkboard, FaTableCells } from "react-icons/fa6";
+import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { setAuthTokens, setUser } from "@/redux/authSlice";
 
-const pages = ["Products", "Pricing", "Blog"];
+
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const notifications = ["not1", "not2", "not2", "hh"];
 
@@ -135,6 +136,17 @@ export default function HeaderWithDrawer({
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const logout = ()=>{
+    const tokens  = localStorage.getItem('Tokens');
+    if(tokens){
+      localStorage.removeItem('Tokens');
+    }
+    dispatch(setAuthTokens(null));
+    dispatch(setUser(null));
+    router.push('/signIn/');
+  }
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -164,72 +176,48 @@ export default function HeaderWithDrawer({
     setAnchorElNotification(null);
   };
 
-  const router = useRouter();
+
 
   return (
     <Box sx={{ height: "100%", display: "flex" }}>
       <CssBaseline />
-      
+
       <AppBar position="fixed" open={open}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <AdbIcon
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
               sx={{
-                color: "#635bff",
-                display: { xs: "none", md: "flex" },
-                mr: 1,
-              }}
-            />
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="#app-bar-with-responsive-menu"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                // fontFamily: "inherit",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "#635bff",
-                textDecoration: "none",
-              }}
-            >
-              السنتر
-            </Typography>
+                marginRight: 0,
 
-            <AdbIcon
-              sx={{
-                display: { xs: "flex", md: "none" },
-                mr: 1,
-              }}
-            />
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="#app-bar-with-responsive-menu"
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                // fontFamily: "inherit",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "#635bff",
-                textDecoration: "none",
+                ...(open && { display: "none" }),
               }}
             >
-              LOGO
-            </Typography>
+              <MenuIcon sx={{ color: "#635bff" }} />
+            </IconButton>
+            <Link className={styles.link} href="/dashboard/">
+              <Image
+                //replace this image with icon
+
+                src="/images/medcy.png"
+                width={80}
+                className={styles.brand}
+                height={80}
+                alt="Medcy"
+                unoptimized
+              />
+            </Link>
             <Box
-              sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+              sx={{ flexGrow: 1, display: {  md: "flex" } }}
             ></Box>
 
             <Box sx={{ flexGrow: 0 }}>
               <IconButton
                 size="large"
-                style={{ marginLeft: "1em" }}
+                style={{ marginRight: "1em" }}
                 aria-label="show 17 new notifications"
                 color="inherit"
                 onClick={handleOpenNotificationMenu}
@@ -243,19 +231,7 @@ export default function HeaderWithDrawer({
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
-                sx={{
-                  marginRight: 0,
-                  
-                  ...(open && { display: "none" }),
-                }}
-              >
-                <MenuIcon sx={{ color: "#635bff" }} />
-              </IconButton>
+
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
@@ -272,11 +248,11 @@ export default function HeaderWithDrawer({
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                
+                  <MenuItem onClick={logout}>
+                    <Typography textAlign="center">Sign out</Typography>
                   </MenuItem>
-                ))}
+                
               </Menu>
               <Menu
                 sx={{ mt: "45px" }}
@@ -330,12 +306,6 @@ export default function HeaderWithDrawer({
                 px: 2.5,
               }}
             >
-              <ListItemText
-                
-                primary="الرئيسية"
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-
               <ListItemIcon
                 sx={{
                   minWidth: 0,
@@ -345,20 +315,19 @@ export default function HeaderWithDrawer({
               >
                 <FcDepartment size={25} />
               </ListItemIcon>
+              <ListItemText
+                primary="Dashboard"
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
             <ListItemButton
-              onClick={() => router.push("/table")}
+              onClick={() => router.push("/patient-encounter")}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
             >
-              <ListItemText
-               
-                primary="الجدول"
-                sx={{ opacity: open ? 1 : 0 }}
-              />
               <ListItemIcon
                 sx={{
                   minWidth: 0,
@@ -368,20 +337,19 @@ export default function HeaderWithDrawer({
               >
                 <FcDataSheet size={25} />
               </ListItemIcon>
+              <ListItemText
+                primary="Patient Encounter"
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
             <ListItemButton
-              onClick={() => router.push("/questions")}
+              onClick={() => router.push("/calendar/")}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
             >
-              <ListItemText
-             
-                primary=" حل أسئلة"
-                sx={{ opacity: open ? 1 : 0 }}
-              />
               <ListItemIcon
                 sx={{
                   minWidth: 0,
@@ -391,20 +359,38 @@ export default function HeaderWithDrawer({
               >
                 <FcIdea size={25} />
               </ListItemIcon>
+              <ListItemText primary="Calendar" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
             <ListItemButton
-              onClick={() => router.push("/lessons")}
+              onClick={() => router.push("/prescriptions")}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
             >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <FcKey size={25} />
+              </ListItemIcon>
               <ListItemText
-              
-                primary="شرح الدرس"
+                primary="Prescriptions"
                 sx={{ opacity: open ? 1 : 0 }}
               />
+            </ListItemButton>
+            <ListItemButton
+              onClick={() => router.push("/emr")}
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
               <ListItemIcon
                 sx={{
                   minWidth: 0,
@@ -414,6 +400,7 @@ export default function HeaderWithDrawer({
               >
                 <FcReadingEbook size={25} />
               </ListItemIcon>
+              <ListItemText primary="EMR" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
         </List>
@@ -429,11 +416,6 @@ export default function HeaderWithDrawer({
                 px: 2.5,
               }}
             >
-              <ListItemText
-            
-                primary="إعدادات"
-                sx={{ opacity: open ? 1 : 0 }}
-              />
               <ListItemIcon
                 sx={{
                   minWidth: 0,
@@ -443,38 +425,17 @@ export default function HeaderWithDrawer({
               >
                 <FcSettings size={25} />
               </ListItemIcon>
+              <ListItemText primary="Settings" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
+
             <ListItemButton
-              onClick={() => router.push("/help")}
+            onClick={logout}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
             >
-              <ListItemText
-                
-                primary="مساعدة"
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                <FcKey size={25} />
-              </ListItemIcon>
-            </ListItemButton>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              
               <ListItemIcon
                 sx={{
                   minWidth: 0,
@@ -484,11 +445,7 @@ export default function HeaderWithDrawer({
               >
                 <FcExport size={25} />
               </ListItemIcon>
-              <ListItemText
-                
-                primary="Log out"
-                sx={{ opacity: open ? 1 : 0 }}
-              />
+              <ListItemText primary="Log out" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
         </List>
