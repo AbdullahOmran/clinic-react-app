@@ -23,7 +23,7 @@ const useAxios = () => {
     const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
     if (!isExpired) return req;
     try {
-      const res = await axios.post(`${baseURL}api/token/refresh/`, {
+      const res = await axios.post(`${baseURL}api/auth/refresh/`, {
         refresh: authTokens.refresh,
       });
       localStorage.setItem('authTokens', JSON.stringify(res.data));
