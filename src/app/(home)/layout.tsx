@@ -5,6 +5,7 @@ import PageTemplate from "@/components/PageTemplate/PageTemplate";
 
 import PageComponent from "@/components/PageTemplate/PageComponent/PageComponent";
 import AuthProvider from "@/components/shared/AuthProvider";
+import HeaderWithDrawer from "@/components/headerWithDrawer/headerWithDrawer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +16,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main className={styles.Main}>
       <AuthProvider>
-        <Nav />
-        <PageTemplate>{children}</PageTemplate>
+        {/* <Nav />
+        <PageTemplate>{children}</PageTemplate> */}
+        <HeaderWithDrawer>{children}</HeaderWithDrawer>
       </AuthProvider>
     </main>
   );
