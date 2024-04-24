@@ -75,7 +75,7 @@ export default function SignUp() {
     console.log(res);
     if (res === true) {
       const loginRes = await loginUser({
-        phone_number: data.phone_number,
+        username: data.username,
         password: data.password,
       });
       if (loginRes) {
@@ -111,12 +111,12 @@ export default function SignUp() {
 Sign Up </Typography>
           {alreadyExistsError && (
             <Typography color="error" component="h6" variant="h6">
-              الحساب دا موجود يا حماده{" "}
+              The account is already registered
             </Typography>
           )}
           {genericError && (
             <Typography color="error" component="h6" variant="h6">
-              حدث مشكلة ي حمادة{" "}
+              an error occurred
             </Typography>
           )}
           
@@ -141,7 +141,7 @@ Sign Up </Typography>
                     helperText={
                       errors.first_name && (
                         <Typography color="error" component="span">
-                          معلش هنتعبك معانا اكتب رقم التليفون
+                          please enter the first name
                         </Typography>
                       )
                     }
@@ -160,6 +160,12 @@ Sign Up </Typography>
                       required: true,
                       maxLength: 20,
                     })}
+                    helperText={
+                      errors.last_name && (
+                        <Typography color="error" component="span">
+                          please enter the last name                        </Typography>
+                      )
+                    }
                     id="lastName"
                     label="last name"
                     name="last_name"
@@ -174,6 +180,13 @@ Sign Up </Typography>
                     {...register("username", {
                       required: true,
                     })}
+                    helperText={
+                      errors.username && (
+                        <Typography color="error" component="span">
+                          please enter a valid username
+                        </Typography>
+                      )
+                    }
                     id="username"
                     label="username"
                     name="username"
@@ -188,7 +201,13 @@ Sign Up </Typography>
                       required: true,
                       pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                     })}
-                    
+                    helperText={
+                      errors.email && (
+                        <Typography color="error" component="span">
+                          please enter a valid email
+                        </Typography>
+                      )
+                    }
                     id="email"
                     label="email"
                     name="email"
@@ -206,6 +225,13 @@ Sign Up </Typography>
                       pattern:
                         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                     })}
+                    helperText={
+                      errors.password && (
+                        <Typography color="error" component="span">
+                          please enter a valid password
+                        </Typography>
+                      )
+                    }
                     name="password"
                     label="password"
                     type="password"

@@ -79,10 +79,11 @@ const usePatient = () => {
       marital_status: patientData.maritalStatus?.toUpperCase().at(0),
     };
 
+    
     try {
       if (patientData.action == "add") {
         const res = await api.post("api/patient/", submittedData);
-        if (res.status == 200) {
+        if (res.status == 201) {
           dispatch(
             appendAlert(["Patient added successfully", "filled", "info"])
           );

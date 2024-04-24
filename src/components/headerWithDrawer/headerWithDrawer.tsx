@@ -369,7 +369,29 @@ export default function HeaderWithDrawer({
               </ListItemIcon>
               <ListItemText primary="Treatment Plans" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
-            
+            <ListItemButton
+            {...((activeItem==3)&&{selected:true})}
+              onClick={() => router.push("/patients")}
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <FcKey size={25} />
+              </ListItemIcon>
+              <ListItemText
+                primary="Patients"
+                sx={{ opacity: open ? 1 : 0 }}
+              />
+            </ListItemButton>
             <ListItemButton
             {...((activeItem==3)&&{selected:true})}
               onClick={() => router.push("/prescriptions")}
