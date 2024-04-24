@@ -333,6 +333,7 @@ export default function HeaderWithDrawer({
             <ListItemButton
             {...((activeItem==1)&&{selected:true})}
               onClick={() => router.push("/patient-encounter")}
+              {...(disablePatientEncounter&&isSecretary&&({disabled:true}))}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
