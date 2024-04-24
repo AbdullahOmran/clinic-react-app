@@ -504,7 +504,7 @@ export default function HeaderWithDrawer({
           </ListItem>
         </List>
       </Drawer>
-      <Box component="main" sx={{bgcolor:"#f6f6f6", height: "100%", flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{bgcolor:"#f9f9f9", height: "100%", flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         {children}
       </Box>
