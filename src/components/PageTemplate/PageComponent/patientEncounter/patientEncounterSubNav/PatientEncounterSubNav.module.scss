@@ -22,12 +22,18 @@
     align-items: center;
     text-decoration: none;
     font-size: 1em;
+    border-bottom: 1px solid $white
   }
   .link:hover{
-    background-color: $primary-color;
-    color: $white;
+    // background-color: $primary-color;
+    border-bottom-color: $primary-color;
+    // color: $white;
+    color: $primary-color;
   }
   .active{
-    background-color: $primary-color;
-    color: $white;
+    // background-color: $primary-color;
+    // color: $white;
+    border-bottom-color: $primary-color;
+    // color: $white;
+    color: $primary-color;
   }
