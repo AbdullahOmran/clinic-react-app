@@ -46,8 +46,10 @@ import {
 import { useRouter } from "next/navigation";
 import { FaPersonChalkboard, FaTableCells } from "react-icons/fa6";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAuthTokens, setUser } from "@/redux/authSlice";
+import { RootState } from "@/redux/store";
+import { truncate } from "fs";
 
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -138,6 +140,8 @@ export default function HeaderWithDrawer({
 }) {
   const router = useRouter();
   const dispatch = useDispatch();
+  const activeItem = useSelector((state: RootState)=>state.user.activeSideMenuItem);
+
   const logout = ()=>{
     const tokens  = localStorage.getItem('Tokens');
     if(tokens){
@@ -179,7 +183,7 @@ export default function HeaderWithDrawer({
 
 
   return (
-    <Box sx={{ height: "100%", display: "flex" }}>
+    <Box sx={{ height: "100vh", display: "flex" }}>
       <CssBaseline />
 
       <AppBar position="fixed" open={open}>
@@ -298,7 +302,7 @@ export default function HeaderWithDrawer({
         <List>
           <ListItem disablePadding sx={{ display: "block" }}>
             <ListItemButton
-              selected
+              {...((activeItem==0)&&{selected:true})}
               onClick={() => router.push("/dashboard")}
               sx={{
                 minHeight: 48,
@@ -320,7 +324,10 @@ export default function HeaderWithDrawer({
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>
+            
+
             <ListItemButton
+            {...((activeItem==1)&&{selected:true})}
               onClick={() => router.push("/patient-encounter")}
               sx={{
                 minHeight: 48,
@@ -343,7 +350,8 @@ export default function HeaderWithDrawer({
               />
             </ListItemButton>
             <ListItemButton
-              onClick={() => router.push("/calendar/")}
+            {...((activeItem==2)&&{selected:true})}
+              onClick={() => router.push("/treatment-plans")}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -357,11 +365,13 @@ export default function HeaderWithDrawer({
                   justifyContent: "center",
                 }}
               >
-                <FcIdea size={25} />
+                <FcSettings size={25} />
               </ListItemIcon>
-              <ListItemText primary="Calendar" sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText primary="Treatment Plans" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
+            
             <ListItemButton
+            {...((activeItem==3)&&{selected:true})}
               onClick={() => router.push("/prescriptions")}
               sx={{
                 minHeight: 48,
@@ -384,6 +394,27 @@ export default function HeaderWithDrawer({
               />
             </ListItemButton>
             <ListItemButton
+            {...((activeItem==4)&&{selected:true})}
+              onClick={() => router.push("/calendar/")}
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <FcIdea size={25} />
+              </ListItemIcon>
+              <ListItemText primary="Calendar" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+            <ListItemButton
+            {...((activeItem==5)&&{selected:true})}
               onClick={() => router.push("/emr")}
               sx={{
                 minHeight: 48,
@@ -409,6 +440,7 @@ export default function HeaderWithDrawer({
         <List>
           <ListItem disablePadding sx={{ display: "block" }}>
             <ListItemButton
+            {...((activeItem==6)&&{selected:true})}
               onClick={() => router.push("/settings")}
               sx={{
                 minHeight: 48,
@@ -450,7 +482,7 @@ export default function HeaderWithDrawer({
           </ListItem>
         </List>
       </Drawer>
-      <Box component="main" sx={{ height: "100%", flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{bgcolor:"#f6f6f6", height: "100%", flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         {children}
       </Box>
