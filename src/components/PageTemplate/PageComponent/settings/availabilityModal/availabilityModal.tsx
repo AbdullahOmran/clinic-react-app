@@ -8,17 +8,12 @@ import {
   OutlinedInput,
   Select,
   SelectChangeEvent,
-  
-  
 } from "@mui/material";
-import { Theme, useTheme } from '@mui/material/styles';
+import { Theme, useTheme } from "@mui/material/styles";
 import styles from "./availabilityModal.module.scss";
-import { Form, Button, Modal, ListGroup } from "react-bootstrap";
+import { Form, Button, Modal, ListGroup, Row, Col } from "react-bootstrap";
 import { BsPlusCircle } from "react-icons/bs";
 import React from "react";
-
-
-
 
 const names = [
   "Saturday",
@@ -30,8 +25,6 @@ const names = [
   "Friday",
 ];
 
-
-
 function AvailabilityModal({
   show,
   handleClose,
@@ -39,7 +32,19 @@ function AvailabilityModal({
   show: boolean;
   handleClose: any;
 }) {
- 
+  const [dayName, setDayName] = React.useState<string[]>([]);
+  const handleChangeMultiple = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const { options } = event.target;
+    const value: string[] = [];
+    for (let i = 0, l = options.length; i < l; i += 1) {
+      if (options[i].selected) {
+        value.push(options[i].value);
+      }
+    }
+    setDayName(value);
+  };
   return (
     <Modal className={styles.modal} show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -47,24 +52,48 @@ function AvailabilityModal({
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Group className="mb-3">
-            <Form.Label>Regular Working Days</Form.Label>
-            
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Select Symptom</Form.Label>
-            <ListGroup className={styles.listGroup}>
-              <ListGroup.Item className={styles.item} action>
-                Headache
-              </ListGroup.Item>
-              <ListGroup.Item className={styles.item} action>
-                Sneezing
-              </ListGroup.Item>
-              <ListGroup.Item className={styles.item} action>
-                Cough
-              </ListGroup.Item>
-            </ListGroup>
-          </Form.Group>
+          <Row>
+            <Col>
+              <FormControl sx={{ m: 1,width:"100%"}}>
+                <InputLabel shrink htmlFor="select-multiple-native">
+                  Days
+                </InputLabel>
+                <Select<string[]>
+                  multiple
+                  native
+                  value={dayName}
+                  // @ts-ignore Typings are not considering `native`
+                  onChange={handleChangeMultiple}
+                  label="Native"
+                  inputProps={{
+                    id: "select-multiple-native",
+                  }}
+                >
+                  {names.map((name) => (
+                    <option key={name} value={name}>
+                      {name}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+            </Col>
+            <Col>
+              <Form.Group
+                className="mb-3"
+              
+              >
+                <Form.Label>Start Time</Form.Label>
+                <Form.Control type="time"  />
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+               
+              >
+                <Form.Label>End Time</Form.Label>
+                <Form.Control type="time"  />
+              </Form.Group>
+            </Col>
+          </Row>
         </Form>
       </Modal.Body>
       <Modal.Footer>
@@ -72,8 +101,7 @@ function AvailabilityModal({
           Close
         </Button>
         <Button variant="primary" onClick={handleClose}>
-          <BsPlusCircle className={styles.icon} />
-          Add
+          OK
         </Button>
       </Modal.Footer>
     </Modal>

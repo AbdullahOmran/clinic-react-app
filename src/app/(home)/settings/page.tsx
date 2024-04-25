@@ -21,6 +21,7 @@ import { styled } from "@mui/material/styles";
 import Container, { ContainerProps } from "@mui/material/Container";
 import React, { useState } from "react";
 import AvailabilityModal from "@/components/PageTemplate/PageComponent/settings/availabilityModal/availabilityModal";
+import BufferTimeModal from "@/components/PageTemplate/PageComponent/settings/bufferTimeModal/bufferTimeModal";
 
 export default function Settings() {
   const dispatch = useDispatch();
@@ -34,6 +35,9 @@ export default function Settings() {
   const [showAvailabilityModal, setShowAvailabilityModal] = useState(false);
   const handleCloseAvailabilityModal = () => setShowAvailabilityModal(false);
   const handleShowAvailabilityModal = () => setShowAvailabilityModal(true);
+  const [showBufferTimeModal, setShowBufferTimeModal] = useState(false);
+  const handleCloseBufferTimeModal= () => setShowBufferTimeModal(false);
+  const handleShowBufferTimeModal = () => setShowBufferTimeModal(true);
 
   return (
     <>
@@ -117,7 +121,7 @@ export default function Settings() {
                   </Typography>
                 </Grid>
                 <Grid item xs={6}>
-                  <Button variant="outlined">change</Button>
+                  <Button onClick={handleShowBufferTimeModal} variant="outlined">change</Button>
                 </Grid>
                 <Grid item xs={6}>
                   <Typography variant="h6" component="h6">
@@ -157,6 +161,10 @@ export default function Settings() {
       <AvailabilityModal
         show={showAvailabilityModal}
         handleClose={handleCloseAvailabilityModal}
+      />
+      <BufferTimeModal
+        show={showBufferTimeModal}
+        handleClose={handleCloseBufferTimeModal}
       />
     </>
   );

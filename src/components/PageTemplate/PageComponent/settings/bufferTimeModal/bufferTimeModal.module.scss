@@ -1,0 +1,37 @@
+
+@import "@/app/variables";
+
+
+.icon{
+    font-size: 1.3em;
+    margin-right: 5px;
+}
+.listGroup{
+    overflow-y: auto;
+    max-height: 250px;
+}
+.item{
+    color: $secondary-color;
+}
+.modal{
+    z-index: 4000;
+}
+.selectGroup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 6px;
+   
+    height: 100%;
+}
+.selectList{
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // flex-wrap: wrap;
+    padding: 6px;
+    border: 1px solid #f3f3f3;
+    flex-grow: 1;
+    overflow-y: auto;
+}
