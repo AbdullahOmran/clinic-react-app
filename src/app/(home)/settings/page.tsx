@@ -2,14 +2,28 @@
 import { useDispatch } from "react-redux";
 
 import { setActiveSideMenuItem } from "@/redux/userSlice";
-import { Button, Divider, Grid, Paper, Slider, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  SelectChangeEvent,
+  Slider,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Container, { ContainerProps } from "@mui/material/Container";
+import React from "react";
 
 export default function Settings() {
   const dispatch = useDispatch();
   dispatch(setActiveSideMenuItem(6));
-
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -23,10 +37,7 @@ export default function Settings() {
         Settings
       </Typography>
       <Paper>
-        <Stack
-          divider={<Divider orientation="horizontal" flexItem />}
-          
-        >
+        <Stack divider={<Divider orientation="horizontal" flexItem />}>
           <Item elevation={0}>
             <Typography variant="h5" component="h5">
               User Account
@@ -74,10 +85,7 @@ export default function Settings() {
         </Stack>
       </Paper>
       <Paper>
-        <Stack
-          divider={<Divider orientation="horizontal" flexItem />}
-          
-        >
+        <Stack divider={<Divider orientation="horizontal" flexItem />}>
           <Item elevation={0}>
             <Typography variant="h5" component="h5">
               Appointment
@@ -91,9 +99,10 @@ export default function Settings() {
               columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             >
               
+
               <Grid item xs={6}>
                 <Typography variant="h6" component="h6">
-                  Available Time
+                  Availability
                 </Typography>
               </Grid>
               <Grid item xs={6}>
@@ -101,7 +110,7 @@ export default function Settings() {
               </Grid>
               <Grid item xs={6}>
                 <Typography variant="h6" component="h6">
-                   Buffer Time
+                  Buffer Time
                 </Typography>
               </Grid>
               <Grid item xs={6}>
@@ -113,15 +122,23 @@ export default function Settings() {
                 </Typography>
               </Grid>
               <Grid item xs={6}>
-              <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" />
+                <Slider
+                  defaultValue={50}
+                  aria-label="Default"
+                  valueLabelDisplay="auto"
+                />
               </Grid>
               <Grid item xs={6}>
                 <Typography variant="h6" component="h6">
-                   Max Bookings
+                  Max Bookings
                 </Typography>
               </Grid>
               <Grid item xs={6}>
-              <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" />
+                <Slider
+                  defaultValue={50}
+                  aria-label="Default"
+                  valueLabelDisplay="auto"
+                />
               </Grid>
             </Grid>
           </Item>
