@@ -14,6 +14,9 @@ import styles from "./availabilityModal.module.scss";
 import { Form, Button, Modal, ListGroup, Row, Col } from "react-bootstrap";
 import { BsPlusCircle } from "react-icons/bs";
 import React from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { setAvailability } from "@/redux/appointmentSettingsSlice";
 
 const names = [
   "Saturday",
@@ -45,13 +48,20 @@ function AvailabilityModal({
     }
     setDayName(value);
   };
+
+  const {register, handleSubmit, watch, formState: {errors}} = useForm();
+  const dispatch = useDispatch();
+  const onSubmit = (data: object) => {
+    setAvailability({...data, days:dayName});
+    handleClose();
+  };
   return (
     <Modal className={styles.modal} show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Availability</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form id="availability-form" onSubmit={handleSubmit(onSubmit)}>
           <Row>
             <Col>
               <FormControl sx={{ m: 1,width:"100%"}}>
@@ -64,6 +74,7 @@ function AvailabilityModal({
                   value={dayName}
                   // @ts-ignore Typings are not considering `native`
                   onChange={handleChangeMultiple}
+                  
                   label="Native"
                   inputProps={{
                     id: "select-multiple-native",
@@ -83,14 +94,20 @@ function AvailabilityModal({
               
               >
                 <Form.Label>Start Time</Form.Label>
-                <Form.Control type="time"  />
+                <Form.Control
+                 type="time" 
+                 {...register("startTime",{required:true})}
+                 />
               </Form.Group>
               <Form.Group
                 className="mb-3"
                
               >
                 <Form.Label>End Time</Form.Label>
-                <Form.Control type="time"  />
+                <Form.Control 
+                type="time" 
+                {...register("endTime",{required:true})}
+                 />
               </Form.Group>
             </Col>
           </Row>
@@ -100,7 +117,8 @@ function AvailabilityModal({
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        <Button variant="primary" onClick={handleClose}>
+        <Button type="submit" variant="primary" form="availability-form">
+        {/* onClick={handleClose} */}
           OK
         </Button>
       </Modal.Footer>

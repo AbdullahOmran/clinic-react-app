@@ -16,6 +16,7 @@ const useAppointment = () => {
   const dispatch = useDispatch();
   const api = useAxios();
   const appointmentData = useSelector((state: RootState) => state.appointment);
+  const appointmentSettingsData = useSelector((state: RootState) => state.appointmentSettings);
 
   const submit = async () => {
     const submittedData = {
@@ -43,10 +44,19 @@ const useAppointment = () => {
       }
     } catch (e) {}
   };
+  const getAppointmentSettings  = async()=>{
+    try{
+      const res = await api.get("api/settings/appointment/");
+      if(res.status === 200){
+        // do something
+      }
+    }catch(e){}
+  };
 
   return {
     submit: submit,
     getAppointments: getAppointments,
+    getAppointmentSettings: getAppointmentSettings,
   };
 };
 
