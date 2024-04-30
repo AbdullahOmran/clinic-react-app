@@ -1,5 +1,5 @@
 "use client";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { setActiveSideMenuItem } from "@/redux/userSlice";
 import {
@@ -22,6 +22,8 @@ import Container, { ContainerProps } from "@mui/material/Container";
 import React, { useState } from "react";
 import AvailabilityModal from "@/components/PageTemplate/PageComponent/settings/availabilityModal/availabilityModal";
 import BufferTimeModal from "@/components/PageTemplate/PageComponent/settings/bufferTimeModal/bufferTimeModal";
+import { setDuration, setMaxAppointments } from "@/redux/appointmentSettingsSlice";
+import { RootState } from "@/redux/store";
 
 export default function Settings() {
   const dispatch = useDispatch();
@@ -38,7 +40,8 @@ export default function Settings() {
   const [showBufferTimeModal, setShowBufferTimeModal] = useState(false);
   const handleCloseBufferTimeModal= () => setShowBufferTimeModal(false);
   const handleShowBufferTimeModal = () => setShowBufferTimeModal(true);
-
+ 
+  
   return (
     <>
       <Stack sx={{ paddingTop: "24px" }} spacing={2}>
@@ -130,21 +133,29 @@ export default function Settings() {
                 </Grid>
                 <Grid item xs={6}>
                   <Slider
-                    defaultValue={50}
+                    defaultValue={15}
+                    
                     aria-label="Default"
                     valueLabelDisplay="auto"
+                    min={10}
+                    max={60}
+                    onChangeCommitted={(e: any)=>{dispatch(setDuration(e.target.value))}}
                   />
                 </Grid>
                 <Grid item xs={6}>
                   <Typography variant="h6" component="h6">
-                    Max Bookings
+                    Max Appointment
                   </Typography>
                 </Grid>
                 <Grid item xs={6}>
                   <Slider
-                    defaultValue={50}
+                    defaultValue={2}
+                    min={1}
+                    max={5}
                     aria-label="Default"
                     valueLabelDisplay="auto"
+                    onChangeCommitted={(e: any)=>{dispatch(setMaxAppointments(e.target.value))}}
+
                   />
                 </Grid>
               </Grid>
