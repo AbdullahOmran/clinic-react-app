@@ -13,6 +13,7 @@ import {
   ListGroup,
   Row,
 } from "react-bootstrap";
+import dayjs  from "dayjs";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import Calendar, { TileArgs, TileContentFunc } from "react-calendar";
@@ -38,7 +39,10 @@ function Schedule() {
   const handleCloseScheduleModal= () => setShowScheduleModal(false);
   const handleShowScheduleModal = (datetime: Date) => {
     setShowScheduleModal(true);
-    dispatch(setDate(datetime.toISOString().substring(0,10)));
+    const date = dayjs(datetime);
+    dispatch(setDate(date.format('YYYY-MM-DD')));
+
+    // dispatch(setDate(datetime.toISOString().substring(0,10)));
   };
  useEffect(()=>{
   appointmentApi.getAppointments();

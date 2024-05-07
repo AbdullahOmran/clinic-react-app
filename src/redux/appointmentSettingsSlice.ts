@@ -2,23 +2,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export type Availability  = {
-  startTime?: string;
-  endTime?: string;
-  days?: Array<string>;
+  start_time: string;
+  end_time: string;
+  days: string[];
 };
 export type TimeRange = {
-  startTime: string;
-  endTime: string;
+  start_time: string;
+  end_time: string;
 };
 export interface appointmentSettingsState {
   availability: Availability;
-  bufferTime: Array<TimeRange>;
+  bufferTime: TimeRange[];
   duration: number;
   maxAppointments: number;
 }
 
 const initialState: appointmentSettingsState = {
-  availability: {},
+  availability: {
+    days:[],
+  start_time:"00:00:00",
+  end_time:"00:00:00"
+},
   bufferTime: [],
   duration: 15,
   maxAppointments: 2,

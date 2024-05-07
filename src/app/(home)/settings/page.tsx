@@ -24,6 +24,7 @@ import AvailabilityModal from "@/components/PageTemplate/PageComponent/settings/
 import BufferTimeModal from "@/components/PageTemplate/PageComponent/settings/bufferTimeModal/bufferTimeModal";
 import { setDuration, setMaxAppointments } from "@/redux/appointmentSettingsSlice";
 import { RootState } from "@/redux/store";
+import useAppointment from "@/api/useAppointment";
 
 export default function Settings() {
   const dispatch = useDispatch();
@@ -40,7 +41,11 @@ export default function Settings() {
   const [showBufferTimeModal, setShowBufferTimeModal] = useState(false);
   const handleCloseBufferTimeModal= () => setShowBufferTimeModal(false);
   const handleShowBufferTimeModal = () => setShowBufferTimeModal(true);
- 
+  const appointment = useAppointment();
+  const appointmentSettingsData = useSelector((state: RootState) =>state.appointmentSettings)
+  React.useEffect(()=>{
+    appointment.getAppointmentSettings();
+  },[]);
   
   return (
     <>
@@ -134,12 +139,12 @@ export default function Settings() {
                 <Grid item xs={6}>
                   <Slider
                     defaultValue={15}
-                    
+                    value={appointmentSettingsData.duration}
                     aria-label="Default"
                     valueLabelDisplay="auto"
                     min={10}
                     max={60}
-                    onChangeCommitted={(e: any)=>{dispatch(setDuration(e.target.value))}}
+                    onChange={(e: any,value)=>{dispatch(setDuration(value))}}
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -150,11 +155,12 @@ export default function Settings() {
                 <Grid item xs={6}>
                   <Slider
                     defaultValue={2}
+                    value={appointmentSettingsData.maxAppointments}
                     min={1}
                     max={5}
                     aria-label="Default"
                     valueLabelDisplay="auto"
-                    onChangeCommitted={(e: any)=>{dispatch(setMaxAppointments(e.target.value))}}
+                    onChange={(e: any, value)=>{dispatch(setMaxAppointments(value))}}
 
                   />
                 </Grid>
@@ -162,7 +168,7 @@ export default function Settings() {
             </Item>
 
             <Item sx={{ textAlign: "right" }} elevation={0}>
-              <Button sx={{ marginRight: "16px" }} variant="contained">
+              <Button onClick={()=>{appointment.submitAppointmentSettings();}} sx={{ marginRight: "16px" }} variant="contained">
                 Save Changes
               </Button>
             </Item>

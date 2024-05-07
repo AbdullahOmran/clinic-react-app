@@ -13,10 +13,11 @@ import { Theme, useTheme } from "@mui/material/styles";
 import styles from "./bufferTimeModal.module.scss";
 import { Form, Button, Modal, ListGroup, Row, Col } from "react-bootstrap";
 import { BsPlusCircle } from "react-icons/bs";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { TimeRange, setBufferTime } from "@/redux/appointmentSettingsSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 
 function BufferTimeModal({
@@ -28,12 +29,17 @@ function BufferTimeModal({
 }) {
 
  const dispatch = useDispatch();
+ const appointmentSettingsData = useSelector((state:RootState) => state.appointmentSettings);
+
   const {register, handleSubmit, watch, formState:{errors}} = useForm();
   type TimeRange = {
-    startTime: string;
-    endTime:string;
+    start_time: string;
+    end_time:string;
   }
   const [timeRanges,setTimeRanges] = React.useState<Array<TimeRange>>([]);
+  useEffect(()=>{
+    setTimeRanges(appointmentSettingsData.bufferTime);
+  },[]);
   const addChip = (data:any)=>{
     const newArray:Array<TimeRange> = [...timeRanges, data];
    setTimeRanges(newArray);
@@ -41,6 +47,7 @@ function BufferTimeModal({
   };
  const onSubmit = ()=>{
   const data:Array<TimeRange> = [...timeRanges];
+  
 dispatch(setBufferTime(data));
 handleClose();
  };
@@ -58,7 +65,7 @@ handleClose();
                   {timeRanges.map((item, id) => (
                     <Chip
                       key={id}
-                      label={item.startTime+" to "+item.endTime}
+                      label={item.start_time+" to "+item.end_time}
                       onClick={() => {
                         alert("chip clicked");
                       }}
@@ -79,13 +86,15 @@ handleClose();
               <Form.Group className="mb-3">
                 <Form.Label>Start Time</Form.Label>
                 <Form.Control
-                {...register("startTime",{required:true})}
+                                 
+
+                {...register("start_time",{required:true})}
                 type="time" />
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>End Time</Form.Label>
                 <Form.Control
-                 {...register("endTime",{required:true})}
+                 {...register("end_time",{required:true})}
 
                 type="time" />
               </Form.Group>
@@ -98,7 +107,7 @@ handleClose();
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        <Button variant="primary" onClick={handleClose}>
+        <Button variant="primary" onClick={onSubmit}>
           OK
         </Button>
       </Modal.Footer>

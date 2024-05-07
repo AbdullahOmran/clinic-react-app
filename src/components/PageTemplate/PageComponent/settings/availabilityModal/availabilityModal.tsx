@@ -15,8 +15,10 @@ import { Form, Button, Modal, ListGroup, Row, Col } from "react-bootstrap";
 import { BsPlusCircle } from "react-icons/bs";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAvailability } from "@/redux/appointmentSettingsSlice";
+import useAppointment from "@/api/useAppointment";
+import { RootState } from "@/redux/store";
 
 const names = [
   "Saturday",
@@ -35,7 +37,13 @@ function AvailabilityModal({
   show: boolean;
   handleClose: any;
 }) {
-  const [dayName, setDayName] = React.useState<string[]>([]);
+  const appointment = useAppointment();
+  const appointmentSettingsData = useSelector((state:RootState) => state.appointmentSettings);
+  // React.useEffect(() => {
+  // appointment.getAppointmentSettings();
+  
+  // },[]);
+  const [dayName, setDayName] = React.useState<string[]>(appointmentSettingsData.availability.days);
   const handleChangeMultiple = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -46,13 +54,14 @@ function AvailabilityModal({
         value.push(options[i].value);
       }
     }
+   
     setDayName(value);
   };
 
   const {register, handleSubmit, watch, formState: {errors}} = useForm();
   const dispatch = useDispatch();
   const onSubmit = (data: object) => {
-    setAvailability({...data, days:dayName});
+    dispatch(setAvailability({...data, days:dayName}));
     handleClose();
   };
   return (
@@ -71,6 +80,7 @@ function AvailabilityModal({
                 <Select<string[]>
                   multiple
                   native
+                  
                   value={dayName}
                   // @ts-ignore Typings are not considering `native`
                   onChange={handleChangeMultiple}
@@ -86,6 +96,7 @@ function AvailabilityModal({
                     </option>
                   ))}
                 </Select>
+                
               </FormControl>
             </Col>
             <Col>
@@ -96,7 +107,8 @@ function AvailabilityModal({
                 <Form.Label>Start Time</Form.Label>
                 <Form.Control
                  type="time" 
-                 {...register("startTime",{required:true})}
+                 value={appointmentSettingsData.availability.start_time}
+                 {...register("start_time",{required:true})}
                  />
               </Form.Group>
               <Form.Group
@@ -105,8 +117,9 @@ function AvailabilityModal({
               >
                 <Form.Label>End Time</Form.Label>
                 <Form.Control 
-                type="time" 
-                {...register("endTime",{required:true})}
+                type="time"
+                value={appointmentSettingsData.availability.end_time} 
+                {...register("end_time",{required:true})}
                  />
               </Form.Group>
             </Col>
@@ -117,7 +130,7 @@ function AvailabilityModal({
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        <Button type="submit" variant="primary" form="availability-form">
+        <Button  type="submit" variant="primary" form="availability-form">
         {/* onClick={handleClose} */}
           OK
         </Button>
