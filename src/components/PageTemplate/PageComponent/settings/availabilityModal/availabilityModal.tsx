@@ -58,7 +58,10 @@ function AvailabilityModal({
     setDayName(value);
   };
 
-  const {register, handleSubmit, watch, formState: {errors}} = useForm();
+  const {register, handleSubmit, watch, formState: {errors}} = useForm({defaultValues:{
+    start_time:appointmentSettingsData.availability.start_time,
+    end_time:appointmentSettingsData.availability.end_time,
+  },});
   const dispatch = useDispatch();
   const onSubmit = (data: object) => {
     dispatch(setAvailability({...data, days:dayName}));
@@ -107,7 +110,7 @@ function AvailabilityModal({
                 <Form.Label>Start Time</Form.Label>
                 <Form.Control
                  type="time" 
-                 value={appointmentSettingsData.availability.start_time}
+                //  value={appointmentSettingsData.availability.start_time}
                  {...register("start_time",{required:true})}
                  />
               </Form.Group>
@@ -118,7 +121,7 @@ function AvailabilityModal({
                 <Form.Label>End Time</Form.Label>
                 <Form.Control 
                 type="time"
-                value={appointmentSettingsData.availability.end_time} 
+                // value={} 
                 {...register("end_time",{required:true})}
                  />
               </Form.Group>

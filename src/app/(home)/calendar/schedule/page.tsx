@@ -16,7 +16,7 @@ import {
 import dayjs  from "dayjs";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import Calendar, { TileArgs, TileContentFunc } from "react-calendar";
+import Calendar, { TileArgs, TileContentFunc, TileDisabledFunc } from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { BsCalendarEventFill } from "react-icons/bs";
 import ScheduleModal from "@/components/PageTemplate/PageComponent/calendar/scheduleModal/scheduleModal";
@@ -26,11 +26,16 @@ import { RootState } from "@/redux/store";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
+const dayValues = [
+  "Sunday", "Monday", "Tuesday", "Wednesday","Thursday", "Friday", "Saturday",
+];
 
 function Schedule() {
   const dispatch = useDispatch();
   const appointmentsList = useSelector((state: RootState)=>state.appointment.appointments);
+  const appointmentsSettingsData = useSelector((state: RootState)=>state.appointmentSettings);
   const patientsList = useSelector((state: RootState)=>state.patient.patients);
+  
   const appointmentApi = useAppointment();
   dispatch(setActiveSideMenuItem(4));
   dispatch(setActiveCalendarSubNavItem(1));
@@ -47,12 +52,15 @@ function Schedule() {
  useEffect(()=>{
   appointmentApi.getAppointments();
  },[]);
+ const days = appointmentsSettingsData.availability.days;
+const daysIndices = days.map((day) =>dayValues.indexOf(day));
   const calendarContent: TileContentFunc = ({
     activeStartDate,
     date,
     view,
   }: TileArgs) => {
-    if (date.getMonth() == 1) {
+    
+    if (daysIndices.includes(date.getDay())) {
       return (
         <div>
           <Badge bg="primary">{Math.round(Math.random() * 10)}</Badge>
@@ -62,6 +70,13 @@ function Schedule() {
     } else {
       return null;
     }
+  };
+  const calendarDisabledDays: TileDisabledFunc = ({
+    activeStartDate,
+    date,
+    view,
+  }: TileArgs) => {
+    return !daysIndices.includes(date.getDay());
   };
 
   return (
@@ -77,7 +92,7 @@ function Schedule() {
         <Row className="mb-1 mt-2">
         <ListGroup as="ol" numbered>
           {Array.from({length: appointmentsList.length}).map((_,idx)=>(
-
+            (appointmentsList[idx].patient&&(
             <ListGroup.Item
               as="li"
               key={idx}
@@ -96,7 +111,7 @@ function Schedule() {
                 02:00 PM <span className={styles.interval}>:</span> 02:20 PM
               </div>
               <CloseButton className="ms-3" />
-            </ListGroup.Item>
+            </ListGroup.Item>))
             
           ))}
             
@@ -114,6 +129,7 @@ function Schedule() {
           <Calendar
             className={styles.calendar}
             tileContent={calendarContent}
+            tileDisabled={calendarDisabledDays}
             onChange={calendarOnChange}
             value={calendarValue}
             onClickDay={handleShowScheduleModal}
