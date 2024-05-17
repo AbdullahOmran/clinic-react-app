@@ -13,11 +13,13 @@ import {
 import { BsCapsule, BsPlusCircle, BsStopwatch } from "react-icons/bs";
 import { FaSyringe } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
+  setAppointmentType,
   setDoctorId,
   setPatientId,
   setSecretaryId,
+  setTime,
 } from "@/redux/appointmentSlice";
 import usePatient from "@/api/usePatient";
 import useAppointment from "@/api/useAppointment";
@@ -42,9 +44,11 @@ function ScheduleModal({
   const user = useSelector((state: RootState) => state.auth.user);
   const patient = usePatient();
   const searchInputRef = useRef<HTMLInputElement>(null);
+  
   useEffect(() => {
     patient.getPatients();
     dispatch(setSecretaryId(user.secretary_id));
+    dispatch(setAppointmentType("C"));
   }, []);
   const appointmentSettingsData = useSelector(
     (state: RootState) => state.appointmentSettings
@@ -90,7 +94,7 @@ function ScheduleModal({
     }
     if (!intersection) availableSlots.push({ start: slotStart, end: slot });
   }
-
+ const [enabledCheckBox, setEnabledCheckBox] = useState(true);
   return (
     <Modal className={styles.modal} size="lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -120,13 +124,19 @@ function ScheduleModal({
               <Form.Check // prettier-ignore
                 type="switch"
                 label="New Inspection"
-                defaultValue={1}
+                onClick = {()=>{setEnabledCheckBox(false);
+                  dispatch(setAppointmentType("I"));
+                }}
+                checked = {!enabledCheckBox}
               />
             </Col>
             <Col>
               <Form.Check // prettier-ignore
                 type="switch"
                 label="Consultation"
+                onClick = {()=>{setEnabledCheckBox(true);
+                dispatch(setAppointmentType("C"));}}
+                checked = {enabledCheckBox}
               />
             </Col>
           </Row>
@@ -136,9 +146,9 @@ function ScheduleModal({
                 <Form.Label className="fw-bold">
                   Available Time Slots
                 </Form.Label>
-                <Form.Select>
+                <Form.Select onChange={(e)=>{alert(enabledCheckBox);dispatch(setTime(e.currentTarget.value))}}>
                 {availableSlots.map((obj, idx) => (
-                    <option value={obj.start} key={idx}>
+                    <option value={obj.start.format("HH:mm:ss")} key={idx}>
                       {obj.start.format("hh:mm a") +
                         " to " +
                         obj.end.format("hh:mm a")}
@@ -192,6 +202,7 @@ function ScheduleModal({
         <Button
           variant="primary"
           onClick={() => {
+            
             appointmentApi.submit();
             handleClose();
           }}

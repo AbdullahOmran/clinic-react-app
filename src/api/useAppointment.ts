@@ -11,6 +11,7 @@ export interface appointmentObj {
   patient: number;
   date: string;
   time: string;
+  appointment_type: string;
 }
 
 const useAppointment = () => {
@@ -26,6 +27,7 @@ const useAppointment = () => {
       patient: appointmentData.patientId,
       date: appointmentData.date,
       time: appointmentData.time,
+      appointment_type: appointmentData.appointment_type,
     };
     try {
       const res = await api.post("api/appointment/", submittedData);

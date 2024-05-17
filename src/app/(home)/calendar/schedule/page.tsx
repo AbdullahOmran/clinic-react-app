@@ -23,6 +23,9 @@ import ScheduleModal from "@/components/PageTemplate/PageComponent/calendar/sche
 import { setDate } from "@/redux/appointmentSlice";
 import useAppointment from "@/api/useAppointment";
 import { RootState } from "@/redux/store";
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -63,8 +66,14 @@ const daysIndices = days.map((day) =>dayValues.indexOf(day));
     if (daysIndices.includes(date.getDay())) {
       return (
         <div>
-          <Badge bg="primary">{Math.round(Math.random() * 10)}</Badge>
-          <Badge bg="secondary">{Math.round(Math.random() * 10)}</Badge>
+          
+          <Badge bg="primary">
+            {appointmentsList.filter((obj)=>obj.appointment_type=="I" && obj.date ==dayjs(`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,"YYYY-M-D").format('YYYY-MM-DD')).length}
+          </Badge>
+          <Badge bg="secondary">
+            {appointmentsList.filter((obj)=>obj.appointment_type=="C" &&obj.date ==dayjs(`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,"YYYY-M-D").format('YYYY-MM-DD')).length}
+          </Badge>
+          
         </div>
       );
     } else {
@@ -101,14 +110,23 @@ const daysIndices = days.map((day) =>dayValues.indexOf(day));
                 "d-flex justify-content-between align-items-center ": true,
               })}
             >
+              
               <div className="ms-2 me-auto">
                 <div className="fw-bold">{patientsList.find((obj)=>obj.id == appointmentsList[idx].patient)?.first_name
                  + ' ' + patientsList.find((obj)=>obj.id == appointmentsList[idx].patient)?.last_name}</div>
-                <Badge bg="primary">New</Badge>
+                 {
+(appointmentsList[idx].appointment_type == "I")&&
+                <Badge bg="primary">New Inspection</Badge>
+                 }
+                 {
+(appointmentsList[idx].appointment_type == "C")&&
+                <Badge bg="secondary">Consultation</Badge>
+                 }
                 
               </div>
               <div className="p-1" >
-                02:00 PM <span className={styles.interval}>:</span> 02:20 PM
+              {dayjs(appointmentsList[idx].time, "HH:mm:ss").format("hh:mm a")} <span className={styles.interval}>:</span>
+              {dayjs(appointmentsList[idx].time, "HH:mm:ss").add(appointmentsSettingsData.duration,'m').format("hh:mm a")}
               </div>
               <CloseButton className="ms-3" />
             </ListGroup.Item>))
@@ -133,6 +151,7 @@ const daysIndices = days.map((day) =>dayValues.indexOf(day));
             onChange={calendarOnChange}
             value={calendarValue}
             onClickDay={handleShowScheduleModal}
+            
           />
           <div className="mt-2 ms-4 d-flex justify-content-start align-items-center">
             <div className={styles.redCircle}></div>
