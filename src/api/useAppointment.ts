@@ -10,6 +10,7 @@ export interface appointmentObj {
   secretary: number;
   patient: number;
   date: string;
+  status: string;
   time: string;
   appointment_type: string;
 }
@@ -27,6 +28,7 @@ const useAppointment = () => {
       patient: appointmentData.patientId,
       date: appointmentData.date,
       time: appointmentData.time,
+      status: appointmentData.status,
       appointment_type: appointmentData.appointment_type,
     };
     try {

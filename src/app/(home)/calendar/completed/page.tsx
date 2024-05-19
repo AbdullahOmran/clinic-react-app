@@ -1,6 +1,6 @@
 "use client";
 import styles from "./page.module.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setActiveCalendarSubNavItem,
   setActiveSideMenuItem,
@@ -8,17 +8,36 @@ import {
 import { Badge, Button, CloseButton, Container, ListGroup, Row } from "react-bootstrap";
 import clsx from "clsx";
 import { CiViewList } from "react-icons/ci";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Calendar, { TileArgs, TileContentFunc } from "react-calendar";
 import { BsCalendarEventFill } from "react-icons/bs";
+import { RootState } from "@/redux/store";
+import useAppointment from "@/api/useAppointment";
+import dayjs, { Dayjs } from "dayjs";
+import usePatient from "@/api/usePatient";
+
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 function Completed() {
   const dispatch = useDispatch();
+  const appointmentApi = useAppointment();
+  const appointmentsList = useSelector((state: RootState)=>state.appointment.appointments);
+  const appointmentsSettingsData = useSelector((state: RootState)=>state.appointmentSettings);
+  const patientsList = useSelector((state: RootState)=>state.patient.patients);
+  const [selectedDate, setSelectedDate] = useState<Dayjs>(dayjs());
+  const patient = usePatient();
+ 
   dispatch(setActiveSideMenuItem(4));
   dispatch(setActiveCalendarSubNavItem(2));
+  useEffect(()=>{
+    patient.getPatients();
+    appointmentApi.getAppointments();
+   },[]);
   const [calendarValue, calendarOnChange] = useState<Value>(new Date());
   const calendarContent: TileContentFunc = ({
     activeStartDate,
@@ -28,14 +47,14 @@ function Completed() {
     if (date.getMonth() == 1) {
       return (
         <div>
-          <Badge bg="primary">{Math.round(Math.random() * 10)}</Badge>
-          <Badge bg="secondary">{Math.round(Math.random() * 10)}</Badge>
+          
         </div>
       );
     } else {
       return null;
     }
   };
+  
   return (
     <div className={styles.container}>
       <Container>
@@ -47,53 +66,38 @@ function Completed() {
         </Row>
         <Row className="g-4 mb-2">
           <ListGroup as="ol" numbered>
+          {Array.from({length: appointmentsList.length}).map((_,idx)=>(
+            ((appointmentsList[idx].date==selectedDate.format("YYYY-MM-DD"))&&(appointmentsList[idx].status=="A")&&appointmentsList[idx].patient&&(
             <ListGroup.Item
               as="li"
+              key={idx}
               action
               className={clsx({
                 "d-flex justify-content-between align-items-center ": true,
               })}
             >
+              
               <div className="ms-2 me-auto">
-                <div className="fw-bold">Patient Name</div>
-                <Badge bg="primary">New</Badge>
-              </div>
-              <div className="p-1" >
-                02:00 PM <span className={styles.interval}>:</span> 02:20 PM
-              </div>
-            </ListGroup.Item>
-            
-            <ListGroup.Item
-              as="li"
-              action
-              className={clsx({
-                "d-flex justify-content-between align-items-center ": true,
-              })}
-            >
-              <div className="ms-2 me-auto">
-                <div className="fw-bold">Patient Name</div>
+                <div className="fw-bold">{patientsList.find((obj)=>obj.id == appointmentsList[idx].patient)?.first_name
+                 + ' ' + patientsList.find((obj)=>obj.id == appointmentsList[idx].patient)?.last_name}</div>
+                 {
+(appointmentsList[idx].appointment_type == "I")&&
+                <Badge bg="primary">New Inspection</Badge>
+                 }
+                 {
+(appointmentsList[idx].appointment_type == "C")&&
                 <Badge bg="secondary">Consultation</Badge>
+                 }
+                
               </div>
               <div className="p-1" >
-                02:00 PM <span className={styles.interval}>:</span> 02:20 PM
+              {dayjs(appointmentsList[idx].time, "HH:mm:ss").format("hh:mm a")} <span className={styles.interval}>:</span>
+              {dayjs(appointmentsList[idx].time, "HH:mm:ss").add(appointmentsSettingsData.duration,'m').format("hh:mm a")}
               </div>
-            </ListGroup.Item>
+              <CloseButton className="ms-3" />
+            </ListGroup.Item>))
             
-            <ListGroup.Item
-              as="li"
-              action
-              className={clsx({
-                "d-flex justify-content-between align-items-center ": true,
-              })}
-            >
-              <div className="ms-2 me-auto">
-                <div className="fw-bold">Patient Name</div>
-                <Badge bg="secondary">Consultation</Badge>
-              </div>
-              <div className="p-1" >
-                02:00 PM <span className={styles.interval}>:</span> 02:20 PM
-              </div>
-            </ListGroup.Item>
+          ))}
             
           </ListGroup>
         </Row>
@@ -105,53 +109,38 @@ function Completed() {
         </Row>
         <Row className="g-4 mb-2">
           <ListGroup as="ol" numbered>
+          {Array.from({length: appointmentsList.length}).map((_,idx)=>(
+            ((appointmentsList[idx].date==selectedDate.format("YYYY-MM-DD"))&&(appointmentsList[idx].status=="R")&&appointmentsList[idx].patient&&(
             <ListGroup.Item
               as="li"
+              key={idx}
               action
               className={clsx({
                 "d-flex justify-content-between align-items-center ": true,
               })}
             >
+              
               <div className="ms-2 me-auto">
-                <div className="fw-bold">Patient Name</div>
-                <Badge bg="primary">New</Badge>
-              </div>
-              <div className="p-1" >
-                02:00 PM <span className={styles.interval}>:</span> 02:20 PM
-              </div>
-            </ListGroup.Item>
-            
-            <ListGroup.Item
-              as="li"
-              action
-              className={clsx({
-                "d-flex justify-content-between align-items-center ": true,
-              })}
-            >
-              <div className="ms-2 me-auto">
-                <div className="fw-bold">Patient Name</div>
+                <div className="fw-bold">{patientsList.find((obj)=>obj.id == appointmentsList[idx].patient)?.first_name
+                 + ' ' + patientsList.find((obj)=>obj.id == appointmentsList[idx].patient)?.last_name}</div>
+                 {
+(appointmentsList[idx].appointment_type == "I")&&
+                <Badge bg="primary">New Inspection</Badge>
+                 }
+                 {
+(appointmentsList[idx].appointment_type == "C")&&
                 <Badge bg="secondary">Consultation</Badge>
+                 }
+                
               </div>
               <div className="p-1" >
-                02:00 PM <span className={styles.interval}>:</span> 02:20 PM
+              {dayjs(appointmentsList[idx].time, "HH:mm:ss").format("hh:mm a")} <span className={styles.interval}>:</span>
+              {dayjs(appointmentsList[idx].time, "HH:mm:ss").add(appointmentsSettingsData.duration,'m').format("hh:mm a")}
               </div>
-            </ListGroup.Item>
+              <CloseButton className="ms-3" />
+            </ListGroup.Item>))
             
-            <ListGroup.Item
-              as="li"
-              action
-              className={clsx({
-                "d-flex justify-content-between align-items-center ": true,
-              })}
-            >
-              <div className="ms-2 me-auto">
-                <div className="fw-bold">Patient Name</div>
-                <Badge bg="secondary">Consultation</Badge>
-              </div>
-              <div className="p-1" >
-                02:00 PM <span className={styles.interval}>:</span> 02:20 PM
-              </div>
-            </ListGroup.Item>
+          ))}
             
           </ListGroup>
         </Row>
@@ -167,7 +156,8 @@ function Completed() {
             tileContent={calendarContent}
             onChange={calendarOnChange}
             value={calendarValue}
-            onClickDay={(value:Date)=>alert(value.getFullYear())}
+            onClickDay={(date:Date)=>{setSelectedDate(dayjs(`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,"YYYY-M-D"));
+          }}
           />
           <div className="mt-2 ms-4 d-flex justify-content-start align-items-center">
             <div className={styles.redCircle}></div>

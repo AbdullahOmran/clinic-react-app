@@ -17,7 +17,6 @@ import dayjs  from "dayjs";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import Calendar, { TileArgs, TileContentFunc, TileDisabledFunc } from "react-calendar";
-import "react-calendar/dist/Calendar.css";
 import { BsCalendarEventFill } from "react-icons/bs";
 import ScheduleModal from "@/components/PageTemplate/PageComponent/calendar/scheduleModal/scheduleModal";
 import { setDate } from "@/redux/appointmentSlice";

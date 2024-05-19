@@ -8,6 +8,7 @@ export interface appointmentState {
   patientId: number;
   date: string;
   time: any;
+  status:string;
   appointment_type: string;
   appointments: Array<appointmentObj>;
 }
@@ -16,6 +17,7 @@ const initialState: appointmentState = {
     secretaryId: -1,
     patientId: -1,
     date: '',
+    status:'S',
     appointment_type: 'I',
     time: '14:00:00',
     appointments: [],
@@ -47,12 +49,16 @@ export const appointmentSlice = createSlice({
     setAppointmentType: (state, action)=>{
         state.appointment_type = action.payload;
     },
+    setStatus: (state, action)=>{
+        state.status = action.payload;
+    },
   },
 });
 
 export const { 
     setDoctorId,
     setSecretaryId,
+    setStatus,
     setPatientId,
     setDate,
     setTime,

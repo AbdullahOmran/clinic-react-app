@@ -2,7 +2,7 @@
 import CalendarSubNav from "@/components/PageTemplate/PageComponent/calendar/calendarSubNav/CalendarSubNav";
 import styles from './layout.module.scss';
 import type { Metadata } from 'next';
-
+import "react-calendar/dist/Calendar.css";
 
 
 export const metadata: Metadata = {
