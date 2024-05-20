@@ -42,6 +42,8 @@ function Schedule() {
   dispatch(setActiveSideMenuItem(4));
   dispatch(setActiveCalendarSubNavItem(1));
   const [calendarValue, calendarOnChange] = useState<Value>(new Date());
+  const isDoctor = useSelector((state: RootState)=>state.auth.isDoctor);
+  const isSecretary = useSelector((state: RootState)=>state.auth.isSecretary);
   const [showScheduleModal, setShowScheduleModal] = useState(false);
   const handleCloseScheduleModal= () => setShowScheduleModal(false);
   const handleShowScheduleModal = (datetime: Date) => {
@@ -135,7 +137,8 @@ const daysIndices = days.map((day) =>dayValues.indexOf(day));
             
           </ListGroup>
         </Row>
-        
+        {isSecretary&&
+        <>
         <Row className="mb-1 mt-4">
           <h3>
             <BsCalendarEventFill className={styles.headerIcon} />
@@ -159,6 +162,8 @@ const daysIndices = days.map((day) =>dayValues.indexOf(day));
             <span>consultations</span>
           </div>
         </Row>
+        </>}
+        
         
       </Container>
     </div>

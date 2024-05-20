@@ -26,10 +26,16 @@ import styles from "./page.module.scss";
 
 import {
   FcAssistant,
+  FcSurvey,
   FcDepartment,
+  FcFilingCabinet ,
   FcExport,
+  FcPieChart ,
   FcKey,
   FcSettings,
+  FcTimeline,
+  FcRules,
+  FcPlanner,
 } from "react-icons/fc";
 import { FcReadingEbook } from "react-icons/fc";
 import { FcIdea } from "react-icons/fc";
@@ -321,7 +327,7 @@ export default function HeaderWithDrawer({
                   justifyContent: "center",
                 }}
               >
-                <FcDepartment size={25} />
+                <FcPieChart  size={25} />
               </ListItemIcon>
               <ListItemText
                 primary="Dashboard"
@@ -347,7 +353,7 @@ export default function HeaderWithDrawer({
                   justifyContent: "center",
                 }}
               >
-                <FcDataSheet size={25} />
+                <FcSurvey size={25} />
               </ListItemIcon>
               <ListItemText
                 primary="Patient Encounter"
@@ -371,7 +377,7 @@ export default function HeaderWithDrawer({
                   justifyContent: "center",
                 }}
               >
-                <FcSettings size={25} />
+                <FcTimeline  size={25} />
               </ListItemIcon>
               <ListItemText primary="Treatment Plans" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -393,7 +399,7 @@ export default function HeaderWithDrawer({
                   justifyContent: "center",
                 }}
               >
-                <FcKey size={25} />
+                <FcRules  size={25} />
               </ListItemIcon>
               <ListItemText
                 primary="Prescriptions"
@@ -418,7 +424,7 @@ export default function HeaderWithDrawer({
                   justifyContent: "center",
                 }}
               >
-                <FcKey size={25} />
+                <FcPlanner size={25} />
               </ListItemIcon>
               <ListItemText
                 primary="Calendar"
@@ -443,7 +449,7 @@ export default function HeaderWithDrawer({
                   justifyContent: "center",
                 }}
               >
-                <FcKey size={25} />
+                <FcPlanner size={25} />
               </ListItemIcon>
               <ListItemText
                 primary="Calendar"
@@ -468,7 +474,7 @@ export default function HeaderWithDrawer({
                   justifyContent: "center",
                 }}
               >
-                <FcIdea size={25} />
+                <FcFilingCabinet  size={25} />
               </ListItemIcon>
               <ListItemText primary="EMR" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -490,7 +496,7 @@ export default function HeaderWithDrawer({
                   justifyContent: "center",
                 }}
               >
-                <FcReadingEbook size={25} />
+                <FcFilingCabinet  size={25} />
               </ListItemIcon>
               <ListItemText primary="Patients" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -545,7 +551,7 @@ export default function HeaderWithDrawer({
           </ListItem>
         </List>
       </Drawer>
-      <Box component="main" sx={{bgcolor:"#f9f9f9", height: "100%", flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{bgcolor:"#ffff", height: "100%", flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         {children}
       </Box>

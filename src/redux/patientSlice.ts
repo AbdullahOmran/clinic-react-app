@@ -2,6 +2,10 @@
 import { PatientObj } from "@/api/usePatient";
 import { createSlice } from "@reduxjs/toolkit";
 
+export interface impressionType {
+    symptom: string;
+    diagnosis: string;
+}
 export interface patientState {
     action?: string;
     id: number;
@@ -22,6 +26,9 @@ export interface patientState {
     allergies?: string;
     immuzinations?: string;
     riskFactors?: string;
+    symptom?: string;
+    diagnosis?: string;
+    impression:impressionType[];
     patients: Array<PatientObj>;
 }
 const initialState: patientState = {
@@ -44,6 +51,9 @@ const initialState: patientState = {
     allergies: '',
     immuzinations: '',
     riskFactors:'',
+    symptom:'',
+    diagnosis:'',
+    impression:[],
     patients: [],
 };
 
@@ -53,6 +63,23 @@ export const patientSlice = createSlice({
   reducers: {
     setAction:(state, action) => {
         state.action = action.payload;
+    },
+    setSymptom:(state, action) => {
+        state.symptom = action.payload;
+    },
+    setDiagnosis:(state, action) => {
+        state.diagnosis = action.payload;
+    },
+    setImpression:(state, action) => {
+        state.impression = action.payload;
+    },
+    addImpression:(state, action) => {
+        state.impression.push(action.payload);
+    },
+    updateImpressionDiagnosis:(state, action) => {
+        const index = action.payload.id;
+        state.impression[index] = {...state.impression[index], diagnosis:action.payload.diagnosis};
+        
     },
     setId:(state, action)=>{
         state.id = action.payload
@@ -118,9 +145,14 @@ export const {
     setAction,
     setId,
     setName,
+    setDiagnosis,
+    setImpression,
+    setSymptom,
     setGender,
     setAge,
     setPhone,
+    updateImpressionDiagnosis,
+    addImpression,
     setEmail,
     setAddress,
     setMaritalStatus,

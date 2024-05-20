@@ -3,6 +3,7 @@ import { appointmentObj } from "@/api/useAppointment";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface appointmentState {
+id:number;
   doctorId: number;
   secretaryId: number;
   patientId: number;
@@ -13,6 +14,7 @@ export interface appointmentState {
   appointments: Array<appointmentObj>;
 }
 const initialState: appointmentState = {
+    id: -1,
     doctorId: -1,
     secretaryId: -1,
     patientId: -1,
@@ -28,6 +30,9 @@ export const appointmentSlice = createSlice({
   name: "appointment",
   initialState,
   reducers: {
+    setAppointmentId: (state, action)=>{
+        state.id = action.payload;
+    },
     setDoctorId: (state, action)=>{
         state.doctorId = action.payload;
     },
@@ -62,6 +67,7 @@ export const {
     setPatientId,
     setDate,
     setTime,
+    setAppointmentId,
     setAppointments,
     setAppointmentType,
             } = appointmentSlice.actions;

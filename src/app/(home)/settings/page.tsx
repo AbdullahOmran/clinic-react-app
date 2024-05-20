@@ -53,7 +53,7 @@ export default function Settings() {
         <Typography variant="h4" component="h4">
           Settings
         </Typography>
-        <Paper>
+        <Paper elevation={2}>
           <Stack divider={<Divider orientation="horizontal" flexItem />}>
             <Item elevation={0}>
               <Typography variant="h5" component="h5">
@@ -101,7 +101,7 @@ export default function Settings() {
             </Item>
           </Stack>
         </Paper>
-        <Paper>
+        <Paper elevation={2}>
           <Stack divider={<Divider orientation="horizontal" flexItem />}>
             <Item elevation={0}>
               <Typography variant="h5" component="h5">

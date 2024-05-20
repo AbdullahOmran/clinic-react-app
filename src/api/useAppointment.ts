@@ -6,6 +6,7 @@ import useAxios from "@/utils/useAxios";
 import { useDispatch, useSelector } from "react-redux";
 
 export interface appointmentObj {
+  id:number;
   doctor: number;
   secretary: number;
   patient: number;
@@ -37,6 +38,36 @@ const useAppointment = () => {
         dispatch(
           appendAlert(["Appointment added successfully", "filled", "info"])
         );
+      }
+    } catch (e) {}
+  };
+  const update = async (id: number, data:object) => {
+    // const submittedData = {
+    //   doctor: appointmentData.doctorId,
+    //   secretary: appointmentData.secretaryId,
+    //   patient: appointmentData.patientId,
+    //   date: appointmentData.date,
+    //   time: appointmentData.time,
+    //   status: appointmentData.status,
+    //   appointment_type: appointmentData.appointment_type,
+    // };
+    try {
+      const res = await api.put(`api/appointment/${id}/`, data);
+      if (res.status == 200) {
+        dispatch(
+          appendAlert(["Appointment updated successfully", "filled", "info"])
+        );
+      }
+    } catch (e) {}
+  };
+  const getAppointment = async (id: number) => {
+  
+    try {
+      const res = await api.get(`api/appointment/${id}/`);
+      if (res.status == 200) {
+        return res.data;
+      }else{
+        return null;
       }
     } catch (e) {}
   };
@@ -91,8 +122,10 @@ const useAppointment = () => {
   return {
     submit: submit,
     getAppointments: getAppointments,
+    getAppointment: getAppointment,
     getAppointmentSettings: getAppointmentSettings,
     submitAppointmentSettings: submitAppointmentSettings,
+    update: update,
   };
 };
 
