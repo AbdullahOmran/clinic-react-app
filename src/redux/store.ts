@@ -7,6 +7,7 @@ import patientSlice from "./patientSlice";
 import appointmentSlice from "./appointmentSlice";
 import appointmentSettingsSlice from "./appointmentSettingsSlice";
 import treatmentSlice from "./treatmentSlice";
+import encounterSlice from "./encounterSlice";
 
 export const store = configureStore({
     reducer:{
@@ -17,6 +18,7 @@ export const store = configureStore({
         appointment: appointmentSlice,
         appointmentSettings:appointmentSettingsSlice,
         treatment:treatmentSlice,
+        encounter:encounterSlice,
     }
 });
 export type RootState = ReturnType<typeof store.getState>;

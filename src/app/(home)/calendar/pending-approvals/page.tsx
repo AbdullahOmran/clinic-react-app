@@ -5,7 +5,8 @@ import {
   setActiveCalendarSubNavItem,
   setActiveSideMenuItem,
 } from "@/redux/userSlice";
-import { Badge, Button, CloseButton, Container, ListGroup, Row } from "react-bootstrap";
+import { Badge, CloseButton, Container, ListGroup, Row } from "react-bootstrap";
+import Button from "@mui/material/Button";
 import clsx from "clsx";
 import { CiViewList } from "react-icons/ci";
 
@@ -35,7 +36,7 @@ function PendingApprovals() {
                 <div className="fw-bold">Patient Name</div>
                 <Badge bg="primary">New</Badge>
               </div>
-              <Button className="p-1" variant="primary">
+              <Button className="p-1" variant="contained">
                 Approve
                 <span className="visually-hidden">unread messages</span>
               </Button>
@@ -53,7 +54,7 @@ function PendingApprovals() {
                 <div className="fw-bold">Patient Name</div>
                 <Badge bg="secondary">Consultation</Badge>
               </div>
-              <Button className="p-1" variant="primary">
+              <Button className="p-1" variant="contained">
                 Approve
                 <span className="visually-hidden">unread messages</span>
               </Button>
@@ -71,7 +72,7 @@ function PendingApprovals() {
                 <div className="fw-bold">Patient Name</div>
                 <Badge bg="secondary">Consultation</Badge>
               </div>
-              <Button className="p-1" variant="primary">
+              <Button className="p-1" variant="contained">
                 Approve
                 <span className="visually-hidden">unread messages</span>
               </Button>

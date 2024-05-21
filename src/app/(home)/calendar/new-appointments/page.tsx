@@ -6,7 +6,8 @@ import {
   setActiveCalendarSubNavItem,
   setActiveSideMenuItem,
 } from "@/redux/userSlice";
-import { Badge, Button, CloseButton, Container, ListGroup, Row } from "react-bootstrap";
+import { Badge,  CloseButton, Container, ListGroup, Row } from "react-bootstrap";
+import Button from "@mui/material/Button";
 import clsx from "clsx";
 import { CiViewList } from "react-icons/ci";
 import useAxios from "@/utils/useAxios";
@@ -85,7 +86,7 @@ function NewAppointments() {
                   router.push('/treatment-plans/');
               }}
               
-              className="p-1" variant="primary">
+              className="p-1" variant="contained">
                 Accept
                 <span className="visually-hidden">unread messages</span>
               </Button>

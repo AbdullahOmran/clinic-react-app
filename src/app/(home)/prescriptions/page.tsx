@@ -5,7 +5,8 @@ import {
   setActiveSideMenuItem,
   setActiveTreatmentPlansSubNavItem,
 } from "@/redux/userSlice";
-import { Button, Card, CloseButton, Col, Container, ListGroup, Row, Stack } from "react-bootstrap";
+import {  Card, CloseButton, Col, Container, ListGroup, Row, Stack } from "react-bootstrap";
+import Button from "@mui/material/Button";
 import { BsCheckCircle, BsPlusCircle, BsXCircle } from "react-icons/bs";
 import { CiViewList } from "react-icons/ci";
 import { useState } from "react";
@@ -22,7 +23,7 @@ function Prescriptions() {
         <Container>
           <Row className="mb-4 mt-2">
             <Stack direction="horizontal" gap={3}>
-              <Button className="p-1" variant="primary">
+              <Button className="p-1" variant="contained">
                 <BsXCircle className={styles.icon} />
                 Delete All
                 <span className="visually-hidden">unread messages</span>
@@ -31,7 +32,7 @@ function Prescriptions() {
               <Button
                
                 className="p-1 ms-auto"
-                variant="primary"
+                variant="contained"
               >
                 <BsPlusCircle className={styles.icon} />
                 Generate Prescription
@@ -60,7 +61,7 @@ function Prescriptions() {
                   <div className="fw-bold">Prescription1</div>
                   Date
                 </div>
-                <Button className="p-1" variant="primary">
+                <Button className="p-1" variant="contained">
                 Show
                   <span className="visually-hidden">unread messages</span>
                 </Button>
@@ -78,7 +79,7 @@ function Prescriptions() {
                   <div className="fw-bold">Prescription2</div>
                   Date
                 </div>
-                <Button className="p-1" variant="primary">
+                <Button className="p-1" variant="contained">
                 Show
                   <span className="visually-hidden">unread messages</span>
                 </Button>
@@ -96,7 +97,7 @@ function Prescriptions() {
                   <div className="fw-bold">Prescription3</div>
                   Date
                 </div>
-                <Button className="p-1" variant="primary">
+                <Button className="p-1" variant="contained">
                 Show
                   <span className="visually-hidden">unread messages</span>
                 </Button>
@@ -114,7 +115,7 @@ function Prescriptions() {
                   <div className="fw-bold">Prescription4</div>
                   Date
                 </div>
-                <Button  className="p-1" variant="primary">
+                <Button  className="p-1" variant="contained">
                   Show
                   <span className="visually-hidden">unread messages</span>
                 </Button>

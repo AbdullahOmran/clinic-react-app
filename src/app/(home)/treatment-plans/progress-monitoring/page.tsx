@@ -6,7 +6,7 @@ import {
   setActiveTreatmentPlansSubNavItem,
 } from "@/redux/userSlice";
 import {
-  Button,
+  
   Card,
   CloseButton,
   Col,
@@ -15,6 +15,7 @@ import {
   Stack,
   Table,
 } from "react-bootstrap";
+import { Button } from "@mui/material";
 import clsx from "clsx";
 import { BsCheckCircle, BsPencilSquare, BsPlusCircle, BsXCircle } from "react-icons/bs";
 import { CiViewList } from "react-icons/ci";
@@ -30,25 +31,25 @@ function ProgressMonitoring() {
         <Container>
           <Row className="mb-4 mt-2">
             <Stack direction="horizontal" gap={3}>
-              <Button className="p-1" variant="primary">
+              <Button className="p-1" variant="contained">
                 <BsXCircle className={styles.icon} />
                 Delete All
                 <span className="visually-hidden">unread messages</span>
               </Button>
-              <Button className="p-1" variant="primary">
+              <Button className="p-1" variant="contained">
                 <BsXCircle className={styles.icon} />
                 Delete Encounter
                 <span className="visually-hidden">unread messages</span>
               </Button>
 
-              <Button className="p-1 ms-auto" variant="primary">
+              <Button className="p-1 ms-auto" variant="contained">
                 <BsPlusCircle className={styles.icon} />
                 Add Encounter
                 <span className="visually-hidden">unread messages</span>
               </Button>
 
               
-              <Button className="p-1" variant="primary">
+              <Button className="p-1" variant="contained">
               <BsPencilSquare className={styles.icon}/>
                 Edit Encounter
                 <span className="visually-hidden">unread messages</span>

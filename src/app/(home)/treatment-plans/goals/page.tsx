@@ -5,7 +5,8 @@ import {
   setActiveSideMenuItem,
   setActiveTreatmentPlansSubNavItem,
 } from "@/redux/userSlice";
-import {Button, CloseButton, Container, ListGroup, Row, Stack } from "react-bootstrap";
+import { CloseButton, Container, ListGroup, Row, Stack } from "react-bootstrap";
+import { Button } from "@mui/material";
 import clsx from "clsx";
 import GoalModal from "@/components/PageTemplate/PageComponent/treatmentPlans/goalModal/goalModal";
 import { useState } from "react";
@@ -27,7 +28,7 @@ function Goals() {
           <Container>
             <Row className="mb-4 mt-2">
               <Stack direction="horizontal" gap={3}>
-                <Button className="p-1" variant="primary">
+                <Button className="p-1" variant="contained">
                   <BsXCircle className={styles.icon} />
                   Delete All
                   <span className="visually-hidden">unread messages</span>
@@ -37,7 +38,7 @@ function Goals() {
                 <Button
                   onClick={handleShowGoalModal}
                   className="p-1 ms-auto"
-                  variant="primary"
+                  variant="contained"
                 >
                   <BsPlusCircle className={styles.icon} />
                   Add Goal

@@ -5,7 +5,8 @@ import {
   setActiveCalendarSubNavItem,
   setActiveSideMenuItem,
 } from "@/redux/userSlice";
-import { Badge, Button, CloseButton, Container, ListGroup, Row } from "react-bootstrap";
+import { Badge,  CloseButton, Container, ListGroup, Row } from "react-bootstrap";
+import Button from "@mui/material/Button";
 import clsx from "clsx";
 import { CiViewList } from "react-icons/ci";
 import { useEffect, useState } from "react";

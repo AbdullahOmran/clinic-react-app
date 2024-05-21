@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setActiveSideMenuItem } from "@/redux/userSlice";
 import { FaSearch } from "react-icons/fa";
 import {
-  Button,
+  
   Card,
   CloseButton,
   Col,
@@ -15,6 +15,7 @@ import {
   Stack,
   Table,
 } from "react-bootstrap";
+import Button from "@mui/material/Button";
 import clsx from "clsx";
 import {
   BsCheckCircle,
@@ -52,8 +53,8 @@ function Patients() {
   useEffect(()=>{
     patient.getPatients();
   },[]);
-  const editButton =(pk: number)=> <Button onClick={()=>editPatient(pk)} variant="primary">Edit</Button>;
-  const deleteButton =(pk: number)=> <Button onClick={()=>deletePatient(pk)} variant="primary">Delete</Button>;
+  const editButton =(pk: number)=> <Button onClick={()=>editPatient(pk)} variant="contained">Edit</Button>;
+  const deleteButton =(pk: number)=> <Button onClick={()=>deletePatient(pk)} variant="contained">Delete</Button>;
 
   const [actionButton, setActionButton] = useState<string>('-');
 
@@ -72,7 +73,7 @@ function Patients() {
                 />
               </InputGroup>
 
-              <Button onClick={addPatient} className="p-1 ms-auto" variant="primary">
+              <Button onClick={addPatient} className="p-1 ms-auto" variant="contained">
                 <BsPlusCircle className={styles.icon} />
                 Add Patient
                 <span className="visually-hidden">unread messages</span>
@@ -80,14 +81,14 @@ function Patients() {
 
               <Button
               onClick={()=>setActionButton('Edit')}
-              className="p-1" variant="primary">
+              className="p-1" variant="contained">
                 <BsPencilSquare className={styles.icon} />
                 Edit Patient
                 <span className="visually-hidden">unread messages</span>
               </Button>
               <Button
               onClick={()=>setActionButton('Delete')}
-               className="p-1" variant="primary">
+               className="p-1" variant="contained">
                 <BsXCircle className={styles.icon} />
                 Delete Patient
                 <span className="visually-hidden">unread messages</span>

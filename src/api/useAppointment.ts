@@ -1,3 +1,4 @@
+"use client";
 import { setAvailability, setBufferTime, setDuration, setMaxAppointments } from "@/redux/appointmentSettingsSlice";
 import { setAppointments } from "@/redux/appointmentSlice";
 import { RootState } from "@/redux/store";

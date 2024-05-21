@@ -1,3 +1,4 @@
+"use client";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import useAxios from "@/utils/useAxios";

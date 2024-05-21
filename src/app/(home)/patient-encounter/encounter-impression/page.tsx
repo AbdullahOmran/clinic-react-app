@@ -10,9 +10,10 @@ import {
   setActiveSideMenuItem,
   setActivePatientEncounterSubNavItem,
 } from "@/redux/userSlice";
+import {Button} from "@mui/material";
 import {
   Row,
-  Button,
+  // Button,
   ListGroup,
   Badge,
   CloseButton,
@@ -27,6 +28,7 @@ import useAppointment, { appointmentObj } from "@/api/useAppointment";
 import { RootState } from "@/redux/store";
 import useTreatment from "@/api/useTreatment";
 import { useRouter } from "next/navigation";
+import useEncounter from "@/api/useEncounter";
 
 type appointmentObject = appointmentObj | undefined;
 
@@ -47,6 +49,7 @@ function EncounterImpression() {
   const [impressionId, setImpressionId] = useState(0);
   const treatmentApi = useTreatment();
   const router = useRouter();
+  const encounterApi = useEncounter();
   return (
     <>
     
@@ -54,7 +57,7 @@ function EncounterImpression() {
         <Container>
           <Row className="mb-4 mt-2">
             <Stack direction="horizontal" gap={3}>
-              <Button className="p-1" variant="primary">
+              <Button className="p-1" variant="contained">
                 <BsXCircle className={styles.icon} />
                 Delete All
                 <span className="visually-hidden">unread messages</span>
@@ -63,14 +66,15 @@ function EncounterImpression() {
               <Button {...((appointmentDetails?.appointment_type=="C")&&({disabled:true}))}
               onClick={()=>{
                 treatmentApi.submit();
+                encounterApi.submit({goals:""});
                 router.push('/treatment-plans/');
               }}
-               className="p-1 ms-auto" variant="primary">
+               className="p-1 ms-auto" variant="contained">
                 <BsPlusCircle className={styles.icon} />
                 Create Treatment Plan
                 <span className="visually-hidden">unread messages</span>
               </Button>
-              <Button onClick={handleShowSymptomModal} className="p-1" variant="primary">
+              <Button onClick={handleShowSymptomModal} className="p-1" variant="contained">
                 <BsPlusCircle className={styles.icon} />
                 Add Symptom
                 <span className="visually-hidden">unread messages</span>
@@ -103,7 +107,7 @@ function EncounterImpression() {
                   const impressionId = index;
                   setImpressionId(impressionId);
                   handleShowDiagnosisModal();
-                  }} className="p-1" variant="primary">
+                  }} className="p-1" variant="contained">
                   <BsPlusCircle className={styles.icon} />
                   set Diagnosis
                   <span className="visually-hidden">unread messages</span>
