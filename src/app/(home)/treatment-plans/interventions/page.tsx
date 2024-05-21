@@ -1,6 +1,6 @@
 "use client";
 import styles from "./page.module.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setActiveSideMenuItem,
   setActiveTreatmentPlansSubNavItem,
@@ -12,6 +12,7 @@ import { CiViewList } from "react-icons/ci";
 import { useState } from "react";
 import MedicationModal from "@/components/PageTemplate/PageComponent/treatmentPlans/medicationModal/medicationModal";
 import clsx from "clsx";
+import { RootState } from "@/redux/store";
 
 function Interventions() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ function Interventions() {
   const [showMedicationModal, setShowMedicationModal] = useState(false);
   const handleCloseMedicationModal= () => setShowMedicationModal(false);
   const handleShowMedicationModal = () => setShowMedicationModal(true);
+  const encounterMedications = useSelector((state:RootState)=>state.treatment.medications);
   return (
     <>
       <div className={styles.container}>
@@ -69,17 +71,17 @@ function Interventions() {
             </h3>
           </Row>
           <Row xl={4} md={2} className="g-4">
-            {Array.from({ length: 5 }).map((_, idx) => (
+            {encounterMedications.map((medication: any, idx) => (
               <Col key={idx}>
                 <Card className={clsx({"position-relative":true, [styles.card]:true})}>
                   <CloseButton className="position-absolute end-0 p-2"/>
                   <Card.Img variant="top" src="/images/drug_img.jpg" />
                   <Card.Body>
-                    <Card.Title>Lisinopril</Card.Title>
+                    <Card.Title>{medication.name}</Card.Title>
                     <Card.Text>
-                      <p className="m-1"><span className="fw-bold">Dosage:</span> 5-40 mg</p>
-                      <p className="m-1"><span className="fw-bold">Frequency:</span> once daily</p>
-                      <p className="m-1"><span className="fw-bold">Duration:</span> 3 weeks</p>
+                      <p className="m-1"><span className="fw-bold">Dosage:</span> {medication.dosage} mg</p>
+                      <p className="m-1"><span className="fw-bold">Frequency:</span> {medication.frequency} daily</p>
+                      <p className="m-1"><span className="fw-bold">Duration:</span> {medication.duration} weeks</p>
                       <p className="m-1"><span className="fw-bold">Route:</span> orally or topically</p>
                       <p className="m-1"><span className="fw-bold">Instructions:</span> with food, at bedtime</p>
                     </Card.Text>

@@ -1,6 +1,6 @@
 "use client";
 import styles from "./page.module.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setActiveSideMenuItem,
   setActiveTreatmentPlansSubNavItem,
@@ -12,6 +12,7 @@ import GoalModal from "@/components/PageTemplate/PageComponent/treatmentPlans/go
 import { useState } from "react";
 import { BsPlusCircle, BsXCircle } from "react-icons/bs";
 import {CiViewList} from "react-icons/ci";
+import { RootState } from "@/redux/store";
 
 function Goals() {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function Goals() {
   const [showGoalModal, setShowGoalModal] = useState(false);
   const handleCloseGoalModal= () => setShowGoalModal(false);
   const handleShowGoalModal = () => setShowGoalModal(true);
+  const encounterGoals = useSelector((state:RootState)=>state.treatment.goals);
   return (
     <div className={styles.container}>
       <>
@@ -54,32 +56,23 @@ function Goals() {
             </Row>
             <Row className="mb-3">
               <ListGroup as="ol" numbered>
-                <ListGroup.Item
+                {encounterGoals.map((goal,index) =>(
+                  <ListGroup.Item
                   as="li"
                   action
+                  key={index}
                   className={clsx({
                     "d-flex justify-content-between align-items-center ": true,
                     [styles.item]: true,
                   })}
                 >
                   <div className="ms-2 me-auto">
-                    <div className="fw-bold">Lower blood sugar levels to below 7% A1C within 6 months.</div>
+                    <div className="fw-bold">{goal}</div>
                   </div>
                   <CloseButton className="ms-3" />
                 </ListGroup.Item>
-                <ListGroup.Item
-                  as="li"
-                  action
-                  className={clsx({
-                    "d-flex justify-content-between align-items-center ": true,
-                    [styles.item]: true,
-                  })}
-                >
-                  <div className="ms-2 me-auto">
-                    <div className="fw-bold">Lose 10 pounds within 6 months.</div>
-                  </div>
-                  <CloseButton className="ms-3" />
-                </ListGroup.Item>
+                ))}
+                
               </ListGroup>
             </Row>
           </Container>

@@ -1,17 +1,133 @@
 "use client";
-import { useDispatch, useSelector } from 'react-redux';
-import styles from './page.module.scss';
-import { RootState } from '@/redux/store';
-import { setActiveSideMenuItem } from '@/redux/userSlice';
+import { useDispatch, useSelector } from "react-redux";
+import styles from "./page.module.scss";
+import { RootState } from "@/redux/store";
+import { setActiveSideMenuItem } from "@/redux/userSlice";
+import { LineChart } from "@mui/x-charts/LineChart";
+import { PieChart } from "@mui/x-charts/PieChart";
+
+import {
+  FcApproval,
+  FcFlashOn,
+  FcHighPriority,
+  FcInspection,
+} from "react-icons/fc";
+import Link from "next/link";
 function Dashboard() {
-   //  const doctor = useSelector((state: RootState)=>state.doctor);
-     const dispatch = useDispatch();
-     dispatch(setActiveSideMenuItem(0));
-    return(
-        <div className={styles.container}>
-        
-        <h1>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore esse eum possimus voluptatum excepturi sunt facere laborum corporis, ex quos et nobis quaerat minus voluptatem? Consequatur praesentium, ut blanditiis modi obcaecati illum. Quisquam odio sequi mollitia soluta quaerat eius, quasi magnam numquam sit voluptatem unde repellendus nobis aperiam minima non, rem ad, officiis dolore repudiandae molestiae. Officia similique animi odio sunt, asperiores dolorum earum eveniet quam necessitatibus culpa recusandae hic unde non fugiat mollitia illo! Earum, labore culpa, laborum eum tenetur distinctio quibusdam odit, quam odio totam in quasi dolorem ad quos optio repudiandae vero nostrum mollitia maiores rem placeat minus quia? Consequuntur, voluptatibus laudantium quis saepe, commodi unde iste vel similique facere veniam vero. Expedita quas vitae harum perferendis deserunt labore quisquam, animi quibusdam? Numquam veniam ipsa non rerum! Hic accusantium aliquid inventore porro doloribus! Ducimus odio commodi deleniti voluptate, aut, optio dolor amet, at laboriosam illum a. Nobis asperiores voluptatum dolore magnam at magni et perferendis voluptas, quibusdam nostrum repellendus, pariatur iure a assumenda quasi? Corporis, illum aliquam veritatis sunt quaerat quas, quibusdam velit blanditiis praesentium, excepturi voluptas. Perspiciatis sequi voluptatibus non, vel magni, placeat, voluptates recusandae sunt ratione explicabo suscipit a accusantium quibusdam velit doloremque neque distinctio nam cupiditate odit! Optio alias, itaque dolores accusantium perspiciatis similique quas distinctio quaerat dolorem sunt blanditiis aspernatur iure eligendi tenetur consequatur dolore officiis corrupti fugit! Et cumque, esse ipsa sapiente laboriosam porro facere inventore aspernatur, tempora, amet molestiae repellat doloribus vel totam neque. Consectetur in praesentium voluptatem inventore ipsam delectus cum! Rem iste mollitia voluptatibus? Suscipit quaerat iusto cupiditate quod sint voluptatum autem, alias eligendi porro nostrum iure rem. Sint magni fuga itaque totam modi quidem quaerat inventore autem dolorem quisquam officia id voluptas voluptatibus, et facilis nobis quod, molestias a veritatis magnam dignissimos repellendus? Magni, ipsum sit. Ullam quae ex nemo, earum fuga eaque impedit adipisci, aliquid ea placeat nam molestiae, non doloribus praesentium modi dolores inventore iure eveniet voluptate ipsam laborum! Facere perspiciatis unde reiciendis voluptate, consectetur sed dicta, expedita aliquam maxime quisquam laudantium dolores assumenda quo dolore saepe voluptatem voluptatum, quis laborum sunt! Amet, exercitationem aperiam iusto quam quibusdam incidunt dolores aliquam sed ad minima, odio facere laboriosam mollitia ex. Maxime a eligendi iste quis incidunt hic inventore, porro aperiam nobis labore ratione aut magnam, sapiente dolor facilis. Delectus, minus eius pariatur beatae autem cupiditate amet animi debitis est officiis, possimus impedit nihil alias sit recusandae asperiores saepe. Eligendi quibusdam, pariatur voluptatibus eaque modi voluptatem necessitatibus quia doloremque consectetur, vel itaque! Debitis laudantium qui minus architecto consequuntur cum praesentium, deleniti eos neque obcaecati sed culpa, ut doloremque quas dolorem tenetur perspiciatis dolorum ducimus tempore magni rem! Sunt reprehenderit rem quaerat eum necessitatibus neque ab accusantium, nulla assumenda! Illo, ratione! Amet reiciendis expedita ipsam molestias harum, nesciunt quisquam vitae quo error maxime consectetur incidunt dolorum. Placeat quo repudiandae sit quibusdam neque. Incidunt temporibus error id quaerat veniam. Cumque, voluptatum quod eaque rem totam aperiam unde explicabo, assumenda quasi porro necessitatibus atque quae suscipit ipsa quisquam, alias consequatur laboriosam vitae eum consectetur ratione itaque non est natus! Impedit odit perferendis sequi ducimus dolorum, repudiandae non explicabo vel error culpa ut saepe adipisci quam nulla tenetur facere libero nostrum nam ratione consequatur ea porro? In voluptatum officia pariatur quod magnam, alias id fugit minus nostrum rem nihil temporibus accusantium aspernatur nemo dolores repellat iusto voluptatibus sequi et saepe officiis! Minus nulla aliquam corporis maiores aperiam velit qui. Corrupti reiciendis hic tempore reprehenderit minus facilis exercitationem, inventore voluptas, quasi libero cum voluptatem dolores, laborum suscipit eos! Iste ad consequuntur facere fuga doloribus at nesciunt nobis. Tempore modi eius et odio iure.</h1>
+  //  const doctor = useSelector((state: RootState)=>state.doctor);
+  const dispatch = useDispatch();
+  dispatch(setActiveSideMenuItem(0));
+
+  const data = [
+    { id: 0, value: 10, label: "Consultaion" },
+    { id: 2, value: 20, label: "New inspection" },
+  ];
+
+  // line chart
+  const uData = [0, 3000, 2000, 2780, 1890, 2390, 3490];
+  const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
+  const xLabels = [
+    "Sunday", "Monday", "Tuesday", "Wednesday","Thursday", "Friday", "Saturday"
+  ];
+  
+  return (
+    <div className={styles.container}>
+      <div className={styles.dash}>
+        <h1 className={styles.title}>Dashboard</h1>
+        <div className={styles.box}>
+          <div className={styles.row1}>
+            <div className={styles.cards}>
+              <div className={styles.card}>
+                <div>
+                  <h1>Appointments</h1>
+                  <h3>+20</h3>
+                  <h2 className={styles.Correct}>+14</h2>
+                </div>
+                <div className={styles.icon}>
+                  <FcApproval size={40} />
+                </div>
+              </div>
+              <div className={styles.card}>
+                <div>
+                  <h1>Rejected</h1>
+                  <h3>-2</h3>
+                  <h2 className={styles.wrong}>-12</h2>
+                </div>
+                <div className={styles.icon}>
+                  <FcHighPriority size={40} />
+                </div>
+              </div>
+              <div className={styles.card}>
+                <div>
+                  <h1>Total Earnings</h1>
+                  <h3>+3600</h3>
+                  <h2 className={styles.Correct}>+1000</h2>
+                </div>
+                <div className={styles.icon}>
+                  <FcFlashOn size={40} />
+                </div>
+              </div>
+              <div className={styles.card}>
+                <div>
+                  <h1>Patients</h1>
+                  <h3>+24</h3>
+                  <h2>+14</h2>
+                </div>
+                <div className={styles.icon}>
+                  <FcInspection size={40} />
+                </div>
+              </div>
+            </div>
+            <div className={styles.lineChart}>
+              <LineChart
+                width={500}
+                height={300}
+                series={[
+                  { data: pData, label: "Earnings" },
+                  { data: uData, label: "Cost" },
+                ]}
+                xAxis={[{ scaleType: "point", data: xLabels }]}
+              />
+            </div>
+          </div>
+          <div className={styles.row2}>
+            <div className={styles.pieChart}>
+              {" "}
+              <PieChart
+                series={[
+                  {
+                    data,
+                    highlightScope: { faded: "global", highlighted: "item" },
+                    faded: {
+                      innerRadius: 30,
+                      additionalRadius: -30,
+                      color: "red",
+                    },
+                  },
+                ]}
+                height={200}
+              />
+            </div>
+            <div className={styles.features}>
+              <h1 className={styles.title}>Latest News</h1>
+              <div className={styles.box}>
+                <div className={styles.img}>
+                  {/* <Image
+                    src="/images/landing-image.png"
+                    width={200}
+                    height={200}
+                    alt="Picture of the author"
+                  /> */}
+                </div>
+                <div className={styles.text}>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        );
+      </div>
+    </div>
+  );
 }
 export default Dashboard;

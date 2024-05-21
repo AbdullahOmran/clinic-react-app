@@ -1,8 +1,11 @@
 "use client";
+import { useRef } from "react";
 import styles from "./medicationModal.module.scss";
 import { Form, Button, Modal, ListGroup, Row, Col, InputGroup } from "react-bootstrap";
 import { BsCapsule, BsPlusCircle, BsStopwatch } from "react-icons/bs";
 import { FaSyringe } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
+import { appendMedication } from "@/redux/treatmentSlice";
 
 function MedicationModal({
   show,
@@ -11,6 +14,12 @@ function MedicationModal({
   show: boolean;
   handleClose: any;
 }) {
+  const dispatch = useDispatch();
+  const name = useRef(null);
+  const dosage = useRef(null);
+  const duration = useRef(null);
+  const frequency = useRef(null);
+  
   return (
     <Modal className={styles.modal} size = "lg" show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -36,12 +45,13 @@ function MedicationModal({
             <Col className="my-auto">
             <Form.Group className="mb-3">
                 <Form.Label>Medication name</Form.Label>
-                <Form.Control type="text" placeholder="Search..." autoFocus />
+                <Form.Control ref={name} type="text" placeholder="Search..." autoFocus />
               </Form.Group>
               <InputGroup className="mb-3">
                 <InputGroup.Text><BsCapsule/></InputGroup.Text>
                 <Form.Control
                 type="text"
+                ref={dosage}
                   placeholder="Dosage"
                 />
               </InputGroup>
@@ -49,6 +59,7 @@ function MedicationModal({
                 <InputGroup.Text><FaSyringe/></InputGroup.Text>
                 <Form.Control
                 type="number"
+                ref={frequency}
                   placeholder="Frequency"
                 />
               </InputGroup>
@@ -56,6 +67,7 @@ function MedicationModal({
                 <InputGroup.Text><BsStopwatch/></InputGroup.Text>
                 <Form.Control
                 type="number"
+                ref={duration}
                   placeholder="Duration"
                 />
               </InputGroup>
@@ -67,7 +79,11 @@ function MedicationModal({
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        <Button variant="primary" onClick={handleClose}>
+        <Button variant="primary" onClick={()=>{
+          dispatch(appendMedication({name:name.current.value,frequency:frequency.current.value,dosage:dosage.current.value,
+            duration:duration.current.value
+          }));
+          handleClose();}}>
           <BsPlusCircle className={styles.icon} />
           Add
         </Button>

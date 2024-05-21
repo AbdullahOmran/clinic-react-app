@@ -42,7 +42,7 @@ export default function Settings() {
   const handleCloseBufferTimeModal= () => setShowBufferTimeModal(false);
   const handleShowBufferTimeModal = () => setShowBufferTimeModal(true);
   const appointment = useAppointment();
-  const appointmentSettingsData = useSelector((state: RootState) =>state.appointmentSettings)
+  const appointmentSettingsData: any = useSelector((state: RootState) =>state.appointmentSettings)
   React.useEffect(()=>{
     appointment.getAppointmentSettings();
   },[]);
@@ -169,6 +169,62 @@ export default function Settings() {
 
             <Item sx={{ textAlign: "right" }} elevation={0}>
               <Button onClick={()=>{appointment.submitAppointmentSettings();}} sx={{ marginRight: "16px" }} variant="contained">
+                Save Changes
+              </Button>
+            </Item>
+          </Stack>
+        </Paper>
+        <Paper elevation={2}>
+          <Stack divider={<Divider orientation="horizontal" flexItem />}>
+            <Item elevation={0}>
+              <Typography variant="h5" component="h5">
+                Billing
+              </Typography>
+            </Item>
+
+            <Item elevation={0}>
+              <Grid
+                container
+                rowSpacing={1}
+                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+              >
+                
+                <Grid item xs={6}>
+                  <Typography variant="h6" component="h6">
+                    Inspection
+                  </Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Slider
+                    defaultValue={200}
+                
+                    aria-label="Default"
+                    valueLabelDisplay="auto"
+                    min={10}
+                    max={1000}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography variant="h6" component="h6">
+                    Consultation
+                  </Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Slider
+                    defaultValue={50}
+                    
+                    min={10}
+                    max={1000}
+                    aria-label="Default"
+                    valueLabelDisplay="auto"
+
+                  />
+                </Grid>
+              </Grid>
+            </Item>
+
+            <Item sx={{ textAlign: "right" }} elevation={0}>
+              <Button  sx={{ marginRight: "16px" }} variant="contained">
                 Save Changes
               </Button>
             </Item>
