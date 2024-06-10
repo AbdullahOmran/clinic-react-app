@@ -49,7 +49,7 @@ function NewAppointments() {
             
             {Array.from({length: appointmentsList.length}).map((_,idx)=>(
             ((appointmentsList[idx].date==dayjs().format("YYYY-MM-DD"))&&
-            (appointmentsList[idx].status=="P")&&(appointmentsList[idx].patient)&&(
+            (appointmentsList[idx].status=="S")&&(appointmentsList[idx].patient)&&(
             <ListGroup.Item
               as="li"
               key={idx}
