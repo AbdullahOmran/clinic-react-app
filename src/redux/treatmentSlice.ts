@@ -38,13 +38,13 @@ export const treatmentSlice = createSlice({
     appendTreatment: (state, action)=>{
         state.treatments.push(action.payload);
     },
-    appendGoal: (state, action)=>{
-        state.goals.push(action.payload);
-    },
+    // appendGoal: (state, action)=>{
+    //     state.goals.push(action.payload);
+    // },
     
-    appendMedication: (state, action)=>{
-        state.medications.push(action.payload);
-    },
+    // appendMedication: (state, action)=>{
+    //     state.medications.push(action.payload);
+    // },
     
   
   },
@@ -55,7 +55,7 @@ export const {
     setDate,
     setTreatments,
     appendTreatment, 
-    appendGoal,
-    appendMedication, 
+    // appendGoal,
+    // appendMedication, 
             } = treatmentSlice.actions;
 export default treatmentSlice.reducer;
